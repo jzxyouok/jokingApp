@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="48dp">
+
+
+    <com.example.jokingApp.view.ProgressBarCircularIndeterminate
+        android:id="@+id/progressBarCircularIndetermininate"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_centerInParent="true"
+        android:background="#1E88E5"/>
+
+
+</RelativeLayout>
