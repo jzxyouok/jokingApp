@@ -61,11 +61,6 @@ public abstract class Loadingpager extends FrameLayout {
             addView(emptyView, new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams
                     .MATCH_PARENT));
         }
-        successView = createSuccessView();
-        if (successView != null) {
-            addView(successView, new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams
-                    .MATCH_PARENT));
-        }
         showPage();
 
     }
@@ -87,7 +82,8 @@ public abstract class Loadingpager extends FrameLayout {
         if (state == STATE_SUCCESS) {
             if (successView == null) {
                 successView = createSuccessView();
-                this.addView(successView, new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
+                this.addView(successView, new FrameLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams
+                        .MATCH_PARENT));
             }
             successView.setVisibility(View.VISIBLE);
         } else {
@@ -98,9 +94,10 @@ public abstract class Loadingpager extends FrameLayout {
     }
 
     private View createErrorView() {
-        View view = View.inflate(getContext(), R.layout.loadpage_error, null);
-        Button buttn = (Button) view.findViewById(R.id.page_bt);
-        buttn.setOnClickListener(new OnClickListener() {
+        View view = View.inflate(UiUtils.getContext(), R.layout.loadpage_error, null);
+        Button page_bt = (Button) view.findViewById(R.id.page_bt);
+        page_bt.setOnClickListener(new OnClickListener() {
+
             @Override
             public void onClick(View v) {
                 show();
@@ -109,24 +106,25 @@ public abstract class Loadingpager extends FrameLayout {
         return view;
     }
 
-    public enum LoadResult {
-        error(2), empty(3), success(4);
+        public enum LoadResult {
+            error(2), empty(3), success(4);
 
-        int value;
+            int value;
 
-        LoadResult(int value) {
-            this.value = value;
+            LoadResult(int value) {
+                this.value = value;
+            }
+
+            public int getValue() {
+                return value;
+            }
+
         }
 
-        public int getValue() {
-            return value;
-        }
+        /**
+         * 根据服务器的数据来 切换 状态
+         */
 
-    }
-
-    /**
-     * 根据服务器的数据来 切换 状态
-     */
     public void show() {
         if (state == STATE_ERROR || state == STATE_EMPTY) {
             state = STATE_LOADING;

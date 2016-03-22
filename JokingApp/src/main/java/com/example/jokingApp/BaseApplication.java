@@ -2,6 +2,7 @@ package com.example.jokingApp;
 
 import android.app.Application;
 import android.os.Handler;
+import android.os.Message;
 
 /**
  * 代表当前的程序
@@ -18,6 +19,7 @@ public class BaseApplication extends Application {
         application = this;
         mainTid = android.os.Process.myTid();
         handler = new Handler();
+
     }
 
     public static BaseApplication getApplication() {

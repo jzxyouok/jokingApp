@@ -18,6 +18,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.example.jokingApp.fragment.BaseFragment;
 import com.example.jokingApp.fragment.FragmentFactory;
 
 public class MainActivity extends BaseActivity {
@@ -26,10 +27,9 @@ public class MainActivity extends BaseActivity {
     private DrawerLayout mDrawerLayout;
     private NavigationView mNavigationView;
     private ViewPager mViewpager;
-    private PagerTabStrip mPagerTabStrip;
     private String[] mStringArray;
     TabLayout  mTabLayout;
-    private  CollapsingToolbarLayout mCollapsingToolbarLayout;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +55,16 @@ public class MainActivity extends BaseActivity {
         mViewpager = (ViewPager) findViewById(R.id.vp);
         mViewpager.setAdapter(new MainAdapter(getSupportFragmentManager()));
         mTabLayout.setupWithViewPager(mViewpager);
+        System.out.println("哈哈哈哈哈哈");
+        mViewpager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener(){
+
+            @Override
+            public void onPageSelected(int position) {
+                super.onPageSelected(position);
+                BaseFragment createFragment = FragmentFactory.createFragment(position);
+                createFragment.show();//  当切换界面的时候 重新请求服务器
+            }
+        });
     }
 
     private void initToobar() {
@@ -68,7 +78,7 @@ public class MainActivity extends BaseActivity {
     private void iniTablayout() {
         mTabLayout = (TabLayout)findViewById(R.id.tabs);
         mTabLayout.setTabMode(TabLayout.MODE_FIXED);
-        mTabLayout.addTab(mTabLayout.newTab().setText("hah"));
+        mTabLayout.addTab(mTabLayout.newTab().setText(mStringArray[0]));
         mTabLayout.addTab(mTabLayout.newTab().setText(mStringArray[1]));
         mTabLayout.addTab(mTabLayout.newTab().setText(mStringArray[2]));
         mTabLayout.addTab(mTabLayout.newTab().setText(mStringArray[3]));

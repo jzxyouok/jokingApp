@@ -17,11 +17,6 @@ import java.util.List;
  */
 public abstract class BaseFragment extends Fragment {
     private Loadingpager mLoadingpager;
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        show();
-    }
 
     @Nullable
     @Override

@@ -10,9 +10,11 @@ import com.example.jokingApp.R;
  * Created by idea-pc on 2016/3/21.
  */
 public class AppHolder extends RecyclerView.ViewHolder {
-    public final TextView mTextView;
+    public final TextView mTitle;
+    public final TextView mDesc;
     public AppHolder(View itemView) {
         super(itemView);
-        mTextView = (TextView) itemView.findViewById(R.id.text);
+        mTitle = (TextView) itemView.findViewById(R.id.title);
+        mDesc = (TextView) itemView.findViewById(R.id.desc);
     }
 }
