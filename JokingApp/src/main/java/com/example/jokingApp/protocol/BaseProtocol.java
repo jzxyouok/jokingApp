@@ -45,7 +45,6 @@ public abstract class BaseProtocol<T> {
         HttpHelper.HttpResult httpResult = HttpHelper.get(GlobalConstant.SERVER_URL + getKey() + index+".json");
         if (httpResult != null) {
             String json = httpResult.getString();
-            System.out.println(json);
             return json;
         } else {
             return null;

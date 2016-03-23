@@ -55,8 +55,7 @@ public class MainActivity extends BaseActivity {
         mViewpager = (ViewPager) findViewById(R.id.vp);
         mViewpager.setAdapter(new MainAdapter(getSupportFragmentManager()));
         mTabLayout.setupWithViewPager(mViewpager);
-        System.out.println("哈哈哈哈哈哈");
-        mViewpager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener(){
+        mViewpager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener(){
 
             @Override
             public void onPageSelected(int position) {

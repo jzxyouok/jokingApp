@@ -17,7 +17,7 @@ public class FragmentFactory {
             } else if (position == 1) {
                 fragment = new AppFragment();
             } else if (position == 2) {
-                fragment = new GameFragment();
+                fragment = new JokeFragment();
             } else if (position == 3) {
                 fragment = new SubjectFragment();
             } else if (position == 4) {

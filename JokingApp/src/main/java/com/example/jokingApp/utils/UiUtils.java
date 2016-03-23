@@ -46,6 +46,10 @@ public class UiUtils {
     public static void postDelay(Runnable runnable,long time){
         BaseApplication.getHandler().postDelayed(runnable,time);
     }
+    /**取消任务*/
+    public static void cancel(Runnable auToRunTask) {
+        BaseApplication.getHandler().removeCallbacks(auToRunTask);
+    }
 
 
 }

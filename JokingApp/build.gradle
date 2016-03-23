@@ -30,4 +30,6 @@ dependencies {
     compile files('libs/gson-2.3.1.jar')
     compile 'com.android.support:cardview-v7:23.2.1'
     compile project(':Supportlibrary')
+    compile 'com.jakewharton:butterknife:5.1.1'
+    compile 'com.jakewharton:butterknife:5.1.1'
 }
