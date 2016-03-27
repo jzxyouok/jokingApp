@@ -18,7 +18,6 @@ public class HomeProtocol extends  BaseProtocol {
     public Object parseJson(String json) {
         Gson gson = new Gson();
         HomeInfo homeInfo = gson.fromJson(json, HomeInfo.class);
-        List<String> picture = homeInfo.getPicture();
-        return picture;
+        return homeInfo;
     }
 }

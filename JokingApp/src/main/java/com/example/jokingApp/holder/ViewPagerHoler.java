@@ -9,11 +9,14 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.example.jokingApp.R;
+import com.example.jokingApp.bean.HomeInfo;
 import com.example.jokingApp.global.GlobalConstant;
 import com.example.jokingApp.utils.BitmapHelper;
 import com.example.jokingApp.utils.UiUtils;
 import com.example.jokingApp.view.ViewPager;
 import com.lidroid.xutils.BitmapUtils;
+
+import java.util.List;
 
 /**
  * Created by idea-pc on 2016/3/23.
@@ -22,9 +25,11 @@ public class ViewPagerHoler extends RecyclerView.ViewHolder {
     private LinearLayout mLinearLayout;
     private ViewPagerAdapter mAdapter;
     private final ViewPager mViewPager;
+    private List<String> data;
 
-    public ViewPagerHoler(View parent) {
+    public ViewPagerHoler(View parent, final List<String> data) {
         super(parent);
+        this.data=data;
         if (mAdapter == null) {
             mAdapter = new ViewPagerAdapter();
         }
@@ -56,7 +61,7 @@ public class ViewPagerHoler extends RecyclerView.ViewHolder {
         mViewPager.addOnPageChangeListener(new android.support.v4.view.ViewPager.SimpleOnPageChangeListener(){
             @Override
             public void onPageSelected(int position) {
-                position=position%4;
+                position=position%data.size();
                 selectPoint(position);
                 super.onPageSelected(position);
             }
@@ -82,7 +87,7 @@ public class ViewPagerHoler extends RecyclerView.ViewHolder {
 
     //添加点
     private void initPoint() {
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < data.size(); i++) {
             ImageView point = new ImageView(UiUtils.getContext());
             if (i == 0) {
                 point.setImageResource(R.drawable.shape_indicator_selector);
@@ -147,9 +152,10 @@ public class ViewPagerHoler extends RecyclerView.ViewHolder {
 
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
+            position=position%data.size();
             ImageView iv = new ImageView(UiUtils.getContext());
             iv.setScaleType(ImageView.ScaleType.FIT_XY);
-            String uri = GlobalConstant.SERVER_URL + "image/" + "1.jpg";
+            String uri = GlobalConstant.SERVER_URL + data.get(position);
             BitmapUtils bitmapUtils = BitmapHelper.getBitmapUtils();
             bitmapUtils.display(iv, uri);
             container.addView(iv);

@@ -21,22 +21,22 @@ import butterknife.InjectView;
  */
 public class ImageHolder extends RecyclerView.ViewHolder {
     @InjectView(R.id.image)
-   public   ImageView mImage;
+    public ImageView mImage;
     @InjectView(R.id.text)
-    public  TextView mText;
-    private   List<String>  data;
+    public TextView mText;
+    private List<String> data;
 
     public ImageHolder(View itemView, List<String> data) {
         super(itemView);
-        this.data=data;
+        this.data = data;
         ButterKnife.inject(this, itemView);
     }
 
     public void initData(int position) {
         mImage.setScaleType(ImageView.ScaleType.FIT_XY);
         BitmapUtils bitmapUtils = BitmapHelper.getBitmapUtils();
-        String uri= GlobalConstant.SERVER_URL+data.get(position);
-        bitmapUtils.display(mImage,uri);
-    }
+        String uri = GlobalConstant.SERVER_URL + data.get(position);
+        bitmapUtils.display(mImage, uri);
 
+    }
 }

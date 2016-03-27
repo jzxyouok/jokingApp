@@ -10,6 +10,7 @@ import android.widget.FrameLayout;
 
 import com.example.jokingApp.R;
 import com.example.jokingApp.utils.ThreadManager;
+import com.example.jokingApp.utils.UiUtils;
 
 /**
  * Created by idea-pc on 2016/3/16.

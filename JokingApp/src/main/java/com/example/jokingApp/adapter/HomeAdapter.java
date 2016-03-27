@@ -7,10 +7,15 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.jokingApp.R;
+import com.example.jokingApp.bean.HomeInfo;
 import com.example.jokingApp.holder.ImageHolder;
 import com.example.jokingApp.holder.ViewPagerHoler;
+import com.example.jokingApp.holder.textHolder;
+import com.example.jokingApp.protocol.HomeProtocol;
 import com.example.jokingApp.utils.UiUtils;
+import com.lidroid.xutils.db.annotation.Id;
 
+import java.nio.channels.Pipe;
 import java.util.List;
 
 /**
@@ -20,34 +25,40 @@ import java.util.List;
 public class HomeAdapter extends RecyclerView.Adapter {
     private static final int TYPE_VIEWPAGER = 0;
     private static final int TYPE_NORMAL = 1;
-    private List<String> data;
+    private static final int TYPE_TIPS = 2;
+    private final List<String> mViewpager;
+    private final List<String> mPicture;
+    private ImageHolder mImageHolder;
 
-    public HomeAdapter(List<String> mList) {
-        this.data = mList;
+    public HomeAdapter(HomeInfo data) {
+        mViewpager = data.getViewpager();
+        mPicture = data.getPicture();
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == TYPE_VIEWPAGER) {
             View view = getViewHolder(R.layout.fragment_item_home_viewpager, parent, true);
-            return new ViewPagerHoler(view);
-        } else {
+            return new ViewPagerHoler(view,mViewpager);
+        } else if (viewType==TYPE_NORMAL){
             View view = getViewHolder(R.layout.item_frgment_home_image, parent, false);
-            return new ImageHolder(view, data);
+            return new ImageHolder(view, mPicture);
+        }else {
+            View view =getViewHolder(R.layout.item_fragment_home_tips,parent,true);
+            return new textHolder(view);
         }
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
         int viewType = getItemViewType(position);
         if (viewType==TYPE_NORMAL){
             position = position - 1;
-            ImageHolder imageHolder = (ImageHolder) holder;
-            imageHolder.initData(position);
+            mImageHolder = (ImageHolder) holder;
+            mImageHolder.initData(position);
         }
 
     }
-
 
     private View getViewHolder(int resource, ViewGroup parent, boolean isFullSpan) {
         View view = LayoutInflater.from(UiUtils.getContext()).inflate(resource, parent, false);
@@ -62,14 +73,15 @@ public class HomeAdapter extends RecyclerView.Adapter {
     public int getItemViewType(int position) {
         if (position == 0) {
             return TYPE_VIEWPAGER;
+        }if (position>0&&position<=mPicture.size()){
+            return TYPE_NORMAL;
+        }else {
+            return   TYPE_TIPS;
         }
-        return TYPE_NORMAL;
     }
-
+    //+1 是viewPager   最后一个+1是 tips
     @Override
     public int getItemCount() {
-        return 1 + data.size();
+        return 1 + mPicture.size()+1;
     }
-
-
 }

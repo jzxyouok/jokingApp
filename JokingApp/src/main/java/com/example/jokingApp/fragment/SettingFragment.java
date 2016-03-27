@@ -7,7 +7,7 @@ import com.example.jokingApp.view.Loadingpager;
 /**
  * Created by idea-pc on 2016/3/17.
  */
-public class TopFragment extends BaseFragment {
+public class SettingFragment extends BaseFragment {
     @Override
     public View createSuccessView() {
 

@@ -14,10 +14,10 @@ import java.util.List;
 /**
  * Created by idea-pc on 2016/3/22.
  */
-public class GameAdapter extends RecyclerView.Adapter {
+public class JokeAdapter extends RecyclerView.Adapter {
     private List<JokeInfo.JokeBean> data;
 
-    public GameAdapter(List<JokeInfo.JokeBean> data) {
+    public JokeAdapter(List<JokeInfo.JokeBean> data) {
         this.data = data;
     }
 

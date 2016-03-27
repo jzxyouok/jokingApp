@@ -9,7 +9,7 @@ import android.widget.Toast;
 import com.alafighting.loadmore.OnLoadmoreListener;
 import com.alafighting.loadmore.RecyclerSwipeHelper;
 import com.example.jokingApp.R;
-import com.example.jokingApp.adapter.GameAdapter;
+import com.example.jokingApp.adapter.JokeAdapter;
 import com.example.jokingApp.bean.JokeInfo;
 import com.example.jokingApp.protocol.JokeProtocol;
 import com.example.jokingApp.utils.ThreadManager;
@@ -23,10 +23,9 @@ import java.util.List;
  */
 public class JokeFragment extends BaseFragment {
     private List<JokeInfo.JokeBean> mJokeBeen;
-    private List<JokeInfo.JokeBean> data; // 下拉刷新后 获得的数据
     private SwipeRefreshLayout swipeRefreshLayout;
     private  RecyclerView recyclerView;
-    private GameAdapter mGameAdapter;
+    private JokeAdapter mJokeAdapter;
     private RecyclerSwipeHelper helper;
     private  static  int i = 0; //加载更多的次数
 
@@ -38,8 +37,8 @@ public class JokeFragment extends BaseFragment {
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setHasFixedSize(true);
-        mGameAdapter = new GameAdapter(mJokeBeen);
-        recyclerView.setAdapter(mGameAdapter);
+        mJokeAdapter = new JokeAdapter(mJokeBeen);
+        recyclerView.setAdapter(mJokeAdapter);
 
         // 初始化辅助类
         helper = new RecyclerSwipeHelper(swipeRefreshLayout, recyclerView);
@@ -69,7 +68,7 @@ public class JokeFragment extends BaseFragment {
                                 public void run() {
                                     if (i < 3) {
                                         helper.setLoadmoreing(false);
-                                        mGameAdapter.notifyDataSetChanged();
+                                        mJokeAdapter.notifyDataSetChanged();
                                     } else {
                                         Toast.makeText(getContext(),"没有更多数据",Toast.LENGTH_LONG).show();
                                         helper.setEnabledLoadmore(false);
@@ -98,7 +97,7 @@ public class JokeFragment extends BaseFragment {
                     @Override
                     public void run() {
                         helper.setRefreshing(false);
-                        mGameAdapter.notifyDataSetChanged();
+                        mJokeAdapter.notifyDataSetChanged();
                     }
                 });
             }

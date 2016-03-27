@@ -23,7 +23,7 @@ public class FragmentFactory {
             } else if (position == 4) {
                 fragment = new CategoryFragment();
             } else if (position == 5) {
-                fragment = new TopFragment();
+                fragment = new SettingFragment();
             }
             if (fragment != null) {
                 mFragments.put(position, fragment);

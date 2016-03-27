@@ -7,14 +7,9 @@ import java.util.List;
  */
 public class HomeInfo {
 
-    private List<String> picture;
 
-    @Override
-    public String toString() {
-        return "HomeInfo{" +
-                "picture=" + picture +
-                '}';
-    }
+    private List<String> picture;
+    private List<String> viewpager;
 
     public List<String> getPicture() {
         return picture;
@@ -22,5 +17,13 @@ public class HomeInfo {
 
     public void setPicture(List<String> picture) {
         this.picture = picture;
+    }
+
+    public List<String> getViewpager() {
+        return viewpager;
+    }
+
+    public void setViewpager(List<String> viewpager) {
+        this.viewpager = viewpager;
     }
 }
