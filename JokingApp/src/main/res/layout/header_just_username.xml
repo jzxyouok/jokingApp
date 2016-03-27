@@ -21,14 +21,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@id/id_link"
-        android:text="谷歌电子市场"/>
+        android:text="MyApp"/>
 
     <ImageView
         android:layout_width="72dp"
         android:layout_height="72dp"
         android:layout_above="@id/id_username"
         android:layout_marginBottom="16dp"
-        android:src="@mipmap/ic_launcher"/>
+        android:src="@mipmap/ic_3d"/>
 
 
 </RelativeLayout>

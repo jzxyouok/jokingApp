@@ -19,6 +19,12 @@ public class BaseApplication extends Application {
         application = this;
         mainTid = android.os.Process.myTid();
         handler = new Handler();
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+
+            }
+        });
 
     }
 
