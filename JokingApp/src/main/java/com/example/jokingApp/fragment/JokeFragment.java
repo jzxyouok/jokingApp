@@ -1,5 +1,6 @@
 package com.example.jokingApp.fragment;
 
+import android.app.Activity;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -14,9 +15,12 @@ import com.example.jokingApp.bean.JokeInfo;
 import com.example.jokingApp.protocol.JokeProtocol;
 import com.example.jokingApp.utils.ThreadManager;
 import com.example.jokingApp.utils.UiUtils;
+import com.example.jokingApp.view.DividerItemDecoration;
 import com.example.jokingApp.view.Loadingpager;
 
 import java.util.List;
+
+import butterknife.ButterKnife;
 
 /**
  * Created by idea-pc on 2016/3/17.
@@ -28,6 +32,11 @@ public class JokeFragment extends BaseFragment {
     private JokeAdapter mJokeAdapter;
     private RecyclerSwipeHelper helper;
     private  static  int i = 0; //加载更多的次数
+    private  Activity mActivity;
+
+    public JokeFragment(Activity activity) {
+        mActivity=  activity;
+    }
 
     @Override
     public View createSuccessView() {
@@ -35,9 +44,13 @@ public class JokeFragment extends BaseFragment {
         swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.refresh_layout);
         recyclerView= (RecyclerView) view.findViewById(R.id.list);
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext()) ;
+        recyclerView.setLayoutManager(layoutManager);
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), layoutManager.getOrientation()));
         recyclerView.setHasFixedSize(true);
-        mJokeAdapter = new JokeAdapter(mJokeBeen);
+        mJokeAdapter = new JokeAdapter(mJokeBeen,mActivity);
         recyclerView.setAdapter(mJokeAdapter);
 
         // 初始化辅助类
@@ -49,39 +62,49 @@ public class JokeFragment extends BaseFragment {
                 refresh();
             }
         });
-
         helper.setOnLoadmoreListener(new OnLoadmoreListener() {
             @Override
             public void onLoadmore() {
-                    ThreadManager.getInstance().createLongPool().execute(new Runnable() {
-                        @Override
-                        public void run() {
-                            if (++i < 3) {
-                                JokeProtocol jokeProtocol = new JokeProtocol();
-                                List<JokeInfo.JokeBean> data = (List<JokeInfo.JokeBean>) jokeProtocol.load(i);
-                                if (data != null) {//这里加个判断语句 为了保证  如果服务器返回为null的话 程序不会崩溃
-                                    mJokeBeen.addAll(data);
-                                }
-                            }
-                            UiUtils.runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    if (i < 3) {
-                                        helper.setLoadmoreing(false);
-                                        mJokeAdapter.notifyDataSetChanged();
-                                    } else {
-                                        Toast.makeText(getContext(),"没有更多数据",Toast.LENGTH_LONG).show();
-                                        helper.setEnabledLoadmore(false);
-                                    }
-                                }
-                            });
-                        }
-                    });
+                onLoadMore();
             }
         });
         return view;
     }
 
+    /**
+     * 加载更多数据
+     */
+    private void onLoadMore() {
+        ThreadManager.getInstance().createLongPool().execute(new Runnable() {
+            @Override
+            public void run() {
+                if (++i < 3) {
+                    JokeProtocol jokeProtocol = new JokeProtocol();
+                    List<JokeInfo.JokeBean> data = (List<JokeInfo.JokeBean>) jokeProtocol.load(i);
+                    if (data != null) {//这里加个判断语句 为了保证  如果服务器返回为null的话 程序不会崩溃
+                        mJokeBeen.addAll(data);
+                    }
+                }
+                UiUtils.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (i < 3) {
+                            helper.setLoadmoreing(false);
+                            mJokeAdapter.notifyDataSetChanged();
+                        } else {
+                            Toast.makeText(getContext(),"没有更多数据",Toast.LENGTH_LONG).show();
+                            //没有更多数据的时候  让该控件不再响应
+                            helper.setEnabledLoadmore(false);
+                        }
+                    }
+                });
+            }
+        });
+    }
+
+    /**
+     * 下拉刷新
+     */
     private void refresh() {
         // 重新启用加载更多
         helper.setEnabledLoadmore(true);

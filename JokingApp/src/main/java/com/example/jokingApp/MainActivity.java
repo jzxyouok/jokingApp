@@ -60,7 +60,7 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onPageSelected(int position) {
                 super.onPageSelected(position);
-                BaseFragment createFragment = FragmentFactory.createFragment(position);
+                BaseFragment createFragment = FragmentFactory.createFragment(position ,MainActivity.this);
                 createFragment.show();//  当切换界面的时候 重新请求服务器
             }
         });
@@ -92,7 +92,7 @@ public class MainActivity extends BaseActivity {
 
         @Override
         public Fragment getItem(int position) {
-            return FragmentFactory.createFragment(position);
+            return FragmentFactory.createFragment(position ,MainActivity.this);
         }
 
         @Override

@@ -16,7 +16,6 @@ public class BaseActivity extends AppCompatActivity {
     public static BaseActivity activity;
 //	private KillAllReceiver receiver;
 //	private class KillAllReceiver extends BroadcastReceiver{
-//
 //		@OverrideBaseActivity
 //		public void onReceive(Context context, Intent intent) {
 //			finish();
@@ -40,8 +39,6 @@ public class BaseActivity extends AppCompatActivity {
 //		receiver=new KillAllReceiver();
 //		IntentFilter filter=new IntentFilter(" com.example.copy3.killAll");
 //		registerReceiver(receiver, filter);
-
-
         synchronized (mActivities) {
             mActivities.add(this);
         }

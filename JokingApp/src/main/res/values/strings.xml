@@ -5,10 +5,10 @@
     <string name="load_error">加载失败 点击重试</string>
     <string-array name="tab_names">
         <item>首页</item>
-        <item>分区</item>
         <item>笑话</item>
+        <item>分区</item>
         <item>专题</item>
         <item>分类</item>
-        <item>排行</item>
+        <item>设置</item>
     </string-array>
 </resources>

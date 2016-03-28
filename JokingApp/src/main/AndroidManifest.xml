@@ -23,6 +23,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".SecondActivity"  android:parentActivityName=".MainActivity"></activity>
+        <activity android:name=".DetailActivity"   android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

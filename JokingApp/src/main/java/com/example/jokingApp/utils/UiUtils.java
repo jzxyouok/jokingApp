@@ -51,5 +51,4 @@ public class UiUtils {
         BaseApplication.getHandler().removeCallbacks(auToRunTask);
     }
 
-
 }

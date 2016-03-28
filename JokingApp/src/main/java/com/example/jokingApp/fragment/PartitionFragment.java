@@ -19,7 +19,7 @@ import java.util.List;
 /**
  * Created by idea-pc on 2016/3/17.
  */
-public class AppFragment extends BaseFragment {
+public class PartitionFragment extends BaseFragment {
 
     private RecyclerView mRecyclerView;
     private List<PartitionInfo.PictureBean> mPictureBeen;

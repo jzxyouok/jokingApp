@@ -1,5 +1,7 @@
 package com.example.jokingApp.fragment;
 
+import android.app.Activity;
+
 import java.util.HashMap;
 
 /**
@@ -8,16 +10,16 @@ import java.util.HashMap;
 public class FragmentFactory {
     private static HashMap<Integer, BaseFragment> mFragments = new HashMap<Integer, BaseFragment>();
 
-    public static BaseFragment createFragment(int position) {
+    public static BaseFragment createFragment(int position , Activity activity) {
         BaseFragment fragment = null;
         fragment = mFragments.get(position);
         if (fragment == null) {
             if (position == 0) {
                 fragment = new HomeFragment();
             } else if (position == 1) {
-                fragment = new AppFragment();
+                fragment = new JokeFragment(activity);
             } else if (position == 2) {
-                fragment = new JokeFragment();
+                fragment = new PartitionFragment();
             } else if (position == 3) {
                 fragment = new SubjectFragment();
             } else if (position == 4) {
