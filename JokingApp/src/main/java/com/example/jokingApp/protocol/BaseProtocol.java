@@ -25,7 +25,7 @@ public abstract class BaseProtocol<T> {
     private String mJson;
 
     public T load(int index) {
-        SystemClock.sleep(2000);
+        SystemClock.sleep(500);
         // 首先加载服务器数据
         String json = loadLocal(index);
         if (json == null) {

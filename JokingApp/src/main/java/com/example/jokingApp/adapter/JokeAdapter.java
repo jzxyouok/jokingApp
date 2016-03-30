@@ -12,6 +12,7 @@ import com.example.jokingApp.DetailActivity;
 import com.example.jokingApp.MainActivity;
 import com.example.jokingApp.R;
 import com.example.jokingApp.bean.JokeInfo;
+import com.example.jokingApp.holder.FootViewHolder;
 
 import java.util.List;
 
@@ -19,31 +20,55 @@ import java.util.List;
  * Created by idea-pc on 2016/3/22.
  */
 public class JokeAdapter extends RecyclerView.Adapter {
+
+    private static final int TYPE_ITEM = 0;
+    private static final int TYPE_FOOTER = 1;
+
+
     private List<JokeInfo.JokeBean> data;
-    private  Activity mActivity;
+    private Activity mActivity;
+
     public JokeAdapter(List<JokeInfo.JokeBean> data, Activity activity) {
         this.data = data;
-        mActivity= activity;
+        mActivity = activity;
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_item, parent, false);
-        return new ViewHolder(view);
+        if (viewType == TYPE_ITEM) {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_item, parent, false);
+            return new ViewHolder(view);
+        } else if (viewType == TYPE_FOOTER) {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_foot, parent,
+                    false);
+            return new FootViewHolder(view);
+        }
+        return null ;
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        ViewHolder mHolder = (ViewHolder) holder;
-        mHolder.mIdView.setText(data.get(position).getName());
-        mHolder.mContentView.setText(data.get(position).getDes());
+        int itemViewType = holder.getItemViewType();
+        if (itemViewType==TYPE_ITEM){
+            ViewHolder mHolder = (ViewHolder) holder;
+            mHolder.mIdView.setText(data.get(position).getName());
+            mHolder.mContentView.setText(data.get(position).getDes());
+        }
     }
 
+    @Override
+    public int getItemViewType(int position) {
+        if (position + 1 == getItemCount()) {
+            return TYPE_FOOTER;
+        } else {
+            return TYPE_ITEM;
+        }
+    }
 
     @Override
     public int getItemCount() {
-        return data.size();
-    }
+        return data.size() + 1;
+    }//+1 是底部加载更多
 
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public final TextView mIdView;
@@ -62,6 +87,12 @@ public class JokeAdapter extends RecyclerView.Adapter {
             intent.setClass(mActivity, DetailActivity.class);
             intent.putExtra("url", "https://www.baidu.com");
             mActivity.startActivity(intent);
+        }
+    }
+    static class FootViewHolder extends RecyclerView.ViewHolder {
+
+        public FootViewHolder(View view) {
+            super(view);
         }
     }
 }

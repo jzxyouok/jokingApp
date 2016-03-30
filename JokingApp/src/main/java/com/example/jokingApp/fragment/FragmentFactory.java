@@ -17,7 +17,7 @@ public class FragmentFactory {
             if (position == 0) {
                 fragment = new HomeFragment();
             } else if (position == 1) {
-                fragment = new JokeFragment(activity);
+                fragment = new JokeFragment();
             } else if (position == 2) {
                 fragment = new PartitionFragment();
             } else if (position == 3) {

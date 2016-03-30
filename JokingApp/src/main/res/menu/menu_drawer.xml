@@ -13,11 +13,11 @@
         <item
             android:id="@+id/nav_friends"
             android:icon="@mipmap/ic_launcher"
-            android:title="Friends"/>
+            android:title="主题"/>
         <item
             android:id="@+id/nav_discussion"
             android:icon="@mipmap/ic_launcher"
-            android:title="Discussion"/>
+            android:title="我的收藏"/>
 
 
         <item
@@ -28,11 +28,11 @@
                     <item
                         android:id="@+id/subitem1"
                         android:icon="@mipmap/ic_launcher"
-                        android:title="我的动态"></item>
+                        android:title="反馈"></item>
                     <item
                         android:id="@+id/item2_two"
                         android:icon="@mipmap/ic_launcher"
-                        android:title="我的留言"></item>
+                        android:title="关于"></item>
 
                 </group>
             </menu>

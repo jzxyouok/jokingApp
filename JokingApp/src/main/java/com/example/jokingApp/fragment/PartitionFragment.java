@@ -26,7 +26,7 @@ public class PartitionFragment extends BaseFragment {
 
     @Override
     public View createSuccessView() {
-        View view = View.inflate(getContext(), R.layout.fragment_partition, null);
+        View view = View.inflate(mActivity, R.layout.fragment_partition, null);
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
         mRecyclerView.setLayoutManager(new GridLayoutManager(getContext(),3));
         mRecyclerView.setHasFixedSize(true);

@@ -9,6 +9,7 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.jokingApp.MainActivity;
 import com.example.jokingApp.R;
 import com.example.jokingApp.adapter.HomeAdapter;
 import com.example.jokingApp.bean.HomeInfo;

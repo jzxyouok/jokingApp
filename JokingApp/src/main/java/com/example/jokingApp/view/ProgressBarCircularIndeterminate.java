@@ -9,6 +9,7 @@ import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.RectF;
+import android.os.SystemClock;
 import android.util.AttributeSet;
 
 import com.example.jokingApp.utils.Utils;
@@ -23,6 +24,7 @@ public class ProgressBarCircularIndeterminate extends CustomView {
 
 	public ProgressBarCircularIndeterminate(Context context, AttributeSet attrs) {
 		super(context, attrs);
+
 		setAttributes(attrs);
 
 	}
