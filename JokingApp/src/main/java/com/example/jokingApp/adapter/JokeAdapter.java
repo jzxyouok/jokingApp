@@ -8,11 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.jokingApp.DetailActivity;
-import com.example.jokingApp.MainActivity;
+import com.example.jokingApp.ui.DetailActivity;
 import com.example.jokingApp.R;
 import com.example.jokingApp.bean.JokeInfo;
-import com.example.jokingApp.holder.FootViewHolder;
 
 import java.util.List;
 
@@ -20,19 +18,14 @@ import java.util.List;
  * Created by idea-pc on 2016/3/22.
  */
 public class JokeAdapter extends RecyclerView.Adapter {
-
     private static final int TYPE_ITEM = 0;
     private static final int TYPE_FOOTER = 1;
-
-
     private List<JokeInfo.JokeBean> data;
     private Activity mActivity;
-
     public JokeAdapter(List<JokeInfo.JokeBean> data, Activity activity) {
         this.data = data;
         mActivity = activity;
     }
-
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == TYPE_ITEM) {
@@ -67,7 +60,7 @@ public class JokeAdapter extends RecyclerView.Adapter {
 
     @Override
     public int getItemCount() {
-        return data.size() + 1;
+        return data.size()+1 ;
     }//+1 是底部加载更多
 
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -90,7 +83,6 @@ public class JokeAdapter extends RecyclerView.Adapter {
         }
     }
     static class FootViewHolder extends RecyclerView.ViewHolder {
-
         public FootViewHolder(View view) {
             super(view);
         }

@@ -1,71 +1,83 @@
 package com.example.jokingApp.fragment;
 
-import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
+
+import com.example.jokingApp.ui.MainActivity;
 import com.example.jokingApp.utils.ViewUtils;
-import com.example.jokingApp.view.Loadingpager;
+import com.example.jokingApp.view.LoadingPage;
 
 import java.util.List;
 
-/**
- * Created by idea-pc on 2016/3/17.
- */
 public abstract class BaseFragment extends Fragment {
-    private Loadingpager mLoadingpager;
-    protected Activity mActivity;
-
-    @Nullable
+    public MainActivity mActivity;
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle
-            savedInstanceState) {
-        mActivity = getActivity();
+    public void onAttach(Context context) {
+        super.onAttach(context);
+       mActivity=  (MainActivity)context;
+    }
 
-        if (mLoadingpager == null) {
-            mLoadingpager = new Loadingpager(getContext()) {
+    private LoadingPage mLoadingPage;
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+
+        if (mLoadingPage == null) {  // 之前的frameLayout 已经记录了一个爹了  爹是之前的ViewPager
+            mLoadingPage = new LoadingPage(getActivity()){
+
                 @Override
                 public View createSuccessView() {
                     return BaseFragment.this.createSuccessView();
                 }
 
                 @Override
-                public LoadResult load() {
+                public LoadingPage.LoadResult load() {
                     return BaseFragment.this.load();
                 }
             };
-        }else {
-            ViewUtils.removeParent(mLoadingpager);
+        }else{
+            ViewUtils.removeParent(mLoadingPage);// 移除frameLayout之前的爹
         }
 
-        return mLoadingpager;
+        return mLoadingPage;  //  拿到当前viewPager 添加这个framelayout
     }
+    /***
+     *  创建成功的界面
+     * @return
+     */
+    protected abstract View createSuccessView();
+    /**
+     * 请求服务器
+     * @return
+     */
+    protected abstract LoadingPage.LoadResult load();
+
+
     public void show(){
-        if(mLoadingpager!=null){
-            mLoadingpager.show();
+        if(mLoadingPage !=null){
+            mLoadingPage.show();
         }
     }
 
-    public abstract View createSuccessView();
-
-    public abstract Loadingpager.LoadResult load();
 
     /**校验数据 */
-    public Loadingpager.LoadResult checkData(List datas) {
+    public LoadingPage.LoadResult checkData(List datas) {
         if(datas==null){
-            return Loadingpager.LoadResult.error;//  请求服务器失败
+            return LoadingPage.LoadResult.error;//  请求服务器失败
         }else{
             if(datas.size()==0){
-                return Loadingpager.LoadResult.empty;
+                return LoadingPage.LoadResult.empty;
             }else{
-                return Loadingpager.LoadResult.success;
+                return LoadingPage.LoadResult.success;
             }
         }
 
     }
+
+
 }

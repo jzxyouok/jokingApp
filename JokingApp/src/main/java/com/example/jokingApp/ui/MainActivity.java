@@ -1,17 +1,13 @@
-package com.example.jokingApp;
+package com.example.jokingApp.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.GravityCompat;
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.PagerTabStrip;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -19,9 +15,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.jokingApp.R;
 import com.example.jokingApp.fragment.BaseFragment;
 import com.example.jokingApp.fragment.FragmentFactory;
 
@@ -47,7 +43,6 @@ public class MainActivity extends BaseActivity {
     @Override
     public void init() {
         mStringArray = getResources().getStringArray(R.array.tab_names);
-
     }
 
     @Override
@@ -56,7 +51,7 @@ public class MainActivity extends BaseActivity {
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerlayout);
         initToobar();
         initNavigationView();
-        //初始化
+        //初始化Tablayout
         iniTablayout();
         //设置viewpager
         initViewPager();
@@ -72,25 +67,16 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onPageSelected(int position) {
                 super.onPageSelected(position);
-                BaseFragment createFragment = FragmentFactory.createFragment(position, MainActivity.this);
+                BaseFragment createFragment = FragmentFactory.createFragment(position);
                 createFragment.show();//  当切换界面的时候 重新请求服务器
                 switch (position) {
-                    case 0:
-                        mToolbar.setTitle("首页");
-                        break;
                     case 1:
-                        mToolbar.setTitle("笑话");
+                        mToolbar.setTitle("图片");
                         break;
                     case 2:
                         mToolbar.setTitle("分区");
                         break;
                     case 3:
-                        mToolbar.setTitle("专题");
-                        break;
-                    case 4:
-                        mToolbar.setTitle("分类");
-                        break;
-                    case 5:
                         mToolbar.setTitle("设置");
                         break;
                     default:
@@ -99,13 +85,13 @@ public class MainActivity extends BaseActivity {
             }
         });
     }
-
     private void initToobar() {
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setHomeAsUpIndicator(R.mipmap.img_menu);
         actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setTitle("笑话");
     }
 
     private void iniTablayout() {
@@ -115,8 +101,6 @@ public class MainActivity extends BaseActivity {
         mTabLayout.addTab(mTabLayout.newTab().setText(mStringArray[1]));
         mTabLayout.addTab(mTabLayout.newTab().setText(mStringArray[2]));
         mTabLayout.addTab(mTabLayout.newTab().setText(mStringArray[3]));
-        mTabLayout.addTab(mTabLayout.newTab().setText(mStringArray[4]));
-        mTabLayout.addTab(mTabLayout.newTab().setText(mStringArray[5]));
     }
 
     class MainAdapter extends FragmentStatePagerAdapter {
@@ -126,7 +110,7 @@ public class MainActivity extends BaseActivity {
 
         @Override
         public Fragment getItem(int position) {
-            return FragmentFactory.createFragment(position, MainActivity.this);
+            return FragmentFactory.createFragment(position);
         }
         @Override
         public int getCount() {
@@ -137,7 +121,6 @@ public class MainActivity extends BaseActivity {
         public CharSequence getPageTitle(int position) {
             return mStringArray[position];
         }
-
     }
 
 
@@ -175,9 +158,6 @@ public class MainActivity extends BaseActivity {
         });
     }
 
-    public void setToolbarTitle(String text) {
-        mToolbar.setTitle(text);
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -213,6 +193,5 @@ public class MainActivity extends BaseActivity {
                 finish();
             }
         }
-
     }
 }

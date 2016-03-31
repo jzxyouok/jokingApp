@@ -79,7 +79,7 @@ public abstract class BaseProtocol<T> {
         try {
             FileReader fr = new FileReader(file);
             BufferedReader br = new BufferedReader(fr);
-            //读取json文件 首行的事件
+            //读取json文件 首行的时间
             long outOfDate = Long.parseLong(br.readLine());
             if (System.currentTimeMillis() > outOfDate) {
                 //如果文件过期了 那么要删除文件

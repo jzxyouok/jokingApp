@@ -1,4 +1,4 @@
-package com.example.jokingApp;
+package com.example.jokingApp.ui;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;

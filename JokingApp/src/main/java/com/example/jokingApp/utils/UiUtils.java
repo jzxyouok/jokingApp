@@ -3,7 +3,7 @@ package com.example.jokingApp.utils;
 import android.content.Context;
 import android.content.res.Resources;
 
-import com.example.jokingApp.BaseApplication;
+import com.example.jokingApp.ui.BaseApplication;
 
 
 /**

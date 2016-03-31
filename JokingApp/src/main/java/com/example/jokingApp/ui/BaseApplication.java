@@ -1,8 +1,7 @@
-package com.example.jokingApp;
+package com.example.jokingApp.ui;
 
 import android.app.Application;
 import android.os.Handler;
-import android.os.Message;
 
 /**
  * 代表当前的程序

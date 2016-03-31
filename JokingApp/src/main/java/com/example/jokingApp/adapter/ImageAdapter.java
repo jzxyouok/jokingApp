@@ -7,22 +7,19 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.jokingApp.R;
-import com.example.jokingApp.bean.HomeInfo;
+import com.example.jokingApp.bean.ImageInfo;
 import com.example.jokingApp.holder.ImageHolder;
 import com.example.jokingApp.holder.ViewPagerHoler;
 import com.example.jokingApp.holder.textHolder;
-import com.example.jokingApp.protocol.HomeProtocol;
 import com.example.jokingApp.utils.UiUtils;
-import com.lidroid.xutils.db.annotation.Id;
 
-import java.nio.channels.Pipe;
 import java.util.List;
 
 /**
  * 面向holder编程
  * Created by idea-pc on 2016/3/22.
  */
-public class HomeAdapter extends RecyclerView.Adapter {
+public class ImageAdapter extends RecyclerView.Adapter {
     private static final int TYPE_VIEWPAGER = 0;
     private static final int TYPE_NORMAL = 1;
     private static final int TYPE_TIPS = 2;
@@ -30,7 +27,7 @@ public class HomeAdapter extends RecyclerView.Adapter {
     private final List<String> mPicture;
     private ImageHolder mImageHolder;
 
-    public HomeAdapter(HomeInfo data) {
+    public ImageAdapter(ImageInfo data) {
         mViewpager = data.getViewpager();
         mPicture = data.getPicture();
     }

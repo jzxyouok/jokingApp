@@ -15,7 +15,7 @@ import com.example.jokingApp.utils.UiUtils;
 /**
  * Created by idea-pc on 2016/3/16.
  */
-public abstract class Loadingpager extends FrameLayout {
+public abstract class LoadingPage extends FrameLayout {
 
     public View loadingView;
     private View errorView;
@@ -28,17 +28,17 @@ public abstract class Loadingpager extends FrameLayout {
     public static final int STATE_SUCCESS = 4;
     public int state = STATE_UNKOWN;
 
-    public Loadingpager(Context context) {
+    public LoadingPage(Context context) {
         super(context);
         init();
     }
 
-    public Loadingpager(Context context, AttributeSet attrs) {
+    public LoadingPage(Context context, AttributeSet attrs) {
         super(context, attrs);
         init();
     }
 
-    public Loadingpager(Context context, AttributeSet attrs, int defStyleAttr) {
+    public LoadingPage(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init();
     }
@@ -72,19 +72,22 @@ public abstract class Loadingpager extends FrameLayout {
      */
     private void showPage() {
         if (loadingView != null) {
-            loadingView.setVisibility(state == STATE_UNKOWN || state == STATE_LOADING ? View.VISIBLE : View.INVISIBLE);
+            loadingView.setVisibility(state == STATE_UNKOWN
+                    || state == STATE_LOADING ? View.VISIBLE : View.INVISIBLE);
         }
         if (errorView != null) {
-            errorView.setVisibility(state == STATE_ERROR ? View.VISIBLE : View.INVISIBLE);
+            errorView.setVisibility(state == STATE_ERROR ? View.VISIBLE
+                    : View.INVISIBLE);
         }
         if (emptyView != null) {
-            emptyView.setVisibility(state == STATE_EMPTY ? View.VISIBLE : View.INVISIBLE);
+            emptyView.setVisibility(state == STATE_EMPTY ? View.VISIBLE
+                    : View.INVISIBLE);
         }
         if (state == STATE_SUCCESS) {
             if (successView == null) {
                 successView = createSuccessView();
-                this.addView(successView, new FrameLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams
-                        .MATCH_PARENT));
+                this.addView(successView, new FrameLayout.LayoutParams(
+                        LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
             }
             successView.setVisibility(View.VISIBLE);
         } else {
@@ -119,13 +122,10 @@ public abstract class Loadingpager extends FrameLayout {
             public int getValue() {
                 return value;
             }
-
         }
-
         /**
          * 根据服务器的数据来 切换 状态
          */
-
     public void show() {
         if (state == STATE_ERROR || state == STATE_EMPTY) {
             state = STATE_LOADING;
@@ -147,15 +147,16 @@ public abstract class Loadingpager extends FrameLayout {
                 });
             }
         });
+        showPage();
     }
 
     private View createLoadingView() {
-        View view = View.inflate(getContext(), R.layout.loadpage_loading, null);
+        View view = View.inflate(UiUtils.getContext(), R.layout.loadpage_loading, null);
         return view;
     }
 
     private View creatEmptyView() {
-        View view = View.inflate(getContext(), R.layout.loadpage_empty, null);
+        View view = View.inflate(UiUtils.getContext(), R.layout.loadpage_empty, null);
         return view;
     }
 

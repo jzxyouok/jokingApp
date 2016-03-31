@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * Created by idea-pc on 2016/3/23.
  */
-public class HomeInfo {
+public class ImageInfo {
 
 
     private List<String> picture;

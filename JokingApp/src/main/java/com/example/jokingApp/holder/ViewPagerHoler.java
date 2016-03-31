@@ -9,7 +9,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.example.jokingApp.R;
-import com.example.jokingApp.bean.HomeInfo;
 import com.example.jokingApp.global.GlobalConstant;
 import com.example.jokingApp.utils.BitmapHelper;
 import com.example.jokingApp.utils.UiUtils;
@@ -35,7 +34,6 @@ public class ViewPagerHoler extends RecyclerView.ViewHolder {
         }
         mViewPager = (ViewPager) itemView.findViewById(R.id.viewpager);
         mLinearLayout = (LinearLayout) itemView.findViewById(R.id.line);
-        mViewPager.setAdapter(new ViewPagerAdapter());
         //给轮播图设置适配器
         mViewPager.setAdapter(mAdapter);
         //添加点
@@ -71,7 +69,6 @@ public class ViewPagerHoler extends RecyclerView.ViewHolder {
     }
     /**
      * 根据角标设置选中的点
-     *
      * @param index
      */
     private void selectPoint(int index) {

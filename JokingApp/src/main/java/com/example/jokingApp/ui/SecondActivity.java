@@ -1,17 +1,11 @@
-package com.example.jokingApp;
+package com.example.jokingApp.ui;
 
 import android.graphics.Color;
-import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.webkit.WebView;
-import android.widget.ImageView;
-import android.widget.TextView;
 
-import com.example.jokingApp.BaseActivity;
-import com.example.jokingApp.utils.BitmapHelper;
-import com.lidroid.xutils.BitmapUtils;
+import com.example.jokingApp.R;
 
 /**
  * Created by idea-pc on 2016/3/20.

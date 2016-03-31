@@ -1,14 +1,14 @@
-package com.example.jokingApp;
+package com.example.jokingApp.ui;
 
 import android.graphics.Bitmap;
 import android.view.View;
-import android.view.Window;
-import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
+
+import com.example.jokingApp.R;
 
 /**
  * Created by idea-pc on 2016/3/28.
