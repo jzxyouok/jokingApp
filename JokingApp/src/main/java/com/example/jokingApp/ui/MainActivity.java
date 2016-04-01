@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -15,11 +16,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.jokingApp.R;
 import com.example.jokingApp.fragment.BaseFragment;
 import com.example.jokingApp.fragment.FragmentFactory;
+import com.example.jokingApp.fragment.left.NewsFragment;
 
 import java.util.List;
 
@@ -62,7 +66,7 @@ public class MainActivity extends BaseActivity {
         final MainAdapter mainAdapter = new MainAdapter(getSupportFragmentManager());
         mViewpager.setAdapter(mainAdapter);
         mTabLayout.setupWithViewPager(mViewpager);
-        mViewpager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+        mViewpager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
 
             @Override
             public void onPageSelected(int position) {
@@ -85,6 +89,7 @@ public class MainActivity extends BaseActivity {
             }
         });
     }
+
     private void initToobar() {
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
@@ -112,6 +117,7 @@ public class MainActivity extends BaseActivity {
         public Fragment getItem(int position) {
             return FragmentFactory.createFragment(position);
         }
+
         @Override
         public int getCount() {
             return mStringArray.length;
@@ -136,7 +142,7 @@ public class MainActivity extends BaseActivity {
                 }
                 switch (itemId) {
                     case R.id.nav_home:
-                        startActivity(new Intent(MainActivity.this, SecondActivity.class));
+                       startActivity(new Intent(MainActivity.this,SecondActivity.class));
                         break;
                     case R.id.nav_friends:
                         Toast.makeText(MainActivity.this, "nav_friends", Toast.LENGTH_LONG).show();
@@ -194,4 +200,5 @@ public class MainActivity extends BaseActivity {
             }
         }
     }
+
 }

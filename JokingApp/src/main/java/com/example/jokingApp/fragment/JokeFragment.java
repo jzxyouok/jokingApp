@@ -1,11 +1,15 @@
 package com.example.jokingApp.fragment;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Toast;
+
 import com.example.jokingApp.R;
 import com.example.jokingApp.adapter.JokeAdapter;
 import com.example.jokingApp.bean.JokeInfo;
@@ -25,8 +29,9 @@ public class JokeFragment extends BaseFragment {
     private List<JokeInfo.JokeBean> mJokeBeen;
     private SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerView recyclerView;
-    private  JokeAdapter  mJokeAdapter ;
+    private JokeAdapter mJokeAdapter;
     boolean isLoading;
+
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -39,15 +44,12 @@ public class JokeFragment extends BaseFragment {
         swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.refresh_layout);
         recyclerView = (RecyclerView) view.findViewById(R.id.list);
 
-
         final LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), layoutManager.getOrientation()));
         recyclerView.setHasFixedSize(true);
-
         mJokeAdapter = new JokeAdapter(mJokeBeen, mActivity);
-
         recyclerView.setAdapter(mJokeAdapter);
 
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -61,6 +63,7 @@ public class JokeFragment extends BaseFragment {
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
             }
+
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
@@ -90,7 +93,7 @@ public class JokeFragment extends BaseFragment {
             public void run() {
                 JokeProtocol jokeProtocol = new JokeProtocol();
                 Random random = new Random();
-                List<JokeInfo.JokeBean> data = (List<JokeInfo.JokeBean>) jokeProtocol.load(random.nextInt(3));
+                List<JokeInfo.JokeBean> data = (List<JokeInfo.JokeBean>) jokeProtocol.load(random.nextInt(2));
                 mJokeBeen.addAll(data);
                 UiUtils.runOnUiThread(new Runnable() {
                     @Override
@@ -98,7 +101,6 @@ public class JokeFragment extends BaseFragment {
                         mJokeAdapter.notifyDataSetChanged();
                         swipeRefreshLayout.setRefreshing(false);
                         mJokeAdapter.notifyItemRemoved(mJokeAdapter.getItemCount());
-                        Toast.makeText(mActivity, "loadMore", Toast.LENGTH_LONG).show();
                         isLoading = false;
                     }
                 });
@@ -115,7 +117,6 @@ public class JokeFragment extends BaseFragment {
             public void run() {
                 JokeProtocol jokeProtocol = new JokeProtocol();
                 final List<JokeInfo.JokeBean> load = (List<JokeInfo.JokeBean>) jokeProtocol.load(0);
-
                 UiUtils.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -134,12 +135,17 @@ public class JokeFragment extends BaseFragment {
     /**
      * 请求服务器的数据
      * 之后执行的createSuccessView()
+     *
      * @return
      */
     @Override
     public LoadingPage.LoadResult load() {
         JokeProtocol jokeProtocol = new JokeProtocol();
-        mJokeBeen = (List<JokeInfo.JokeBean>) jokeProtocol.load(0);
-        return checkData(mJokeBeen);
+        List<JokeInfo.JokeBean> load = (List<JokeInfo.JokeBean>) jokeProtocol.load(0);
+        if(mJokeBeen==null){
+            mJokeBeen=load;
+        }
+        return checkData(load);
     }
+
 }

@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 
 import com.example.jokingApp.ui.MainActivity;
@@ -22,14 +23,12 @@ public abstract class BaseFragment extends Fragment {
        mActivity=  (MainActivity)context;
     }
 
-    private LoadingPage mLoadingPage;
+    public LoadingPage mLoadingPage;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         if (mLoadingPage == null) {  // 之前的frameLayout 已经记录了一个爹了  爹是之前的ViewPager
-            mLoadingPage = new LoadingPage(getActivity()){
-
+            mLoadingPage = new LoadingPage(mActivity){
                 @Override
                 public View createSuccessView() {
                     return BaseFragment.this.createSuccessView();
@@ -78,6 +77,4 @@ public abstract class BaseFragment extends Fragment {
         }
 
     }
-
-
 }
