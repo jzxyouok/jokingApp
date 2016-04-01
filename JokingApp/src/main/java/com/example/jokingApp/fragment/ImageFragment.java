@@ -32,7 +32,7 @@ public class ImageFragment extends BaseFragment implements SwipeRefreshLayout.On
 
     @Override
     public View createSuccessView() {
-        View view = View.inflate(getContext(), R.layout.fragment_home, null);
+        View view = View.inflate(mActivity, R.layout.fragment_home, null);
         ButterKnife.inject(this, view);
 
         mRefresh.setOnRefreshListener(this);

@@ -38,9 +38,12 @@ public class ViewPagerHoler extends RecyclerView.ViewHolder {
         mViewPager.setAdapter(mAdapter);
         //添加点
         initPoint();
+        //设置开始的位置
+        int centerCount = Integer.MAX_VALUE / 2;
+        centerCount = centerCount - centerCount % data.size();
+        mViewPager.setCurrentItem(centerCount);// 设置起始的位置
 
-        mViewPager.setCurrentItem(Integer.MAX_VALUE / 2);// 设置起始的位置
-
+        //给viewpager设置触摸监听  触摸的时候不再轮播
         mViewPager.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -59,7 +62,7 @@ public class ViewPagerHoler extends RecyclerView.ViewHolder {
         mViewPager.addOnPageChangeListener(new android.support.v4.view.ViewPager.SimpleOnPageChangeListener(){
             @Override
             public void onPageSelected(int position) {
-                position=position%data.size();
+                position = position % data.size();
                 selectPoint(position);
                 super.onPageSelected(position);
             }
@@ -89,7 +92,6 @@ public class ViewPagerHoler extends RecyclerView.ViewHolder {
             if (i == 0) {
                 point.setImageResource(R.drawable.shape_indicator_selector);
             } else {
-                point.setImageResource(R.drawable.shape_indicator_normal);
                 point.setImageResource(R.drawable.shape_indicator_normal);
             }
             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams

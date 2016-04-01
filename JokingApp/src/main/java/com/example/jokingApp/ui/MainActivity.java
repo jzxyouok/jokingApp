@@ -23,7 +23,6 @@ import android.widget.Toast;
 import com.example.jokingApp.R;
 import com.example.jokingApp.fragment.BaseFragment;
 import com.example.jokingApp.fragment.FragmentFactory;
-import com.example.jokingApp.fragment.left.NewsFragment;
 
 import java.util.List;
 

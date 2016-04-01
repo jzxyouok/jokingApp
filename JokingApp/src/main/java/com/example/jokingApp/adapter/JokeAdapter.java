@@ -2,6 +2,8 @@ package com.example.jokingApp.adapter;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +24,7 @@ public class JokeAdapter extends RecyclerView.Adapter {
     private static final int TYPE_FOOTER = 1;
     private List<JokeInfo.JokeBean> data;
     private Activity mActivity;
+
     public JokeAdapter(List<JokeInfo.JokeBean> data, Activity activity) {
         this.data = data;
         mActivity = activity;
@@ -76,9 +79,15 @@ public class JokeAdapter extends RecyclerView.Adapter {
 
         @Override
         public void onClick(View v) {
+            int adapterPosition = this.getAdapterPosition();
+            JokeInfo.JokeBean jokeBean = data.get(adapterPosition);
+
             Intent intent = new Intent();
             intent.setClass(mActivity, DetailActivity.class);
-            intent.putExtra("url", "https://www.baidu.com");
+            Bundle bundle = new Bundle();
+            bundle.putParcelable("data",  jokeBean);
+            intent.putExtras(bundle);
+           // intent.putExtra("url", "https://www.baidu.com");
             mActivity.startActivity(intent);
         }
     }
@@ -86,5 +95,8 @@ public class JokeAdapter extends RecyclerView.Adapter {
         public FootViewHolder(View view) {
             super(view);
         }
+    }
+    public JokeInfo.JokeBean getItem(int position) {
+        return data == null ? null : data.get(position);
     }
 }
