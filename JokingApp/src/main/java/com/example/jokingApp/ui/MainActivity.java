@@ -8,7 +8,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.GravityCompat;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -16,13 +15,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.jokingApp.R;
 import com.example.jokingApp.fragment.BaseFragment;
 import com.example.jokingApp.fragment.FragmentFactory;
+import com.example.jokingApp.utils.UiUtils;
 
 import java.util.List;
 
@@ -136,12 +134,17 @@ public class MainActivity extends BaseActivity {
             public boolean onNavigationItemSelected(MenuItem item) {
                 int itemId = item.getItemId();
                 item.setChecked(true);
-                synchronized (mDrawerLayout) {
                     mDrawerLayout.closeDrawers();
-                }
                 switch (itemId) {
                     case R.id.nav_home:
-                       startActivity(new Intent(MainActivity.this,SecondActivity.class));
+                        //这里之所以延迟执行,为了先将navigation隐藏,否则的话 会出现不太明显的卡顿现象,受百度云音乐的启发
+                        UiUtils.postDelay(new Runnable() {
+                            @Override
+                            public void run() {
+                                startActivity(new Intent(MainActivity.this,SecondActivity.class));
+                            }
+                        },500);
+
                         break;
                     case R.id.nav_friends:
                         Toast.makeText(MainActivity.this, "nav_friends", Toast.LENGTH_LONG).show();

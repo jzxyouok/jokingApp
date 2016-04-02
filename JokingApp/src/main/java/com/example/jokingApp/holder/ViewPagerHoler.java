@@ -134,7 +134,6 @@ public class ViewPagerHoler extends RecyclerView.ViewHolder {
                 UiUtils.cancel(this);
             }
         }
-
     }
 
     class ViewPagerAdapter extends PagerAdapter {
