@@ -1,4 +1,4 @@
-package com.example.jokingApp.ui;
+package com.example.jokingApp;
 
 import android.app.Application;
 import android.os.Handler;

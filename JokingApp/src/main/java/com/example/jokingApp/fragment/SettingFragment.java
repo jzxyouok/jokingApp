@@ -2,7 +2,7 @@ package com.example.jokingApp.fragment;
 
 import android.view.View;
 
-import com.example.jokingApp.view.LoadingPage;
+import com.example.jokingApp.customView.LoadingPage;
 
 /**
  * Created by idea-pc on 2016/3/17.

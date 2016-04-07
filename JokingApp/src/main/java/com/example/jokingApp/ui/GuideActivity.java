@@ -16,6 +16,7 @@ import com.example.jokingApp.utils.PrefUtils;
 import com.example.jokingApp.utils.UiUtils;
 
 /**
+ * 新手引导页  初次进入的时候 显示
  * Created by idea-pc on 2016/3/30.
  */
 public class GuideActivity extends Activity {

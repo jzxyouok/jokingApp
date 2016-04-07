@@ -9,7 +9,7 @@ import com.google.gson.Gson;
 public class ImagerProtocol extends  BaseProtocol {
     @Override
     public String getKey() {
-        return "home";
+        return "imagefragment";
     }
 
     @Override

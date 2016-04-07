@@ -4,6 +4,7 @@ import com.lidroid.xutils.BitmapUtils;
 
 /**
  * 获取bitmapUtils
+ * 单例模式
  * Created by idea-pc on 2016/3/23.
  */
 public class BitmapHelper {

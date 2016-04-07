@@ -46,7 +46,7 @@ public class SplashActivity extends BaseActivity {
         // 缩放动画
         ScaleAnimation scale = new ScaleAnimation(1, 1.35f, 0, 1.35f, Animation.RELATIVE_TO_SELF, 0.5f, Animation
                 .RELATIVE_TO_SELF, 0.5f);
-      scale.setDuration(1000);// 动画时间
+        scale.setDuration(2000);// 动画时间
         scale.setFillAfter(true);// 保持动画状态
 
         // 渐变动画
@@ -56,7 +56,7 @@ public class SplashActivity extends BaseActivity {
 
 ///       set.addAnimation(rotate);
         set.addAnimation(scale);
-       // set.addAnimation(alpha);
+        // set.addAnimation(alpha);
 
         // 设置动画监听
         set.setAnimationListener(new Animation.AnimationListener() {
@@ -80,13 +80,13 @@ public class SplashActivity extends BaseActivity {
 
         rlRoot.startAnimation(set);
     }
+
     /**
      * 跳转下一个页面
      */
     private void jumpNextPage() {
         // 判断之前有没有显示过新手引导
-        boolean userGuide = PrefUtils.getBoolean(this, "is_user_guide_showed",
-                false);
+        boolean userGuide = PrefUtils.getBoolean(this, "is_user_guide_showed", false);
 
         if (!userGuide) {
             // 跳转到新手引导页
@@ -94,7 +94,6 @@ public class SplashActivity extends BaseActivity {
         } else {
             startActivity(new Intent(SplashActivity.this, MainActivity.class));
         }
-
         finish();
     }
 }

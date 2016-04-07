@@ -5,13 +5,16 @@ import android.os.Parcelable;
 
 import java.util.List;
 
+
 /**
+ * 笑话页面的信息
  * Created by idea-pc on 2016/3/22.
  */
-public class JokeInfo {
+public class JokeInfo  {
 
 
     /**
+     * 例子
      * des : 早上八点我还在睡觉，老妈打开房间门：“太阳晒屁股啦！”。多亏她的提醒，我给屁股抹了点防晒霜。
      * id : 1525490
      * imageurl : image/1.jpg
@@ -29,7 +32,7 @@ public class JokeInfo {
         this.joke = joke;
     }
 
-    public static class JokeBean implements Parcelable {
+    public static class JokeBean   implements Parcelable {
         private String des;
         private int id;
         private String imageurl;

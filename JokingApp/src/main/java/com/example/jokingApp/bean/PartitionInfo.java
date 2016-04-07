@@ -3,6 +3,7 @@ package com.example.jokingApp.bean;
 import java.util.List;
 
 /**
+ * 分区页面的信息
  * Created by idea-pc on 2016/3/24.
  */
 public class PartitionInfo {

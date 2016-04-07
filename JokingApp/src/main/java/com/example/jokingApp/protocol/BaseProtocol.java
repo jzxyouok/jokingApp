@@ -2,9 +2,9 @@ package com.example.jokingApp.protocol;
 
 import android.os.SystemClock;
 
-import com.example.jokingApp.global.GlobalConstant;
-import com.example.jokingApp.http.HttpHelper;
+import com.example.jokingApp.api.ApiService;
 import com.example.jokingApp.utils.FileUtils;
+import com.example.jokingApp.utils.RetrofitUtils;
 import com.lidroid.xutils.util.IOUtils;
 
 import java.io.BufferedReader;
@@ -12,7 +12,11 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.io.StringWriter;
+
+import retrofit2.Call;
+import retrofit2.Response;
 
 /**
  * 加载本地数据
@@ -24,6 +28,11 @@ import java.io.StringWriter;
 public abstract class BaseProtocol<T> {
     private String mJson;
 
+    /**
+     * 加载数据
+     * @param index
+     * @return
+     */
     public T load(int index) {
         SystemClock.sleep(500);
         // 首先加载服务器数据
@@ -41,14 +50,30 @@ public abstract class BaseProtocol<T> {
             return null;
         }
     }
-    private String loadServer(final int index) {
-        HttpHelper.HttpResult httpResult = HttpHelper.get(GlobalConstant.SERVER_URL + getKey() + index+".json");
-        if (httpResult != null) {
-            String json = httpResult.getString();
-            return json;
-        } else {
-            return null;
+
+    /**
+     * 请求服务器数据  index为请求的参数
+     * @param index
+     * @return
+     */
+    private String loadServer( int index) {
+        //同步请求 并不是异步请求
+        //在这里拿到服务器返回的数据类型为转换为 String ,并不直接拿到json对象
+        // 因为这里并不需要直接操作json数据 只是用来判断是否为空
+        //这里写的还是 有问题   z
+
+        ApiService service = RetrofitUtils.createApiToString(ApiService.class);
+        Call<String> call = service.getResult(getKey(),index);
+        try {
+
+            String execute = call.execute().body();
+            //服务器数据不为null  返回
+            return execute != null ? execute : null;
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+        //   HttpHelper.HttpResult httpResult = HttpHelper.get(GlobalConstant.SERVER_URL + getKey() + index+".json");
+        return null;
     }
 
     private void saveLocal(String json, int index) {
@@ -60,7 +85,7 @@ public abstract class BaseProtocol<T> {
             FileWriter fw = new FileWriter(file);
             bw = new BufferedWriter(fw);
             //写入了文件过期的时间  即100秒
-            bw.write(System.currentTimeMillis() + 1000 * 100 + "");
+            bw.write(System.currentTimeMillis() + 1000 * 10 + "");
             bw.newLine();//这里是换行
             bw.write(json);//  写入json 数据
             bw.flush();

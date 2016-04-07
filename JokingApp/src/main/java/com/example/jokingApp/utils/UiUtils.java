@@ -2,12 +2,13 @@ package com.example.jokingApp.utils;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.support.design.widget.Snackbar;
 
-import com.example.jokingApp.ui.BaseApplication;
+import com.example.jokingApp.BaseApplication;
 
 
 /**
- *
+ *对一些常用的工具类的封装
  * Created by idea-pc on 2016/3/20.
  */
 public class UiUtils {
@@ -50,5 +51,22 @@ public class UiUtils {
     public static void cancel(Runnable auToRunTask) {
         BaseApplication.getHandler().removeCallbacks(auToRunTask);
     }
+    /**获取屏幕的高度*/
+    public static final int getHeightInPx( ) {
+        final int height = getResource().getDisplayMetrics().heightPixels;
+        return height;
+    }
+
+    /**获取屏幕的宽度 */
+    public static final int getWidthInPx() {
+        final int width = getResource().getDisplayMetrics().widthPixels;
+        return width;
+    }
+
+
+
+
+
+
 
 }

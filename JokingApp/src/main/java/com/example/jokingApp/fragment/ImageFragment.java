@@ -11,7 +11,7 @@ import com.example.jokingApp.adapter.ImageAdapter;
 import com.example.jokingApp.bean.ImageInfo;
 import com.example.jokingApp.protocol.ImagerProtocol;
 import com.example.jokingApp.utils.UiUtils;
-import com.example.jokingApp.view.LoadingPage;
+import com.example.jokingApp.customView.LoadingPage;
 
 import java.util.List;
 
@@ -35,9 +35,11 @@ public class ImageFragment extends BaseFragment implements SwipeRefreshLayout.On
         View view = View.inflate(mActivity, R.layout.fragment_home, null);
         ButterKnife.inject(this, view);
 
+        //设置下拉刷新
         mRefresh.setOnRefreshListener(this);
         mRefresh.setColorSchemeResources(R.color.colorAccent);
 
+        //设置数据的显示
         ImageAdapter imageAdapter = new ImageAdapter(mImageInfo);
         mRecyclerview.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
         mRecyclerview.setAdapter(imageAdapter);
@@ -45,14 +47,23 @@ public class ImageFragment extends BaseFragment implements SwipeRefreshLayout.On
         return view;
     }
 
+    /**
+     * 其请求服务器
+     * @return
+     */
     @Override
     public LoadingPage.LoadResult load() {
         ImagerProtocol imagerProtocol = new ImagerProtocol();
         mImageInfo = (ImageInfo) imagerProtocol.load(0);
-        data = mImageInfo.getPicture();
+        if (mImageInfo!=null){
+            data = mImageInfo.getPicture();
+        }
         return checkData(data);
     }
 
+    /**
+     * 下拉刷新
+     */
     @Override
     public void onRefresh() {
         UiUtils.postDelay(new Runnable() {

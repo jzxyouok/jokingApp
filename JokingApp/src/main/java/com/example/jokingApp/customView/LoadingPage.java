@@ -1,4 +1,4 @@
-package com.example.jokingApp.view;
+package com.example.jokingApp.customView;
 
 import android.content.Context;
 import android.os.SystemClock;
@@ -13,7 +13,7 @@ import com.example.jokingApp.utils.UiUtils;
 
 /***
  * 创建了自定义帧布局 把baseFragment 一部分代码 抽取到这个类中
- *
+ *加载界面
  * @author itcast
  *
  */

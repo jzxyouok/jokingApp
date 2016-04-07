@@ -1,4 +1,4 @@
-package com.example.jokingApp.view;
+package com.example.jokingApp.customView;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -7,11 +7,11 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.RecyclerView.ItemDecoration;
 import android.util.TypedValue;
 import android.view.View;
 
 /**
+ * recylerview 的item
  * Created by idea-pc on 2016/3/28.
  */
 public class DividerItemDecoration extends RecyclerView.ItemDecoration {

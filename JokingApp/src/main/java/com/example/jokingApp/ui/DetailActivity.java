@@ -2,27 +2,33 @@ package com.example.jokingApp.ui;
 
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
-import android.webkit.WebView;
-import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.jokingApp.R;
 import com.example.jokingApp.bean.JokeInfo;
 import com.example.jokingApp.global.GlobalConstant;
 import com.example.jokingApp.utils.BitmapHelper;
+import com.lidroid.xutils.DbUtils;
+import com.lidroid.xutils.db.sqlite.Selector;
+import com.lidroid.xutils.exception.DbException;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import me.imid.swipebacklayout.lib.SwipeBackLayout;
+import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
 
 /**
+ * 点击笑话 进入后的详情页
  * Created by idea-pc on 2016/3/28.
  */
-public class DetailActivity extends BaseActivity {
+public class DetailActivity extends SwipeBackActivity {
     @InjectView(R.id.ivImage)
     ImageView mIvImage;
     @InjectView(R.id.toolbar)
@@ -31,15 +37,18 @@ public class DetailActivity extends BaseActivity {
     CollapsingToolbarLayout mCollapsingToolbar;
     @InjectView(R.id.text)
     TextView mText;
-
-    private ProgressBar pbProgress;
-    private WebView mWebView;
-    private ImageButton btnBack;
-    private ImageButton btnSize;
-    private ImageButton btnShare;
+    @InjectView(R.id.coor)
+    CoordinatorLayout mCoor;
+    private SwipeBackLayout mSwipeBackLayout;
+    private JokeInfo.JokeBean mData;
 
     @Override
-    protected void initView() {
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        initView();
+    }
+
+    private void initView() {
         setContentView(R.layout.activity_detail);
         ButterKnife.inject(this);
         setSupportActionBar(mToolbar);
@@ -50,89 +59,70 @@ public class DetailActivity extends BaseActivity {
                 onBackPressed();
             }
         });
-//
-//        mWebView = (WebView) findViewById(R.id.wv_web);
-//        btnBack = (ImageButton) findViewById(R.id.btn_back);
-//        btnSize = (ImageButton) findViewById(R.id.btn_size);
-//        btnShare = (ImageButton) findViewById(R.id.btn_share);
-//        pbProgress = (ProgressBar) findViewById(R.id.pb_progress);
-//
-//        btnBack.setOnClickListener(this);
-//        btnSize.setOnClickListener(this);
-//        btnShare.setOnClickListener(this);
-//
-//
-//        JokeInfo.JokeBean data = (JokeInfo.JokeBean) getIntent().getParcelableExtra("data");
-//        String url = data.getUrl();
-//        url= GlobalConstant.SERVER_URL+url;
-//        //String url = getIntent().getStringExtra("url");
-//        WebSettings settings = mWebView.getSettings();
-//        settings.setJavaScriptEnabled(true);// 表示支持js
-//        settings.setBuiltInZoomControls(true);// 显示放大缩小按钮
-//        settings.setUseWideViewPort(true);// 支持双击缩放
-//
-//        mWebView.setWebViewClient(new WebViewClient() {
-//            /**
-//             * 网页开始加载
-//             */
-//            @Override
-//            public void onPageStarted(WebView view, String url, Bitmap favicon) {
-//                super.onPageStarted(view, url, favicon);
-//                pbProgress.setVisibility(View.VISIBLE);
-//            }
-//
-//            /**
-//             * 网页加载结束
-//             */
-//            @Override
-//            public void onPageFinished(WebView view, String url) {
-//                super.onPageFinished(view, url);
-//                pbProgress.setVisibility(View.GONE);
-//            }
-//
-//            /**
-//             * 所有跳转的链接都会在此方法中回调
-//             */
-//            @Override
-//            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-//                // tel:110
-//                System.out.println("跳转url:" + url);
-//                view.loadUrl(url);
-//
-//                return true;
-//                // return super.shouldOverrideUrlLoading(view, url);
-//            }
-//        });
-//        mWebView.loadUrl(url);// 加载网页
 
-        JokeInfo.JokeBean data = (JokeInfo.JokeBean) getIntent().getParcelableExtra("data");
-        String des = data.getDes();
+        //拿到传入的数据
+        mData = (JokeInfo.JokeBean) getIntent().getParcelableExtra("data");
+        String des = mData.getDes();
+        //设置text
         mText.setText(des);
+        //设置图片
+        String imageurl = GlobalConstant.SERVER_URL + mData.getImageurl();
+        BitmapHelper.getBitmapUtils().display(mIvImage, imageurl);
 
-        String imageurl = GlobalConstant.SERVER_URL+data.getImageurl();
-        BitmapHelper.getBitmapUtils().display(mIvImage,imageurl);
-
-        String name = data.getName();
+        //设置 swipebacklayout
+        mSwipeBackLayout = getSwipeBackLayout();
+        mSwipeBackLayout.setEdgeTrackingEnabled(SwipeBackLayout.EDGE_LEFT);
+        //设置toolbar
+        String name = mData.getName();
         mCollapsingToolbar.setTitle(name);
+
+
     }
 
-//    @Override
-//    public void onClick(View v) {
-//        switch (v.getId()) {
-//            case R.id.btn_back:
-//                finish();
-//                break;
-//            case R.id.btn_size:
-//                break;
-//            case R.id.btn_share:
-//                break;
-//            default:
-//                break;
-//        }
-//    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        return super.onCreateOptionsMenu(menu);
+        //toobar的 显示布局
+        getMenuInflater().inflate(R.menu.menu_detail, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        //这段代码的可阅读性是不是太差了
+        //其实可以把代码抽取到另一个方法当中  因为这里只有这一段逻辑 暂时不抽取了
+        int id = item.getItemId();
+        if (id == R.id.action_collect) {
+            DbUtils db = DbUtils.create(this);
+            //首先判断数据库中是否已经加入  其实 也可以在进入activity中先判断 , 将收藏图标替换
+            try {
+                JokeInfo.JokeBean bean = db.findFirst(Selector.from(JokeInfo.JokeBean.class).where("name", "=", mData
+                        .getName()));
+                //如果数据库中没有该数据  将数据放入数据库中
+                if (bean == null) {
+                    JokeInfo.JokeBean user = new JokeInfo.JokeBean(); //这里需要注意的是User对象必须有id属性，或者有通过@ID注解的属性
+                    user.setUrl(mData.getUrl());
+                    user.setDes(mData.getDes());
+                    user.setImageurl(mData.getImageurl());
+                    user.setName(mData.getName());
+                    user.setId(mData.getId());
+                    try {
+                        //将设置的数据 保存到数据库当中
+                        db.save(user);
+                    } catch (DbException e) {
+                        e.printStackTrace();
+                    }
+                    Snackbar.make(mCoor, "收藏成功", Snackbar.LENGTH_LONG).show();
+                } else {
+                    //数据库中没有数据  提示已经添加过了
+                    Snackbar.make(mCoor, "已经添加过了", Snackbar.LENGTH_LONG).show();
+                }
+            } catch (DbException e) {
+                e.printStackTrace();
+            }
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

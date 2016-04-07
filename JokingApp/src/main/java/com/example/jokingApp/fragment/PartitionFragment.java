@@ -8,7 +8,7 @@ import com.example.jokingApp.R;
 import com.example.jokingApp.adapter.PartitionAdapter;
 import com.example.jokingApp.bean.PartitionInfo;
 import com.example.jokingApp.protocol.PartitionProtocol;
-import com.example.jokingApp.view.LoadingPage;
+import com.example.jokingApp.customView.LoadingPage;
 
 import java.util.List;
 

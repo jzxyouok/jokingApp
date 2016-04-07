@@ -1,4 +1,4 @@
-package com.example.jokingApp.view;
+package com.example.jokingApp.customView;
 
 import android.content.Context;
 import android.graphics.Canvas;

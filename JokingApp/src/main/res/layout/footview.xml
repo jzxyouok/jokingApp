@@ -4,7 +4,7 @@
                 android:layout_height="48dp">
 
 
-    <com.example.jokingApp.view.ProgressBarCircularIndeterminate
+    <com.example.jokingApp.customView.ProgressBarCircularIndeterminate
         android:id="@+id/progressBarCircularIndetermininate"
         android:layout_width="32dp"
         android:layout_height="32dp"

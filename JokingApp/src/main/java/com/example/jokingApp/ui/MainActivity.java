@@ -2,7 +2,9 @@ package com.example.jokingApp.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -26,7 +28,6 @@ import java.util.List;
 
 public class MainActivity extends BaseActivity {
 
-    private List<String> tagList;
     private DrawerLayout mDrawerLayout;
     private NavigationView mNavigationView;
     private ViewPager mViewpager;
@@ -50,6 +51,7 @@ public class MainActivity extends BaseActivity {
     public void initView() {
         setContentView(R.layout.activity_main);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerlayout);
+
         initToobar();
         initNavigationView();
         //初始化Tablayout
@@ -144,19 +146,18 @@ public class MainActivity extends BaseActivity {
                                 startActivity(new Intent(MainActivity.this,SecondActivity.class));
                             }
                         },500);
-
                         break;
-                    case R.id.nav_friends:
-                        Toast.makeText(MainActivity.this, "nav_friends", Toast.LENGTH_LONG).show();
+                    case R.id.theme:
+                        Toast.makeText(MainActivity.this, "该功能暂未实现", Toast.LENGTH_LONG).show();
                         break;
-                    case R.id.nav_messages:
-                        Toast.makeText(MainActivity.this, "nav_messages", Toast.LENGTH_LONG).show();
+                    case R.id.nav_collect:
+                        startActivity(new Intent(MainActivity.this,CollectActivity.class));
                         break;
-                    case R.id.subitem1:
-                        Toast.makeText(MainActivity.this, "subitem1", Toast.LENGTH_LONG).show();
+                    case R.id.feedback:
+                        Toast.makeText(MainActivity.this, "反馈", Toast.LENGTH_LONG).show();
                         break;
-                    case R.id.nav_discussion:
-                        Toast.makeText(MainActivity.this, "nav_discussion", Toast.LENGTH_LONG).show();
+                    case R.id.about:
+                        Toast.makeText(MainActivity.this, "关于", Toast.LENGTH_LONG).show();
                         break;
                     default:
                         break;

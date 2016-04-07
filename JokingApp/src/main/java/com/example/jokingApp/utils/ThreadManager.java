@@ -5,6 +5,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 /**
+ * 线程池的简单封装
  * 管理线程池
  * Created by idea-pc on 2016/3/17.
  */
@@ -12,7 +13,7 @@ public class ThreadManager {
 
     private ThreadPoolProxy mLongPool;
     private ThreadPoolProxy mShortPool;
-
+    //单例
     private ThreadManager() {
 
     }
@@ -24,8 +25,8 @@ public class ThreadManager {
     }
 
     /**
-     * 读取本地文件
-     *
+     * 读取本地文件  或者读取数据库的操作可以在这里进行
+     *但是现在有了 RxJava  这个类是不是可以废弃了呢...
      * @return
      */
     public synchronized ThreadPoolProxy createShortPool() {
@@ -36,7 +37,7 @@ public class ThreadManager {
     }
 
     /**
-     * 联网
+     * 请求网络
      * @return
      */
     public synchronized ThreadPoolProxy createLongPool() {
