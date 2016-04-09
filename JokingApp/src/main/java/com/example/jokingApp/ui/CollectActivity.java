@@ -45,7 +45,7 @@ public class CollectActivity extends BaseActivity {
         } catch (DbException e) {
             e.printStackTrace();
         }
-        mJokeAdapter = new JokeAdapter(list, this);
+        mJokeAdapter = new JokeAdapter(list, this,false);
 
         //设置recylerView
         final LinearLayoutManager layoutManager = new LinearLayoutManager(this);

@@ -65,7 +65,7 @@ public class JokeFragment extends BaseFragment {
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), layoutManager.getOrientation()));
         recyclerView.setHasFixedSize(true);
-        mJokeAdapter = new JokeAdapter(mJokeBeen, mActivity);
+        mJokeAdapter = new JokeAdapter(mJokeBeen, mActivity,true);
         recyclerView.setAdapter(mJokeAdapter);
 
         //下拉刷新

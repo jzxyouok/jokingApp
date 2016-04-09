@@ -3,6 +3,8 @@ package com.example.jokingApp.bean;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.lidroid.xutils.db.annotation.Id;
+
 import java.util.List;
 
 
@@ -34,7 +36,8 @@ public class JokeInfo  {
 
     public static class JokeBean   implements Parcelable {
         private String des;
-        private int id;
+        @Id
+        private String id;
         private String imageurl;
         private String name;
         private String url;
@@ -47,11 +50,11 @@ public class JokeInfo  {
             this.des = des;
         }
 
-        public int getId() {
+        public String getId() {
             return id;
         }
 
-        public void setId(int id) {
+        public void setId(String id) {
             this.id = id;
         }
 
@@ -87,7 +90,7 @@ public class JokeInfo  {
         @Override
         public void writeToParcel(Parcel dest, int flags) {
             dest.writeString(this.des);
-            dest.writeInt(this.id);
+            dest.writeString(this.id);
             dest.writeString(this.imageurl);
             dest.writeString(this.name);
             dest.writeString(this.url);
@@ -98,7 +101,7 @@ public class JokeInfo  {
 
         protected JokeBean(Parcel in) {
             this.des = in.readString();
-            this.id = in.readInt();
+            this.id = in.readString();
             this.imageurl = in.readString();
             this.name = in.readString();
             this.url = in.readString();

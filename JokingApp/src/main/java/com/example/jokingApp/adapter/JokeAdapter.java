@@ -25,27 +25,31 @@ public class JokeAdapter extends RecyclerView.Adapter {
     private List<JokeInfo.JokeBean> data;
     private Activity mActivity;
 
-    public JokeAdapter(List<JokeInfo.JokeBean> data, Activity activity) {
+    //是否有加载更多的功能
+    private boolean isLoadingMore = true;
+
+    public JokeAdapter(List<JokeInfo.JokeBean> data, Activity activity, boolean isLoadingMore) {
         this.data = data;
         mActivity = activity;
+        this.isLoadingMore = isLoadingMore;
     }
+
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == TYPE_ITEM) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_item, parent, false);
             return new ViewHolder(view);
         } else if (viewType == TYPE_FOOTER) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_foot, parent,
-                    false);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_foot, parent, false);
             return new FootViewHolder(view);
         }
-        return null ;
+        return null;
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         int itemViewType = holder.getItemViewType();
-        if (itemViewType==TYPE_ITEM){
+        if (itemViewType == TYPE_ITEM) {
             ViewHolder mHolder = (ViewHolder) holder;
             mHolder.mIdView.setText(data.get(position).getName());
             mHolder.mContentView.setText(data.get(position).getDes());
@@ -54,17 +58,22 @@ public class JokeAdapter extends RecyclerView.Adapter {
 
     @Override
     public int getItemViewType(int position) {
-        if (position + 1 == getItemCount()) {
+        if (position + 1 == getItemCount()&&isLoadingMore) {
             return TYPE_FOOTER;
-        } else {
-            return TYPE_ITEM;
         }
+            return TYPE_ITEM;
     }
 
     @Override
     public int getItemCount() {
-        return data.size()+1 ;
-    }//+1 是底部加载更多
+        if (isLoadingMore) {//+1 是底部加载更多
+            return data.size() + 1;
+        } else if (data != null) {
+            return data.size();
+        } else {
+            return 0;
+        }
+    }
 
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public final TextView mIdView;
@@ -85,17 +94,19 @@ public class JokeAdapter extends RecyclerView.Adapter {
             Intent intent = new Intent();
             intent.setClass(mActivity, DetailActivity.class);
             Bundle bundle = new Bundle();
-            bundle.putParcelable("data",  jokeBean);
+            bundle.putParcelable("data", jokeBean);
             intent.putExtras(bundle);
-           // intent.putExtra("url", "https://www.baidu.com");
+            // intent.putExtra("url", "https://www.baidu.com");
             mActivity.startActivity(intent);
         }
     }
+
     static class FootViewHolder extends RecyclerView.ViewHolder {
         public FootViewHolder(View view) {
             super(view);
         }
     }
+
     public JokeInfo.JokeBean getItem(int position) {
         return data == null ? null : data.get(position);
     }

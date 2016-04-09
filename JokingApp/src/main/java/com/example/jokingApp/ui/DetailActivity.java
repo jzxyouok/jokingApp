@@ -41,6 +41,7 @@ public class DetailActivity extends SwipeBackActivity {
     CoordinatorLayout mCoor;
     private SwipeBackLayout mSwipeBackLayout;
     private JokeInfo.JokeBean mData;
+    private JokeInfo.JokeBean mId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,10 +98,11 @@ public class DetailActivity extends SwipeBackActivity {
             DbUtils db = DbUtils.create(this);
             //首先判断数据库中是否已经加入  其实 也可以在进入activity中先判断 , 将收藏图标替换
             try {
-                JokeInfo.JokeBean bean = db.findFirst(Selector.from(JokeInfo.JokeBean.class).where("name", "=", mData
-                        .getName()));
+              //  JokeInfo.JokeBean bean = db.findFirst(Selector.from(JokeInfo.JokeBean.class).where("name", "=", mData
+               //         .getName()));
+                mId = db.findById(JokeInfo.JokeBean.class, mData.getId());
                 //如果数据库中没有该数据  将数据放入数据库中
-                if (bean == null) {
+                if (mId  == null) {
                     JokeInfo.JokeBean user = new JokeInfo.JokeBean(); //这里需要注意的是User对象必须有id属性，或者有通过@ID注解的属性
                     user.setUrl(mData.getUrl());
                     user.setDes(mData.getDes());
