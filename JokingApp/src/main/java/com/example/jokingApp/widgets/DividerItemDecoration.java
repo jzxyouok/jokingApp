@@ -1,4 +1,4 @@
-package com.example.jokingApp.customView;
+package com.example.jokingApp.widgets;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -25,7 +25,7 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
     /**
      * item之间分割线的size，默认为1
      */
-    private int mItemSize = 1;
+    private int mItemSize = 5;
     /**
      * 绘制item分割线的画笔，和设置其属性
      * 来绘制个性分割线
@@ -41,7 +41,7 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
         }
         mItemSize = (int) TypedValue.applyDimension(mItemSize, TypedValue.COMPLEX_UNIT_DIP,context.getResources().getDisplayMetrics());
         mPaint = new Paint(Paint.ANTI_ALIAS_FLAG) ;
-        mPaint.setColor(Color.GRAY);
+        mPaint.setColor(Color.parseColor("#D8BFD8"));
          /*设置填充*/
         mPaint.setStyle(Paint.Style.FILL);
     }

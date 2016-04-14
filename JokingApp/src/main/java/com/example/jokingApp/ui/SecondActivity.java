@@ -3,18 +3,17 @@ package com.example.jokingApp.ui;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.Toast;
 
 import com.example.jokingApp.R;
+import com.example.jokingApp.widgets.swipeback.SwipeBackLayout;
 import com.example.jokingApp.utils.UiUtils;
 
-import me.imid.swipebacklayout.lib.SwipeBackLayout;
-import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
+
 
 /**
  * Created by idea-pc on 2016/3/20.
  */
-public class SecondActivity extends SwipeBackActivity {
+public class SecondActivity extends BaseSwipeBackActivity {
     private SwipeBackLayout mSwipeBackLayout;
 
     @Override
@@ -36,5 +35,10 @@ public class SecondActivity extends SwipeBackActivity {
         int widthInPx = UiUtils.getWidthInPx();
         mSwipeBackLayout.setEdgeSize(0);
         mSwipeBackLayout.setEdgeTrackingEnabled(SwipeBackLayout.EDGE_LEFT);
+    }
+
+    @Override
+    public void initInjector() {
+
     }
 }

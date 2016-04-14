@@ -8,7 +8,7 @@ import com.example.jokingApp.R;
 import com.example.jokingApp.adapter.PartitionAdapter;
 import com.example.jokingApp.bean.PartitionInfo;
 import com.example.jokingApp.protocol.PartitionProtocol;
-import com.example.jokingApp.customView.LoadingPage;
+import com.example.jokingApp.widgets.LoadingPage;
 
 import java.util.List;
 
@@ -36,6 +36,11 @@ public class PartitionFragment extends BaseFragment {
         PartitionProtocol partitionProtocol = new PartitionProtocol();
         mPictureBeen = (List<PartitionInfo.PictureBean>) partitionProtocol.load(0);
         return checkData(mPictureBeen);
+    }
+
+    @Override
+    public void initInjector() {
+
     }
 }
 

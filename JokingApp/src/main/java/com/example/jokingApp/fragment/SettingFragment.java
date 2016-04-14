@@ -2,7 +2,7 @@ package com.example.jokingApp.fragment;
 
 import android.view.View;
 
-import com.example.jokingApp.customView.LoadingPage;
+import com.example.jokingApp.widgets.LoadingPage;
 
 /**
  * Created by idea-pc on 2016/3/17.
@@ -16,5 +16,10 @@ public class SettingFragment extends BaseFragment {
     @Override
     public LoadingPage.LoadResult load() {
         return LoadingPage.LoadResult.error;
+    }
+
+    @Override
+    public void initInjector() {
+
     }
 }

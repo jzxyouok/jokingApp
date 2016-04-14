@@ -2,6 +2,7 @@ package com.example.jokingApp.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
@@ -29,6 +30,11 @@ public class SplashActivity extends BaseActivity {
         startAnim();
     }
 
+    @Override
+    public void initInjector() {
+
+    }
+
     /**
      * 动画效果
      */
@@ -44,19 +50,19 @@ public class SplashActivity extends BaseActivity {
 //        rotate.setFillAfter(true);// 保持动画状态
 
         // 缩放动画
-        ScaleAnimation scale = new ScaleAnimation(1, 1.35f, 0, 1.35f, Animation.RELATIVE_TO_SELF, 0.5f, Animation
-                .RELATIVE_TO_SELF, 0.5f);
-        scale.setDuration(2000);// 动画时间
-        scale.setFillAfter(true);// 保持动画状态
+//        ScaleAnimation scale = new ScaleAnimation(1, 1.35f, 0, 1.35f, Animation.RELATIVE_TO_SELF, 0.5f, Animation
+//                .RELATIVE_TO_SELF, 0.5f);
+//        scale.setDuration(2000);// 动画时间
+//        scale.setFillAfter(true);// 保持动画状态
 
         // 渐变动画
-        AlphaAnimation alpha = new AlphaAnimation(0.5f, 1.2f);
+        AlphaAnimation alpha = new AlphaAnimation(0.5f, 1.0f);
         alpha.setDuration(2000);// 动画时间
         alpha.setFillAfter(true);// 保持动画状态
 
 ///       set.addAnimation(rotate);
-        set.addAnimation(scale);
-        // set.addAnimation(alpha);
+//        set.addAnimation(scale);
+         set.addAnimation(alpha);
 
         // 设置动画监听
         set.setAnimationListener(new Animation.AnimationListener() {

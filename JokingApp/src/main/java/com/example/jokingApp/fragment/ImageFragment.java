@@ -11,7 +11,7 @@ import com.example.jokingApp.adapter.ImageAdapter;
 import com.example.jokingApp.bean.ImageInfo;
 import com.example.jokingApp.protocol.ImagerProtocol;
 import com.example.jokingApp.utils.UiUtils;
-import com.example.jokingApp.customView.LoadingPage;
+import com.example.jokingApp.widgets.LoadingPage;
 
 import java.util.List;
 
@@ -59,6 +59,11 @@ public class ImageFragment extends BaseFragment implements SwipeRefreshLayout.On
             data = mImageInfo.getPicture();
         }
         return checkData(data);
+    }
+
+    @Override
+    public void initInjector() {
+        mFragmentComponent.inject(this);
     }
 
     /**

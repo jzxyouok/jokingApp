@@ -9,12 +9,12 @@
         android:layout_width="match_parent"
         android:layout_height="120dp">
 
-        <com.example.jokingApp.customView.ViewPager
+        <com.example.jokingApp.widgets.ViewPager
             android:id="@+id/viewpager"
             android:layout_width="match_parent"
             android:layout_height="120dp"
             android:orientation="vertical">
-        </com.example.jokingApp.customView.ViewPager>
+        </com.example.jokingApp.widgets.ViewPager>
 
         <LinearLayout
             android:id="@+id/line"

@@ -4,10 +4,23 @@
     <string name="action_collect">收藏</string>
     <string name="action_search">搜索</string>
     <string name="load_error">加载失败 点击重试</string>
+
     <string-array name="tab_names">
         <item>笑话</item>
         <item>图片</item>
         <item>分区</item>
         <item>设置</item>
     </string-array>
+
+    <!--loginActivity -->
+    <string name="login">这是个人独自开发的APP,文章阅读, 音乐, 视频 ,音频等功能 ,快快关注吧</string>
+    <string name="login_user_hint">用户名/手机/邮箱 </string>
+    <string name="login_password_hint">请输入密码 </string>
+    <string name="login_signup">还没有帐号?，快点击注册吧 </string>
+    <string name="login_login">登录 </string>
+    <string name="login_error_empty_user">帐号不能为空 </string>
+    <string name="login_error_empty_pass">密码不能为空 </string>
+
+
+
 </resources>

@@ -2,6 +2,12 @@ package com.example.jokingApp.ui;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+
+import com.example.jokingApp.BaseApplication;
+import com.example.jokingApp.injector.component.ActivityComponent;
+import com.example.jokingApp.injector.component.DaggerActivityComponent;
+import com.example.jokingApp.injector.moduel.ActivityModule;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -9,11 +15,13 @@ import java.util.List;
 /**
  * 抽取BaseActivity   管理所有activity 方便退出
  */
-public class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity extends AppCompatActivity {
     // 管理运行的所有的activity
     public final static List<BaseActivity> mActivities = new LinkedList<BaseActivity>();
 
     public static BaseActivity activity;
+    protected ActivityComponent mActivityComponent;
+
 //	private KillAllReceiver receiver;
 //	private class KillAllReceiver extends BroadcastReceiver{
 //		@OverrideBaseActivity
@@ -25,12 +33,13 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        activity=this;
+        activity = this;
     }
+
     @Override
     protected void onPause() {
         super.onPause();
-        activity=null;
+        activity = null;
     }
 
     @Override
@@ -42,10 +51,18 @@ public class BaseActivity extends AppCompatActivity {
         synchronized (mActivities) {
             mActivities.add(this);
         }
+
+        mActivityComponent = DaggerActivityComponent.builder()
+                .activityModule(new ActivityModule(this))
+                .applicationComponent(((BaseApplication) getApplication()).getApplicationComponent())
+                .build();
         init();
         initView();
         initData();
+
+        initInjector(); //初始化注入
     }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -70,10 +87,19 @@ public class BaseActivity extends AppCompatActivity {
         // 杀死当前的进程
         android.os.Process.killProcess(android.os.Process.myPid());
     }
+
     protected void initData() {
     }
+
     protected void initView() {
     }
+
     protected void init() {
     }
+
+    /**
+     * 注入Injector
+     */
+    public abstract void initInjector();
+
 }

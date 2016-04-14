@@ -1,4 +1,4 @@
-package com.example.jokingApp.customView;
+package com.example.jokingApp.widgets;
 
 import android.content.Context;
 import android.support.annotation.Nullable;

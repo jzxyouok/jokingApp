@@ -3,14 +3,18 @@
           package="com.example.jokingApp">
 
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <!--  SD卡读写权限 -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <!--  网络访问权限 和 监控网络状态 -->
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
     <application
         android:name=".BaseApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_3d"
+        android:icon="@mipmap/splash"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
@@ -32,13 +36,24 @@
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".ui.MainActivity"
-            android:theme="@style/AppTheme.swipe"/>
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".ui.DetailActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".ui.CollectActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".ui.LoginActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <service
+            android:name="com.example.jokingApp.service.MessageService"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.example.jokingApp.ACTION_GET" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>

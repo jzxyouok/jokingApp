@@ -12,7 +12,7 @@ import com.example.jokingApp.R;
 import com.example.jokingApp.global.GlobalConstant;
 import com.example.jokingApp.utils.BitmapHelper;
 import com.example.jokingApp.utils.UiUtils;
-import com.example.jokingApp.customView.ViewPager;
+import com.example.jokingApp.widgets.ViewPager;
 import com.lidroid.xutils.BitmapUtils;
 
 import java.util.List;

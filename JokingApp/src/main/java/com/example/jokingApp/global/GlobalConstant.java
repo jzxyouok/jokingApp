@@ -6,4 +6,6 @@ package com.example.jokingApp.global;
 public class GlobalConstant {
     //服务器地址
     public  static  final String SERVER_URL="http://121.42.200.58/";
+
+    public static String Cookie = "";
 }

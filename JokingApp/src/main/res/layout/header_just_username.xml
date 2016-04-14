@@ -1,34 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="192dp"
-    android:background="?attr/colorPrimaryDark"
+    android:layout_height="200dp"
+    android:background="@mipmap/bg_star"
     android:orientation="vertical"
     android:padding="16dp"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
-
     <TextView
-        android:id="@+id/id_link"
+        android:id="@+id/text2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="16dp"
-        android:text="Demo"/>
+        android:text="登录解锁更多功能"/>
 
     <TextView
-        android:id="@+id/id_username"
+        android:id="@+id/login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@id/id_link"
-        android:text="MyApp"/>
+        android:layout_above="@id/text2"
+        android:textSize="18sp"
+        android:text="立即登录"/>
 
     <ImageView
+        android:id="@+id/image"
         android:layout_width="72dp"
         android:layout_height="72dp"
-        android:layout_above="@id/id_username"
-        android:layout_marginBottom="16dp"
-        android:src="@mipmap/ic_3d"/>
-
-
+        android:src="@mipmap/ic_3d"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"/>
 </RelativeLayout>

@@ -17,6 +17,12 @@ public class RetrofitUtils {
     private static Retrofit singleton;
     private static Retrofit single;
 
+    /**
+     * 将请求的数据转换为String
+     * @param clazz
+     * @param <T>
+     * @return
+     */
     public static <T> T createApiToString( Class<T> clazz) {
         //DCL  单例
         if (singleton == null) {
@@ -33,6 +39,13 @@ public class RetrofitUtils {
         }
         return singleton.create(clazz);
     }
+
+    /**
+     * 将请求的数据 直接转换为Gson
+     * @param clazz
+     * @param <T>
+     * @return
+     */
     public static <T> T createApiToGson( Class<T> clazz) {
         //DCL  单例
         if (single == null) {

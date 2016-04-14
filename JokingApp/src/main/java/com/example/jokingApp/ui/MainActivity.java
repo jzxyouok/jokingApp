@@ -17,16 +17,25 @@ import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.jokingApp.R;
 import com.example.jokingApp.fragment.BaseFragment;
 import com.example.jokingApp.fragment.FragmentFactory;
+import com.example.jokingApp.utils.FileUtils;
 import com.example.jokingApp.utils.UiUtils;
 
+import java.io.File;
 import java.util.List;
 
-public class MainActivity extends BaseActivity {
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
+
+public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     private DrawerLayout mDrawerLayout;
     private NavigationView mNavigationView;
@@ -48,16 +57,22 @@ public class MainActivity extends BaseActivity {
     }
 
     @Override
+    public void initInjector() {
+
+    }
+
+    @Override
     public void initView() {
         setContentView(R.layout.activity_main);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerlayout);
-
         initToobar();
         initNavigationView();
         //初始化Tablayout
         iniTablayout();
         //设置viewpager
         initViewPager();
+
+
     }
 
     private void initViewPager() {
@@ -73,6 +88,9 @@ public class MainActivity extends BaseActivity {
                 BaseFragment createFragment = FragmentFactory.createFragment(position);
                 createFragment.show();//  当切换界面的时候 重新请求服务器
                 switch (position) {
+                    case 0:
+                    mToolbar.setTitle("笑话");
+                        break;
                     case 1:
                         mToolbar.setTitle("图片");
                         break;
@@ -90,6 +108,7 @@ public class MainActivity extends BaseActivity {
     }
 
     private void initToobar() {
+
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
         ActionBar actionBar = getSupportActionBar();
@@ -107,6 +126,19 @@ public class MainActivity extends BaseActivity {
         mTabLayout.addTab(mTabLayout.newTab().setText(mStringArray[3]));
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case  R.id.login:
+            case R.id.image:
+                mDrawerLayout.closeDrawers();
+                startActivity(new Intent(MainActivity.this,LoginActivity.class));
+                break;
+            default:
+                break;
+        }
+    }
+    //viewpager的 adapter
     class MainAdapter extends FragmentStatePagerAdapter {
         public MainAdapter(FragmentManager fm) {
             super(fm);
@@ -128,36 +160,45 @@ public class MainActivity extends BaseActivity {
         }
     }
 
-
+    /**
+     * 初始化 navigationView
+     */
     private void initNavigationView() {
         mNavigationView = (NavigationView) findViewById(R.id.id_nv_menu);
+        //头布局
+        View headerView = mNavigationView.getHeaderView(0);
+        TextView mTextView = (TextView) headerView.findViewById(R.id.login);
+        ImageView mImageView = (ImageView) headerView.findViewById(R.id.image);
+        mTextView.setOnClickListener(this);
+        mImageView.setOnClickListener(this);
+
         mNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem item) {
                 int itemId = item.getItemId();
                 item.setChecked(true);
-                    mDrawerLayout.closeDrawers();
+                mDrawerLayout.closeDrawers();
                 switch (itemId) {
                     case R.id.nav_home:
                         //这里之所以延迟执行,为了先将navigation隐藏,否则的话 会出现不太明显的卡顿现象,受百度云音乐的启发
                         UiUtils.postDelay(new Runnable() {
                             @Override
                             public void run() {
-                                startActivity(new Intent(MainActivity.this,SecondActivity.class));
+                                startActivity(new Intent(MainActivity.this, SecondActivity.class));
                             }
-                        },500);
+                        }, 500);
                         break;
                     case R.id.theme:
                         Toast.makeText(MainActivity.this, "该功能暂未实现", Toast.LENGTH_LONG).show();
                         break;
                     case R.id.nav_collect:
-                        startActivity(new Intent(MainActivity.this,CollectActivity.class));
+                        startActivity(new Intent(MainActivity.this, CollectActivity.class));
                         break;
                     case R.id.feedback:
-                        Toast.makeText(MainActivity.this, "反馈", Toast.LENGTH_LONG).show();
+                        startActivity(new Intent(MainActivity.this, LoginActivity.class));
                         break;
-                    case R.id.about:
-                        Toast.makeText(MainActivity.this, "关于", Toast.LENGTH_LONG).show();
+                    case R.id.exist:
+                        killAll();
                         break;
                     default:
                         break;
@@ -189,6 +230,8 @@ public class MainActivity extends BaseActivity {
 
     private long exitTime = 0;
 
+
+    //返回键处理
     @Override
     public void onBackPressed() {
         //如果 navigationView 打开 点击 返回 应该关闭
@@ -196,12 +239,11 @@ public class MainActivity extends BaseActivity {
             mDrawerLayout.closeDrawers();
         } else {
             if ((System.currentTimeMillis() - exitTime) > 2000) {
-                Toast.makeText(this, "再按一次退出MyAPP", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "再按一次退出程序", Toast.LENGTH_SHORT).show();
                 exitTime = System.currentTimeMillis();
             } else {
                 finish();
             }
         }
     }
-
 }

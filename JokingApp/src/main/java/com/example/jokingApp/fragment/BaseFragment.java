@@ -2,19 +2,24 @@ package com.example.jokingApp.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-
+import com.example.jokingApp.BaseApplication;
+import com.example.jokingApp.injector.component.DaggerFragmentComponent;
+import com.example.jokingApp.injector.component.FragmentComponent;
+import com.example.jokingApp.injector.moduel.FragmentModule;
 import com.example.jokingApp.ui.MainActivity;
 import com.example.jokingApp.utils.ViewUtils;
-import com.example.jokingApp.customView.LoadingPage;
+import com.example.jokingApp.widgets.LoadingPage;
 
 import java.util.List;
 
 public abstract class BaseFragment extends Fragment {
+    protected FragmentComponent mFragmentComponent;
     public MainActivity mActivity;
     @Override
     public void onAttach(Context context) {
@@ -26,6 +31,7 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         if (mLoadingPage == null) {  // 之前的frameLayout 已经记录了一个爹了  爹是之前的ViewPager
             mLoadingPage = new LoadingPage(mActivity){
                 @Override
@@ -42,8 +48,22 @@ public abstract class BaseFragment extends Fragment {
             ViewUtils.removeParent(mLoadingPage);// 移除frameLayout之前的爹
         }
 
+
+
+
         return mLoadingPage;  //  拿到当前viewPager 添加这个framelayout
     }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        mFragmentComponent = DaggerFragmentComponent.builder()
+                .fragmentModule(new FragmentModule(this))
+                .applicationComponent(((BaseApplication) getActivity().getApplication()).getApplicationComponent())
+                .build();
+        initInjector();
+    }
+
     /***
      *  创建成功的界面
      * @return
@@ -76,4 +96,6 @@ public abstract class BaseFragment extends Fragment {
         }
 
     }
+    //初始化  注入器
+    public abstract void initInjector();
 }

@@ -23,6 +23,14 @@
         android:layout_height="wrap_content"
         app:layoutManager="LinearLayoutManager"
         tools:listitem="@layout/fragment_item"/>
+
+    <TextView
+        android:gravity="center"
+        android:visibility="gone"
+        android:id="@+id/text"
+        android:text="还没有收藏文章,快去收藏吧"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 </LinearLayout>
 
 

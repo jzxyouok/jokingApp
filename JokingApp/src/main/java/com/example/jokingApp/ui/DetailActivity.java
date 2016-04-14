@@ -13,22 +13,19 @@ import android.widget.TextView;
 
 import com.example.jokingApp.R;
 import com.example.jokingApp.bean.JokeInfo;
+import com.example.jokingApp.widgets.swipeback.SwipeBackLayout;
 import com.example.jokingApp.global.GlobalConstant;
 import com.example.jokingApp.utils.BitmapHelper;
 import com.lidroid.xutils.DbUtils;
-import com.lidroid.xutils.db.sqlite.Selector;
 import com.lidroid.xutils.exception.DbException;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
-import me.imid.swipebacklayout.lib.SwipeBackLayout;
-import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
-
 /**
  * 点击笑话 进入后的详情页
  * Created by idea-pc on 2016/3/28.
  */
-public class DetailActivity extends SwipeBackActivity {
+public class DetailActivity extends BaseSwipeBackActivity {
     @InjectView(R.id.ivImage)
     ImageView mIvImage;
     @InjectView(R.id.toolbar)
@@ -46,10 +43,10 @@ public class DetailActivity extends SwipeBackActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initView();
+
     }
 
-    private void initView() {
+     protected void initView() {
         setContentView(R.layout.activity_detail);
         ButterKnife.inject(this);
         setSupportActionBar(mToolbar);
@@ -70,13 +67,15 @@ public class DetailActivity extends SwipeBackActivity {
         String imageurl = GlobalConstant.SERVER_URL + mData.getImageurl();
         BitmapHelper.getBitmapUtils().display(mIvImage, imageurl);
 
-        //设置 swipebacklayout
-        mSwipeBackLayout = getSwipeBackLayout();
-        mSwipeBackLayout.setEdgeTrackingEnabled(SwipeBackLayout.EDGE_LEFT);
         //设置toolbar
         String name = mData.getName();
         mCollapsingToolbar.setTitle(name);
 
+
+    }
+
+    @Override
+    public void initInjector() {
 
     }
 
@@ -127,4 +126,6 @@ public class DetailActivity extends SwipeBackActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+
 }
