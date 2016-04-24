@@ -5,18 +5,30 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.jokingApp.R;
 import com.example.jokingApp.bean.ImageInfo;
-import com.example.jokingApp.holder.ImageHolder;
-import com.example.jokingApp.holder.ViewPagerHoler;
-import com.example.jokingApp.holder.textHolder;
+import com.example.jokingApp.adapter.holder.ViewPagerHoler;
+import com.example.jokingApp.adapter.holder.textHolder;
+import com.example.jokingApp.global.GlobalConstant;
 import com.example.jokingApp.utils.UiUtils;
+import com.example.jokingApp.utils.helper.ImageHelper;
+import com.example.jokingApp.widgets.swipeback.Utils;
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+
 /**
- * 面向holder编程
+ *
  * Created by idea-pc on 2016/3/22.
  */
 public class ImageAdapter extends RecyclerView.Adapter {
@@ -26,6 +38,8 @@ public class ImageAdapter extends RecyclerView.Adapter {
     private final List<String> mViewpager;
     private final List<String> mPicture;
     private ImageHolder mImageHolder;
+
+
 
     public ImageAdapter(ImageInfo data) {
         mViewpager = data.getViewpager();
@@ -54,7 +68,6 @@ public class ImageAdapter extends RecyclerView.Adapter {
             mImageHolder = (ImageHolder) holder;
             mImageHolder.initData(position);
         }
-
     }
 
     private View getViewHolder(int resource, ViewGroup parent, boolean isFullSpan) {
@@ -80,5 +93,28 @@ public class ImageAdapter extends RecyclerView.Adapter {
     @Override
     public int getItemCount() {
         return 1 + mPicture.size()+1;
+    }
+
+
+    public class ImageHolder extends RecyclerView.ViewHolder {
+        @InjectView(R.id.image)
+        public ImageView mImage;
+        @InjectView(R.id.text)
+        public TextView mText;
+        private List<String> data;
+
+        public ImageHolder(View itemView, List<String> data) {
+            super(itemView);
+            this.data = data;
+            ButterKnife.inject(this, itemView);
+        }
+
+        public void initData(int position) {
+            String url = GlobalConstant.SERVER_URL + data.get(position);
+              Picasso.with(UiUtils.getContext())
+                   .load(url)
+                   .into(mImage);
+
+        }
     }
 }

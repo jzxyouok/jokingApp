@@ -1,7 +1,7 @@
 package com.example.jokingApp.db;
 
 /**
- * 存入数据库的信息
+ * 用户存入数据库的信息
  * Created by idea-pc on 2016/4/11.
  */
 public class User {

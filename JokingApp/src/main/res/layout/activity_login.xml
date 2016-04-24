@@ -23,7 +23,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="10dp"
         android:layout_marginTop="20dp"
-        android:src="@mipmap/ic_3d"/>
+        android:src="@mipmap/ic_person"/>
 
     <TextView
         android:layout_width="match_parent"
@@ -38,7 +38,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:drawableLeft="@mipmap/ic_person"
+        android:drawableLeft="@mipmap/ic_user"
         android:drawablePadding="8dp"
         android:hint="@string/login_user_hint"
         android:singleLine="true"
@@ -60,10 +60,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:background="@drawable/btn_bg"
+        android:background="@color/colorPrimary"
         android:text="@string/login_login"
         android:textStyle="bold"/>
-
     <TextView
         android:id="@+id/login_sign_up_txt"
         style="?android:borderlessButtonStyle"
@@ -75,6 +74,4 @@
         android:textColor="#555"
         android:textSize="14sp"
         />
-
-
 </LinearLayout>

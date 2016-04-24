@@ -49,5 +49,4 @@ public class BaseApplication extends Application {
         return mApplicationComponent;
     }
 
-
 }

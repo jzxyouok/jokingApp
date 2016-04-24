@@ -6,7 +6,7 @@ import rx.subjects.SerializedSubject;
 import rx.subjects.Subject;
 
 /**
- *通过RXjava来替代Event Bus
+ *通过Rxjava来替代Event Bus
  * Created by idea-pc on 2016/4/14.
  */
 public class RxBus {
@@ -14,6 +14,8 @@ public class RxBus {
     private final Subject bus;
 
     //首先创建一个可同时充当Observer和Observable的Subject；
+
+    // PublishSubject只会把在订阅发生的时间点之后来自原始Observable的数据发射给观察者
     public RxBus() {
         bus = new SerializedSubject<>(PublishSubject.create());
     }

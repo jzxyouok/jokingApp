@@ -12,12 +12,9 @@ import android.widget.TextView;
 
 import com.example.jokingApp.R;
 import com.example.jokingApp.bean.JokeInfo;
-import com.example.jokingApp.ui.DetailActivity;
+import com.example.jokingApp.ui.activity.DetailActivity;
 
-import java.util.LinkedList;
 import java.util.List;
-
-import javax.inject.Inject;
 
 /**
  * Created by idea-pc on 2016/3/22.
@@ -27,6 +24,11 @@ public class JokeAdapter extends AnimRecyclerViewAdapter<RecyclerView.ViewHolder
     private static final int TYPE_ITEM = 0;
     private static final int TYPE_FOOTER = 1;
     private List<JokeInfo.JokeBean> data;
+
+    public void setData(List<JokeInfo.JokeBean> data) {
+        this.data = data;
+    }
+
     private Activity mActivity;
 
 
@@ -34,8 +36,8 @@ public class JokeAdapter extends AnimRecyclerViewAdapter<RecyclerView.ViewHolder
     private boolean isLoadingMore = true;
 
 
-    public JokeAdapter(List<JokeInfo.JokeBean> data, Activity activity, boolean isLoadingMore) {
-        this.data = data;
+    public JokeAdapter( Activity activity, boolean isLoadingMore) {
+      //  this.data = data;
         mActivity = activity;
         this.isLoadingMore = isLoadingMore;
     }

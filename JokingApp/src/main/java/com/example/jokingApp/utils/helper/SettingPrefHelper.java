@@ -1,6 +1,7 @@
 package com.example.jokingApp.utils.helper;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
@@ -19,46 +20,51 @@ public class SettingPrefHelper {
         this.context = context;
     }
 
-    //获取图片保存路径
-    public String getPicSavePath() {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-        return prefs.getString("PicSavePath", "gzsll");
-    }
+
     //设置图片保存路径
     public void setPicSavePath(String path) {
-        PrefUtils.setString(context,"PicSavePath", path);
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        prefs.edit().putString("PicSavePath", path).apply();
+
     }
 
     //获取字体默认大小
     private int getTextSizePref() {
-        return Integer.parseInt(PrefUtils.getString(context,"pTextSize", "3"));
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        return Integer.parseInt(prefs.getString("pTextSize", "3"));
     }
 
     //获取夜间模式
     public boolean getNightModel() {
-        return PrefUtils.getBoolean(context,"pNightMode", false);
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        return prefs.getBoolean("pNightMode", false);
     }
     //设置夜间模式
     public void setNightModel(boolean nightModel) {
-        PrefUtils.setBoolean(context,"pNightMode", nightModel);
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        prefs.edit().putBoolean("pNightMode", nightModel).apply();
     }
 
     //设置加载图片
     public boolean getLoadPic() {
-        return PrefUtils.getBoolean(context,"pLoadPic", true);
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        return prefs.getBoolean("pLoadPic", true);
     }
     //是否接受通知
     public boolean getNotification() {
-        return PrefUtils.getBoolean(context,"pNotification", true);
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        return prefs.getBoolean("pNotification", true);
     }
     //默认加载图片
     public boolean getLoadOriginPic() {
-        return PrefUtils.getBoolean(context,"pLoadOriginPic", false);
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        return prefs.getBoolean("pLoadOriginPic", false);
     }
 
     //应用是否自动更新
     public boolean getAutoUpdate() {
-        return PrefUtils.getBoolean(context,"pAutoUpdate", true);
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        return prefs.getBoolean("pLoadOriginPic", false);
     }
 
     public boolean getSingleLine() {
@@ -68,16 +74,28 @@ public class SettingPrefHelper {
 
     //获取手势返回的方向
     public int getSwipeBackEdgeMode() {
-        return Integer.parseInt(PrefUtils.getString(context,"pSwipeBackEdgeMode", "0"));
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        return Integer.parseInt(prefs.getString("pSwipeBackEdgeMode", "0"));
+    }
+    //获取手势返回的方向
+    public void getSwipeBackEdgeMode(int  model) {
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        prefs.edit().putString("pSwipeBackEdgeMode", String.valueOf(model)).apply();
     }
 
 
+
     public String getLoginUid() {
-        return   PrefUtils.getString(context,"loginUid","");
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        return   prefs.getString("loginUid","");
     }
 
     //获取uid
     public void setLoginUid(String uid) {
-        PrefUtils.setString(context,"loginUid",uid);
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        prefs.edit().putString("loginUid", uid).apply();
     }
+
 }

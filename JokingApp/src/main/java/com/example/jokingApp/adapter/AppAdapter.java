@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 
 import com.example.jokingApp.R;
 import com.example.jokingApp.bean.JokeInfo;
-import com.example.jokingApp.holder.AppHolder;
+import com.example.jokingApp.adapter.holder.AppHolder;
 import com.example.jokingApp.protocol.JokeProtocol;
 import com.example.jokingApp.utils.UiUtils;
 

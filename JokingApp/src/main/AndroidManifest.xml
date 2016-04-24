@@ -19,7 +19,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".ui.SplashActivity"
+            android:name=".ui.activity.SplashActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -27,25 +27,36 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.SecondActivity"
-            android:parentActivityName=".ui.MainActivity"
+            android:name=".ui.activity.SecondActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity
-            android:name=".ui.GuideActivity"
-            android:parentActivityName=".ui.MainActivity"
+            android:name=".ui.activity.GuideActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity
-            android:name=".ui.MainActivity"
+            android:name=".ui.activity.MainActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity
-            android:name=".ui.DetailActivity"
+            android:name=".ui.activity.DetailActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity
-            android:name=".ui.CollectActivity"
+            android:name=".ui.activity.CollectActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity
-            android:name=".ui.LoginActivity"
+            android:name=".ui.activity.LoginActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".ui.activity.SettingActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".ui.activity.AboutActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".ui.activity.VideoActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:theme="@style/AppThemeNotTranslucent" />
+
+        android:theme="@style/AppTheme.NoActionBar"/>
         <service
             android:name="com.example.jokingApp.service.MessageService"
             android:exported="true">
@@ -54,6 +65,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </service>
+
     </application>
 
 </manifest>

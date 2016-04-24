@@ -7,11 +7,15 @@ import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.View;
 
+import java.lang.annotation.Target;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class AmazingBgView extends View {
+/**
+ * 可以冬的view
+ */
+public class AmazingBgView extends View    {
 
     private final Paint paint = new Paint();
     private final List<Ring> ringList = new ArrayList<>();

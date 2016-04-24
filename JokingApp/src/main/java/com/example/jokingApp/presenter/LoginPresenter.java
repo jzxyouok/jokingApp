@@ -8,7 +8,7 @@ import com.example.jokingApp.bean.UserResult;
 import com.example.jokingApp.db.User;
 import com.example.jokingApp.global.GlobalConstant;
 import com.example.jokingApp.ui.view.LoginView;
-import com.example.jokingApp.utils.ToastHelper;
+import com.example.jokingApp.utils.helper.ToastHelper;
 import com.example.jokingApp.utils.helper.SecurityHelper;
 import com.example.jokingApp.utils.helper.UserStorage;
 
@@ -16,7 +16,6 @@ import org.apache.log4j.Logger;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
-import java.util.List;
 
 import javax.inject.Inject;
 

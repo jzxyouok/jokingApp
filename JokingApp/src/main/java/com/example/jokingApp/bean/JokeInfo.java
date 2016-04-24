@@ -3,8 +3,6 @@ package com.example.jokingApp.bean;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.lidroid.xutils.db.annotation.Id;
-
 import java.util.List;
 
 
@@ -34,9 +32,8 @@ public class JokeInfo  {
         this.joke = joke;
     }
 
-    public static class JokeBean   implements Parcelable {
+    public static class JokeBean  implements Parcelable {
         private String des;
-        @Id
         private String id;
         private String imageurl;
         private String name;

@@ -5,11 +5,18 @@
     <string name="action_search">搜索</string>
     <string name="load_error">加载失败 点击重试</string>
 
+    <!--首页 TabLayout的名称 -->
     <string-array name="tab_names">
         <item>笑话</item>
         <item>图片</item>
-        <item>分区</item>
-        <item>设置</item>
+        <item>视频</item>
+    </string-array>
+    <!--音乐界面 TabLayout的名称 -->
+    <string-array name="tab_music">
+        <item>单曲</item>
+        <item>歌手</item>
+        <item>专辑</item>
+        <item>文件夹</item>
     </string-array>
 
     <!--loginActivity -->
@@ -21,6 +28,72 @@
     <string name="login_error_empty_user">帐号不能为空 </string>
     <string name="login_error_empty_pass">密码不能为空 </string>
 
+    <!--loginFragment -->
+    <string name="settings_thread_sort">帖子排序方式</string>
+    <string name="settings_text_size">字体大小</string>
+    <string name="settings_md_colors">主题颜色</string>
+    <string name="settings_auto_update">自动更新应用</string>
+    <string name="settings_swipeback_edgemode">手势返回</string>
+    <string name="settings_dt_swipeback_edgemode">设置手势方向</string>
+    <string name="settings_auto_notification">是否接受通知</string>
+    <string name="settings_general_settings">常规</string>
+    <string name="settings_notification_settings">通知</string>
+    <string name="category_read">阅读</string>
+    <string name="settings_load_pic">是否加载图片</string>
+    <string name="settings_load_pic_summary">默认加载列表和内容图片</string>
+    <string name="category_other">其他</string>
+    <string name="settings_pic_path">图片保存路径</string>
+    <string name="settings_clear_cache">清空缓存</string>
 
+
+    <!--手势返回方向 -->
+    <string-array name="swipeBackEdgeMode">
+        <item>向左</item>
+        <item>向右</item>
+    </string-array>
+    <!--设置界面的字体大小 -->
+    <string-array name="txtSizeNum">
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+        <item>16</item>
+        <item>17</item>
+        <item>18</item>
+        <item>19</item>
+    </string-array>
+
+//手势返回的默认值
+    <string-array name="prefValues">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+        <item>16</item>
+    </string-array>
+
+
+    <string name="back_button_label">Back</string>
+    <string name="next_button_label">Next</string>
+
+    <!-- Optional button to Skip a PreferenceActivity [CHAR LIMIT=20] -->
+    <string name="skip_button_label">Skip</string>
+
+
+
+    <string name="headsup_title">myApp</string>
+    <string name="headsup_content">劳累一天了,快来放松下~</string>
 
 </resources>

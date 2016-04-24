@@ -20,12 +20,12 @@ public class FragmentModule {
     public FragmentModule(Fragment fragment) {
         mFragment = fragment;
     }
-    @PerFragment
-    @Provides
+
+     @PerFragment
+     @Provides
      Activity provideActivity() {
         return mFragment.getActivity();
     }
-
 
 }
 

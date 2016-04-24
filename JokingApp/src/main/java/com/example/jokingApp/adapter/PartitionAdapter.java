@@ -9,8 +9,9 @@ import android.widget.TextView;
 import com.example.jokingApp.R;
 import com.example.jokingApp.bean.PartitionInfo;
 import com.example.jokingApp.global.GlobalConstant;
-import com.example.jokingApp.holder.PartitionHolder;
-import com.example.jokingApp.utils.BitmapHelper;
+import com.example.jokingApp.adapter.holder.PartitionHolder;
+import com.example.jokingApp.utils.UiUtils;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -35,7 +36,10 @@ public class PartitionAdapter extends RecyclerView.Adapter {
         ImageView imageView = mPartition.mImageView;
         TextView textView =mPartition .mTextView;
         String  uri= GlobalConstant.SERVER_URL+mPictureBeen.get(position).getIconUrl();
-        BitmapHelper.getBitmapUtils().display(imageView,uri);
+        Picasso.with(UiUtils.getContext())
+                .load(uri)
+                .into(imageView);
+
         textView.setText(mPictureBeen.get(position).getName());
 
     }
