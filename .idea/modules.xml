@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Bili/Bili.iml" filepath="$PROJECT_DIR$/Bili/Bili.iml" />
+      <module fileurl="file://$PROJECT_DIR$/JokingApp/JokingApp.iml" filepath="$PROJECT_DIR$/JokingApp/JokingApp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/LoadMore/LoadMore.iml" filepath="$PROJECT_DIR$/LoadMore/LoadMore.iml" />
+      <module fileurl="file://$PROJECT_DIR$/MyAPP.iml" filepath="$PROJECT_DIR$/MyAPP.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Supportlibrary/Supportlibrary.iml" filepath="$PROJECT_DIR$/Supportlibrary/Supportlibrary.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SwipeBackLayout/SwipeBackLayout.iml" filepath="$PROJECT_DIR$/SwipeBackLayout/SwipeBackLayout.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SwipeToLoadLayout/SwipeToLoadLayout.iml" filepath="$PROJECT_DIR$/SwipeToLoadLayout/SwipeToLoadLayout.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/demo/demo.iml" filepath="$PROJECT_DIR$/demo/demo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/greendaogenerator/greendaogenerator.iml" filepath="$PROJECT_DIR$/greendaogenerator/greendaogenerator.iml" />
+      <module fileurl="file://$PROJECT_DIR$/haDemo/haDemo.iml" filepath="$PROJECT_DIR$/haDemo/haDemo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hahhah/hahhah.iml" filepath="$PROJECT_DIR$/hahhah/hahhah.iml" />
+      <module fileurl="file://$PROJECT_DIR$/joke/joke.iml" filepath="$PROJECT_DIR$/joke/joke.iml" />
+      <module fileurl="file://$PROJECT_DIR$/library/library.iml" filepath="$PROJECT_DIR$/library/library.iml" />
+      <module fileurl="file://$PROJECT_DIR$/swipeback/swipeback.iml" filepath="$PROJECT_DIR$/swipeback/swipeback.iml" />
+    </modules>
+  </component>
+</project>
