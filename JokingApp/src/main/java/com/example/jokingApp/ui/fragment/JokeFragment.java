@@ -208,15 +208,6 @@ public class JokeFragment extends BaseFragment {
 
 
     private void initRxBus() {
-        mRxBus.toObserverable()
-                .subscribe(new Action1<Object>() {
-                    @Override
-                    public void call(Object o) {
-                        if (o instanceof NightModelEvent) {
 
-
-                        }
-                    }
-                });
     }
 }
