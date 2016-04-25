@@ -1,30 +1,25 @@
 package com.example.jokingApp.ui.fragment;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.jokingApp.R;
 import com.example.jokingApp.adapter.JokeAdapter;
 import com.example.jokingApp.api.ApiService;
 import com.example.jokingApp.bean.JokeInfo;
-import com.example.jokingApp.ui.fragment.BaseFragment;
+import com.example.jokingApp.protocol.JokeProtocol;
+import com.example.jokingApp.utils.RetrofitUtils;
 import com.example.jokingApp.utils.RxBus;
+import com.example.jokingApp.utils.UiUtils;
+import com.example.jokingApp.utils.event.DayModelEvent;
 import com.example.jokingApp.utils.event.NightModelEvent;
 import com.example.jokingApp.widgets.DividerItemDecoration;
 import com.example.jokingApp.widgets.LoadingPage;
-
-import com.example.jokingApp.protocol.JokeProtocol;
-import com.example.jokingApp.utils.RetrofitUtils;
-import com.example.jokingApp.utils.ThreadManager;
-import com.example.jokingApp.utils.UiUtils;
 
 import java.util.List;
 import java.util.Random;
@@ -49,6 +44,7 @@ public class JokeFragment extends BaseFragment {
     private FloatingActionButton mFloatingActionButton;
     private JokeAdapter mJokeAdapter;
 
+    private boolean isLight;
     @Inject
     RxBus mRxBus;
 
@@ -101,11 +97,25 @@ public class JokeFragment extends BaseFragment {
             }
         });
         initRxBus();
-
-
         return view;
 
     }
+
+    private void initRxBus() {
+        mRxBus.toObserverable()
+                .subscribe(new Action1<Object>() {
+                    @Override
+                    public void call(Object o) {
+                        if (o instanceof NightModelEvent) {
+                            mJokeAdapter.updateTheme();
+                        } else if (o instanceof DayModelEvent) {
+                            mJokeAdapter.updateTheme();
+                        }
+                        isLight=!isLight;
+                    }
+                });
+    }
+
 
     /**
      * recylerview 滚动监听
@@ -207,7 +217,4 @@ public class JokeFragment extends BaseFragment {
     }
 
 
-    private void initRxBus() {
-
-    }
 }

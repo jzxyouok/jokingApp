@@ -80,6 +80,8 @@ public class DetailActivity extends BaseSwipeBackActivity {
         String name = mData.getName();
         mCollapsingToolbar.setTitle(name);
 
+
+
      }
 
     @Override

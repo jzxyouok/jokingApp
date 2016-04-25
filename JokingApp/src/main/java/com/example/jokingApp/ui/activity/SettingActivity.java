@@ -43,4 +43,10 @@ public class SettingActivity extends BaseSwipeBackActivity {
         overridePendingTransition(0, 0);
         startActivity(intent);
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.slide_left_in, R.anim.slide_right_out);
+    }
 }

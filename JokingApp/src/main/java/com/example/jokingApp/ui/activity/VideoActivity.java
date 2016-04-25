@@ -46,8 +46,6 @@ public class VideoActivity extends BaseSwipeBackActivity implements UniversalVid
     @InjectView(R.id.start)
     Button mStart;
 
-
-
     private static final String TAG = "MainActivity";
     private static final String SEEK_POSITION_KEY = "SEEK_POSITION_KEY";
     private static final String VIDEO_URL = "http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4";

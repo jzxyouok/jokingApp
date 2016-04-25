@@ -58,7 +58,7 @@
                 android:layout_height="match_parent"
                 android:maxLines="10"
                 android:padding="12dp"
-                android:textAppearance="@android:style/TextAppearance.Medium"/>
+                android:textAppearance="?attr/textAppearanceListItem"/>
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 </android.support.design.widget.CoordinatorLayout>

@@ -9,7 +9,7 @@ import java.io.File;
  */
 public class FileUtils {
     public static final String CACHE = "cache";
-    public static final String ROOT = "JokingAPP";
+    public static final String ROOT = "JokingApp";
     public static final String IMAGE = "image";
 
     public static File getDir(String str) {
@@ -94,7 +94,5 @@ public class FileUtils {
 
         return fileSizeString;
     }
-
-
 
 }

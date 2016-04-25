@@ -10,6 +10,8 @@ import android.support.v7.widget.RecyclerView;
 import android.util.TypedValue;
 import android.view.View;
 
+import com.example.jokingApp.utils.UiUtils;
+
 /**
  * recylerview 的item
  * Created by idea-pc on 2016/3/28.
@@ -39,9 +41,10 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
         if(orientation != LinearLayoutManager.VERTICAL && orientation != LinearLayoutManager.HORIZONTAL){
             throw new IllegalArgumentException("请传入正确的参数") ;
         }
-        mItemSize = (int) TypedValue.applyDimension(mItemSize, TypedValue.COMPLEX_UNIT_DIP,context.getResources().getDisplayMetrics());
+        mItemSize = (int) TypedValue.applyDimension(mItemSize, TypedValue.COMPLEX_UNIT_DIP, UiUtils.getResource().getDisplayMetrics());
         mPaint = new Paint(Paint.ANTI_ALIAS_FLAG) ;
-        mPaint.setColor(Color.parseColor("#D8BFD8"));
+
+        mPaint.setColor(UiUtils.getResource().getColor(android.R.color.darker_gray));
          /*设置填充*/
         mPaint.setStyle(Paint.Style.FILL);
     }

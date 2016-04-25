@@ -52,4 +52,5 @@
         <attr name="npWrapValue" format="boolean" />
         <attr name="npBackground" format="color" />
     </declare-styleable>
+
 </resources>

@@ -1,7 +1,9 @@
 package com.example.jokingApp.ui.activity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.MenuRes;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -11,6 +13,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.Menu;
@@ -23,12 +26,17 @@ import android.widget.Toast;
 import com.example.jokingApp.R;
 import com.example.jokingApp.ui.fragment.BaseFragment;
 import com.example.jokingApp.ui.fragment.FragmentFactory;
+import com.example.jokingApp.utils.PrefUtils;
 import com.example.jokingApp.utils.RxBus;
+import com.example.jokingApp.utils.event.DayModelEvent;
+import com.example.jokingApp.utils.event.NightModelEvent;
 import com.example.jokingApp.utils.helper.ToastHelper;
 import com.example.jokingApp.utils.UiUtils;
 import com.example.jokingApp.utils.helper.NetWorkHelper;
 
 import javax.inject.Inject;
+
+import rx.functions.Action1;
 
 public class MainActivity extends BaseSwipeBackActivity implements View.OnClickListener {
 
@@ -45,6 +53,8 @@ public class MainActivity extends BaseSwipeBackActivity implements View.OnClickL
     ToastHelper mToastHelper;
     @Inject
     RxBus mRxBus;
+    private boolean mIsNightModel;
+    private boolean  isNightModel=true;
 
 
     @Override
@@ -68,6 +78,9 @@ public class MainActivity extends BaseSwipeBackActivity implements View.OnClickL
         setContentView(R.layout.activity_main);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerlayout);
 
+        mIsNightModel = PrefUtils.getBoolean(this, "isNightModel", false);
+
+
         //初始化toobar
         initToobar();
         initNavigationView();
@@ -77,8 +90,31 @@ public class MainActivity extends BaseSwipeBackActivity implements View.OnClickL
         initViewPager();
         //判断当前网络状态 提醒用户
         initNetWork();
+        //初始化事件分发  这里主要用来实现模式切换
+        initRxBus();
+
     }
 
+
+    private void initRxBus() {
+        mRxBus.toObserverable()
+                .subscribe(new Action1<Object>() {
+                    @Override
+                    public void call(Object o) {
+                        if (o instanceof NightModelEvent) {
+                            mNavigationView.setBackgroundColor(UiUtils.getResource().getColor(R.color.menu_item_color));
+                            mToolbar.setBackgroundColor(Color.parseColor("#ff303030"));
+                            mTabLayout.setSelectedTabIndicatorColor(Color.WHITE);
+                            mTabLayout.setBackgroundColor(Color.parseColor("#ff303030"));
+                        } else if (o instanceof DayModelEvent) {
+                            mNavigationView.setBackgroundColor(Color.WHITE);
+                            mToolbar.setBackgroundColor(UiUtils.getResource().getColor(R.color.colorPrimary));
+                            mTabLayout.setSelectedTabIndicatorColor(UiUtils.getResource().getColor(R.color.indicatorcolor));
+                            mTabLayout.setBackgroundColor(UiUtils.getResource().getColor(R.color.colorPrimary));
+                        }
+                    }
+                });
+    }
 
 
     private void initNetWork() {
@@ -185,7 +221,7 @@ public class MainActivity extends BaseSwipeBackActivity implements View.OnClickL
         ImageView mImageView = (ImageView) headerView.findViewById(R.id.image);
         mTextView.setOnClickListener(this);
         mImageView.setOnClickListener(this);
-
+        final MenuItem item = mNavigationView.getMenu().getItem(2);
         mNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem item) {
@@ -203,7 +239,15 @@ public class MainActivity extends BaseSwipeBackActivity implements View.OnClickL
                         }, 200);
                         break;
                     case R.id.theme:
-                        Toast.makeText(MainActivity.this, "该功能暂未实现", Toast.LENGTH_LONG).show();
+
+                         if (!isNightModel) {
+                             item.setTitle("夜间模式");
+                             mRxBus.send(new DayModelEvent());
+                      } else {
+                             item.setTitle("日间模式");
+                             mRxBus.send(new NightModelEvent());
+                      }
+                        isNightModel=!isNightModel;
                         break;
                     case R.id.nav_collect:
                         startActivity(new Intent(MainActivity.this, CollectActivity.class));

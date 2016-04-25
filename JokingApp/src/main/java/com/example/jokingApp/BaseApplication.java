@@ -2,15 +2,18 @@ package com.example.jokingApp;
 
 import android.app.Application;
 import android.os.Handler;
+import android.support.v7.app.AppCompatDelegate;
 
 import com.example.jokingApp.injector.component.ApplicationComponent;
 import com.example.jokingApp.injector.component.DaggerApplicationComponent;
 import com.example.jokingApp.injector.moduel.ApplicationModule;
+import com.example.jokingApp.utils.PrefUtils;
 
 /**
  * 代表当前的程序
  * Created by idea-pc on 2016/3/17.
  */
+
 public class BaseApplication extends Application {
     private static BaseApplication application;
     private static int mainTid;
@@ -20,12 +23,16 @@ public class BaseApplication extends Application {
 
     @Override
     public void onCreate() {
+
         super.onCreate();
         application = this;
         mainTid = android.os.Process.myTid();
         handler = new Handler();
         initComponent();
+
     }
+
+
     private void initComponent() {
         mApplicationComponent = DaggerApplicationComponent.builder()
                 .applicationModule(new ApplicationModule(this))

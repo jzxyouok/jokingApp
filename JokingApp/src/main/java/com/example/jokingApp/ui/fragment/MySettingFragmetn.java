@@ -12,7 +12,9 @@ import com.example.jokingApp.injector.component.DaggerFragmentComponent;
 import com.example.jokingApp.injector.moduel.FragmentModule;
 import com.example.jokingApp.ui.activity.SettingActivity;
 import com.example.jokingApp.utils.FileUtils;
+import com.example.jokingApp.utils.PrefUtils;
 import com.example.jokingApp.utils.RxBus;
+import com.example.jokingApp.utils.event.DayModelEvent;
 import com.example.jokingApp.utils.helper.ToastHelper;
 import com.example.jokingApp.utils.event.NightModelEvent;
 import com.example.jokingApp.utils.helper.CacheHelper;
@@ -100,7 +102,11 @@ public class MySettingFragmetn extends PreferenceFragment implements Preference.
             setListSetting(Integer.parseInt(newValue.toString()), R.array.swipeBackEdgeMode, pSwipeBackEdgeMode);
             ((SettingActivity) getActivity()).reload();
         } else if ("pNightMode".equals(preference.getKey())){
-            mBus.send(new NightModelEvent());
+            if ("true".equals(newValue.toString())) {
+                mBus.send(new NightModelEvent());
+            } else if ("false".equals(newValue.toString())){
+                mBus.send(new DayModelEvent());
+            }
         }
         return true;
     }

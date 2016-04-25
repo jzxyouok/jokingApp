@@ -20,7 +20,6 @@
     </style>
 
 
-
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
@@ -32,19 +31,6 @@
 
     <style name="SwipeBackLayout">
         <item name="edge_size">0dp</item>
-    </style>
-
-    <style name="AnimationActivity" parent="@android:style/Animation.Activity">
-        <item name="android:activityOpenEnterAnimation">@anim/slide_right_in</item>
-        <item name="android:activityOpenExitAnimation">@anim/slide_left_out</item>
-        <item name="android:activityCloseEnterAnimation">@anim/slide_left_in</item>
-        <item name="android:activityCloseExitAnimation">@anim/slide_right_out</item>
-    </style>
-
-    <style name="NormalTheme" parent="AppTheme.NoActionBar">
-        <item name="android:windowAnimationStyle">@style/AnimationActivity</item>
-        <item name="android:windowEnableSplitTouch">false</item>
-        <item name="android:splitMotionEvents">false</item>
     </style>
 
 </resources>

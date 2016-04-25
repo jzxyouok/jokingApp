@@ -49,7 +49,6 @@ public class CollectAdapter extends AnimRecyclerViewAdapter<RecyclerView.ViewHol
             //这个动画效果有bug
             //showItemAnim(((ViewHolder) holder).mCardView, position);
         }
-
     }
 
 
@@ -66,13 +65,11 @@ public class CollectAdapter extends AnimRecyclerViewAdapter<RecyclerView.ViewHol
     class ViewHolder extends RecyclerView.ViewHolder  {
         public final TextView mIdView;
         public final TextView mContentView;
-        public final CardView mCardView;
 
         public ViewHolder(View view) {
             super(view);
             mIdView = (TextView) view.findViewById(R.id.id);
             mContentView = (TextView) view.findViewById(R.id.content);
-            mCardView=(CardView) view.findViewById(R.id.cardview);
         }
     }
 

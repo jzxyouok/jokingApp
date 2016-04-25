@@ -51,7 +51,8 @@ public class CollectActivity extends BaseSwipeBackActivity {
         //在这里 存入数据库的类型 和 从服务器拿到的数据类型冲突 好烦....
         JokeEntityDao jokeEntityDao = mDbHelper.getJokeEntityDao();
         List<JokeEntity> list = jokeEntityDao.loadAll();
-        mText.setVisibility(list==null
+       //这里的list如果为null的话 并不直接为null 而是返回一个[]
+        mText.setVisibility(list.size()==0
                  ? View.VISIBLE : View.GONE);
 
 
