@@ -1,15 +1,20 @@
 package com.example.jokingApp.ui.activity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.WindowManager;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.example.jokingApp.R;
 import com.example.jokingApp.utils.PrefUtils;
+import com.example.jokingApp.utils.UiUtils;
+import com.squareup.picasso.MemoryPolicy;
+import com.squareup.picasso.Picasso;
 
 /**
  * Created by idea-pc on 2016/3/30.
@@ -24,6 +29,12 @@ public class SplashActivity extends BaseActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_splash);
         rlRoot = (RelativeLayout) findViewById(R.id.rl_root);
+        final ImageView imageView = (ImageView) findViewById(R.id.iv_start);
+        Picasso.with(UiUtils.getContext())
+                .load(R.mipmap.splash)                                        //第一个参数指 放弃在内存中查找图片
+                .memoryPolicy(MemoryPolicy.NO_CACHE, MemoryPolicy.NO_STORE)  //第二个参数指图片加载完   不缓存到内存中
+                .config(Bitmap.Config.RGB_565)
+                .into(imageView);
         startAnim();
     }
 

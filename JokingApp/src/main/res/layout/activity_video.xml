@@ -16,13 +16,13 @@
             android:layout_height="fill_parent"
             android:layout_gravity="center"
             app:uvv_autoRotation="true"
-            app:uvv_fitXY="false" />
+            app:uvv_fitXY="false"/>
 
         <com.universalvideoview.UniversalMediaController
             android:id="@+id/media_controller"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            app:uvv_scalable="true" />
+            app:uvv_scalable="true"/>
 
     </FrameLayout>
 
@@ -35,13 +35,21 @@
 
         <Button
             android:id="@+id/start"
-            android:layout_margin="5dp"
             android:layout_width="fill_parent"
             android:layout_height="50dp"
+            android:layout_margin="5dp"
             android:background="@android:color/holo_red_light"
             android:gravity="center"
-            android:text="点击开始播放" />
 
+            android:text="点击开始播放"/>
+
+        <TextView
+            android:layout_marginTop="50dp"
+            android:gravity="center"
+            android:textSize="18sp"
+            android:text="视频数据来自第三方网站,请耐心等候"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
     </LinearLayout>
 
 

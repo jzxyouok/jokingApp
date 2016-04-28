@@ -36,6 +36,7 @@ import com.example.jokingApp.utils.helper.NetWorkHelper;
 
 import javax.inject.Inject;
 
+import rx.Subscription;
 import rx.functions.Action1;
 
 public class MainActivity extends BaseSwipeBackActivity implements View.OnClickListener {
@@ -95,28 +96,32 @@ public class MainActivity extends BaseSwipeBackActivity implements View.OnClickL
 
     }
 
-
+    /**
+     * 切换模式  白天/夜间
+     */
     private void initRxBus() {
-        mRxBus.toObserverable()
-                .subscribe(new Action1<Object>() {
-                    @Override
-                    public void call(Object o) {
-                        if (o instanceof NightModelEvent) {
-                            mNavigationView.setBackgroundColor(UiUtils.getResource().getColor(R.color.menu_item_color));
-                            mToolbar.setBackgroundColor(Color.parseColor("#ff303030"));
-                            mTabLayout.setSelectedTabIndicatorColor(Color.WHITE);
-                            mTabLayout.setBackgroundColor(Color.parseColor("#ff303030"));
-                        } else if (o instanceof DayModelEvent) {
-                            mNavigationView.setBackgroundColor(Color.WHITE);
-                            mToolbar.setBackgroundColor(UiUtils.getResource().getColor(R.color.colorPrimary));
-                            mTabLayout.setSelectedTabIndicatorColor(UiUtils.getResource().getColor(R.color.indicatorcolor));
-                            mTabLayout.setBackgroundColor(UiUtils.getResource().getColor(R.color.colorPrimary));
-                        }
-                    }
-                });
+        final Subscription subscribe = mRxBus.toObserverable().subscribe(new Action1<Object>() {
+            @Override
+            public void call(Object o) {
+                if (o instanceof NightModelEvent) {
+                    mNavigationView.setBackgroundColor(UiUtils.getResource().getColor(R.color.menu_item_color));
+                    mToolbar.setBackgroundColor(UiUtils.getResource().getColor(R.color.toobar_back_night));
+                    mTabLayout.setSelectedTabIndicatorColor(Color.WHITE);
+                    mTabLayout.setBackgroundColor(UiUtils.getResource().getColor(R.color.toobar_back_night));
+                } else if (o instanceof DayModelEvent) {
+                    mNavigationView.setBackgroundColor(Color.WHITE);
+                    mToolbar.setBackgroundColor(UiUtils.getResource().getColor(R.color.colorPrimary));
+                    mTabLayout.setSelectedTabIndicatorColor(UiUtils.getResource().getColor(R.color.indicatorcolor));
+                    mTabLayout.setBackgroundColor(UiUtils.getResource().getColor(R.color.colorPrimary));
+                }
+            }
+        });
+        addSubscription(subscribe); //退出的时候销毁
     }
 
-
+    /**
+     * 判断当前的网络状态
+     */
     private void initNetWork() {
         boolean wiFi = mNetWorkHelper.isWiFi();
         boolean isAvailableNetwork = mNetWorkHelper.isAvailableNetwork();
@@ -158,7 +163,6 @@ public class MainActivity extends BaseSwipeBackActivity implements View.OnClickL
     }
 
     private void initToobar() {
-
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
         ActionBar actionBar = getSupportActionBar();
@@ -239,15 +243,7 @@ public class MainActivity extends BaseSwipeBackActivity implements View.OnClickL
                         }, 200);
                         break;
                     case R.id.theme:
-
-                         if (!isNightModel) {
-                             item.setTitle("夜间模式");
-                             mRxBus.send(new DayModelEvent());
-                      } else {
-                             item.setTitle("日间模式");
-                             mRxBus.send(new NightModelEvent());
-                      }
-                        isNightModel=!isNightModel;
+                        changeTheme(item);
                         break;
                     case R.id.nav_collect:
                         startActivity(new Intent(MainActivity.this, CollectActivity.class));
@@ -277,6 +273,17 @@ public class MainActivity extends BaseSwipeBackActivity implements View.OnClickL
                 return true;
             }
         });
+    }
+
+    private void changeTheme(MenuItem item) {
+        if (!isNightModel) {
+            item.setTitle("夜间模式");
+            mRxBus.send(new DayModelEvent());
+     } else {
+            item.setTitle("日间模式");
+            mRxBus.send(new NightModelEvent());
+     }
+        isNightModel=!isNightModel;
     }
 
     @Override

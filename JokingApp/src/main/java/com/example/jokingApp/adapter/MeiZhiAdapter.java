@@ -2,6 +2,7 @@ package com.example.jokingApp.adapter;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,7 @@ import com.example.jokingApp.utils.UiUtils;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
+import java.util.Random;
 
 import javax.inject.Inject;
 
@@ -55,7 +57,13 @@ public class MeiZhiAdapter extends RecyclerView.Adapter <RecyclerView.ViewHolder
         String url = data.get(position).getUrl();
         Picasso with = Picasso.with(mActivity);
         with.setIndicatorsEnabled(true);
+        final Random random = new Random();
+        final int i = random.nextInt(4)+1;
+
         with .load(url)
+                .resize(200,400+i*30)
+                .centerCrop()
+                .config(Bitmap.Config.RGB_565)
                 .into(mHolder.mImage);
         mHolder.mText.setText(data.get(position).getSource());
 
