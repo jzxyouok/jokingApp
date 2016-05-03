@@ -74,8 +74,7 @@ public class JokeAdapter extends AnimRecyclerViewAdapter<RecyclerView.ViewHolder
                 mHolder.mIdView.setTextColor(UiUtils.getResource().getColor(android.R.color.white));
                 mHolder.mContentView.setTextColor(UiUtils.getResource().getColor(android.R.color.white));
             }
-            mHolder.mLine.setBackgroundColor(isLight ? Color.parseColor("#ff303030") : Color.parseColor("#ffffffff"));
-
+            mHolder.mCardView.setBackgroundColor(isLight ? Color.parseColor("#ff303030") : Color.parseColor("#ffffffff"));
 
             //这个动画效果有bug
             //showItemAnim(((ViewHolder) holder).mCardView, position);
@@ -108,11 +107,14 @@ public class JokeAdapter extends AnimRecyclerViewAdapter<RecyclerView.ViewHolder
         public final TextView mIdView;
         public final TextView mContentView;
         public final LinearLayout mLine;
+        public final CardView mCardView;
+
         public ViewHolder(View view) {
             super(view);
             mIdView = (TextView) view.findViewById(R.id.id);
             mContentView = (TextView) view.findViewById(R.id.content);
            mLine= (LinearLayout) view.findViewById(R.id.root_view);
+            mCardView= (CardView) view.findViewById(R.id.cardview);
             view.setOnClickListener(this);
         }
 

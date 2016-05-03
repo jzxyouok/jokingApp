@@ -3,6 +3,9 @@ package com.example.jokingApp.ui.activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.support.annotation.MenuRes;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
@@ -118,6 +121,8 @@ public class MainActivity extends BaseSwipeBackActivity implements View.OnClickL
         });
         addSubscription(subscribe); //退出的时候销毁
     }
+
+
 
     /**
      * 判断当前的网络状态
