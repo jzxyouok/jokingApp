@@ -68,8 +68,8 @@ public class JokeAdapter extends AnimRecyclerViewAdapter<RecyclerView.ViewHolder
             mHolder.mIdView.setText(data.get(position).getName());
             mHolder.mContentView.setText(data.get(position).getDes());
             if (!isLight) {
-                mHolder.mIdView.setTextColor(UiUtils.getResource().getColor(android.R.color.black));
-                mHolder.mContentView.setTextColor(UiUtils.getResource().getColor(android.R.color.black));
+                mHolder.mIdView.setTextColor(UiUtils.getResource().getColor(R.color.toobar_back_night));
+                mHolder.mContentView.setTextColor(UiUtils.getResource().getColor(R.color.toobar_back_night));
             } else {
                 mHolder.mIdView.setTextColor(UiUtils.getResource().getColor(android.R.color.white));
                 mHolder.mContentView.setTextColor(UiUtils.getResource().getColor(android.R.color.white));

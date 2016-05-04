@@ -240,12 +240,12 @@ public class MainActivity extends BaseSwipeBackActivity implements View.OnClickL
                 switch (itemId) {
                     case R.id.nav_home:
                         //这里之所以延迟执行,为了先将navigation隐藏,否则的话 会出现不太明显的卡顿现象,受百度云音乐的启发
-                        UiUtils.postDelay(new Runnable() {
-                            @Override
-                            public void run() {
-                                startActivity(new Intent(MainActivity.this, SecondActivity.class));
-                            }
-                        }, 200);
+//                        UiUtils.postDelay(new Runnable() {
+//                            @Override
+//                            public void run() {
+//                                startActivity(new Intent(MainActivity.this, SecondActivity.class));
+//                            }
+//                        }, 200);
                         break;
                     case R.id.theme:
                         changeTheme(item);
