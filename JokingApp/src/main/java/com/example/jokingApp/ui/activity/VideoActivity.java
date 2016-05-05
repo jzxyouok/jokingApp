@@ -9,6 +9,7 @@ import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.SurfaceHolder;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -67,8 +68,6 @@ public class VideoActivity extends BaseSwipeBackActivity implements UniversalVid
         mVideoView.setVideoViewCallback(this);
         mVideoView.setFitXY(true);
 
-
-
         String url ="http://img.app.meitudata.com/meitumv/images/pc2.0/logo.png";
         final Target target = new Target() {
             @Override
@@ -94,7 +93,7 @@ public class VideoActivity extends BaseSwipeBackActivity implements UniversalVid
         Picasso.with(UiUtils.getContext())
                 .load(url)
                 .into(target);
-
+        mVideoView.start();
     }
 
     @Override
@@ -105,7 +104,7 @@ public class VideoActivity extends BaseSwipeBackActivity implements UniversalVid
 
     @Override
     public void initInjector() {
-            mActivityComponent.inject(this);
+        mActivityComponent.inject(this);
     }
 
 
@@ -207,11 +206,13 @@ public class VideoActivity extends BaseSwipeBackActivity implements UniversalVid
     @Override
     public void onBufferingStart(MediaPlayer mediaPlayer) {
         Log.d(TAG, "onBufferingStart UniversalVideoView callback");
+        System.out.println("onBufferingStart");
     }
 
     @Override
     public void onBufferingEnd(MediaPlayer mediaPlayer) {
         Log.d(TAG, "onBufferingEnd UniversalVideoView callback");
+        System.out.println("onBufferingEnd");
     }
 
     @Override

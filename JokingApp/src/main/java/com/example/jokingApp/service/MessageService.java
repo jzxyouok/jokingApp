@@ -14,7 +14,6 @@ import com.example.jokingApp.utils.helper.NetWorkHelper;
 import com.example.jokingApp.utils.helper.SettingPrefHelper;
 import com.example.jokingApp.utils.helper.UserStorage;
 
-import org.apache.log4j.Logger;
 
 import javax.inject.Inject;
 
@@ -23,7 +22,6 @@ import javax.inject.Inject;
  */
 public class MessageService extends Service {
 
-    Logger logger = Logger.getLogger(MessageService.class.getSimpleName());
 
     public static final String ACTION_GET = "com.example.jokingApp.ACTION_GET";
     public static final String ACTION_UPDATE = "com.example.jokingApp.ACTION_UPDATE";
@@ -51,7 +49,6 @@ public class MessageService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-        logger.debug("服务初始化");
         //注入
         DaggerServiceComponent.builder()
                 .serviceModule(new ServiceModule(this))
@@ -78,7 +75,6 @@ public class MessageService extends Service {
         //    resetTheTime();
         //    loadMessage();
         } else if (ACTION_UPDATE.equals(action)) {
-            logger.debug("刷新时间");
         //    resetTheTime();
         } else if (ACTION_CLOSE.equals(action)) {
         //    clearAlarm();

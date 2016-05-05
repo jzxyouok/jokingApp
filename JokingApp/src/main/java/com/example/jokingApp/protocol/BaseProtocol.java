@@ -5,7 +5,6 @@ import android.os.SystemClock;
 import com.example.jokingApp.api.ApiService;
 import com.example.jokingApp.utils.FileUtils;
 import com.example.jokingApp.utils.RetrofitUtils;
-import com.lidroid.xutils.util.IOUtils;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -94,7 +93,6 @@ public abstract class BaseProtocol<T> {
             e.printStackTrace();
         } finally {
             //关流 节省资源
-            IOUtils.closeQuietly(bw);
         }
     }
 
