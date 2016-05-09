@@ -8,8 +8,10 @@
     <!--首页 TabLayout的名称 -->
     <string-array name="tab_names">
         <item>笑话</item>
-        <item>图片</item>
+        <item>奇闻</item>
         <item>视频</item>
+        <item>图片</item>
+
     </string-array>
     <!--音乐界面 TabLayout的名称 -->
     <string-array name="tab_music">

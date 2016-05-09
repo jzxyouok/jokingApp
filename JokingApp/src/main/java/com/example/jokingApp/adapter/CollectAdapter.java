@@ -1,6 +1,7 @@
 package com.example.jokingApp.adapter;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 
 import com.example.jokingApp.db.JokeEntity;
 import com.example.jokingApp.R;
+import com.example.jokingApp.utils.UiUtils;
 
 import java.util.List;
 
@@ -46,6 +48,9 @@ public class CollectAdapter extends AnimRecyclerViewAdapter<RecyclerView.ViewHol
             mHolder.mIdView.setText(data.get(position).getName());
             mHolder.mContentView.setText(data.get(position).getDes());
 
+            mHolder.mIdView.setTextColor(UiUtils.getResource().getColor(R.color.toobar_back_night));
+            mHolder.mContentView.setTextColor(UiUtils.getResource().getColor(R.color.toobar_back_night));
+            mHolder.mCardView.setBackgroundColor( Color.parseColor("#ffffffff"));
             //这个动画效果有bug
             //showItemAnim(((ViewHolder) holder).mCardView, position);
         }
@@ -65,11 +70,13 @@ public class CollectAdapter extends AnimRecyclerViewAdapter<RecyclerView.ViewHol
     class ViewHolder extends RecyclerView.ViewHolder  {
         public final TextView mIdView;
         public final TextView mContentView;
+        public final CardView mCardView;
 
         public ViewHolder(View view) {
             super(view);
             mIdView = (TextView) view.findViewById(R.id.id);
             mContentView = (TextView) view.findViewById(R.id.content);
+            mCardView = (CardView) view.findViewById(R.id.cardview);
         }
     }
 

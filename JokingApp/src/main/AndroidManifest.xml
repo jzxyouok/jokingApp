@@ -52,6 +52,9 @@
             android:name=".ui.activity.AboutActivity"
            />
         <activity
+            android:name=".ui.activity.FantasticActivity"
+            />
+        <activity
             android:name=".ui.activity.VideoActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:theme="@style/AppThemeNotTranslucent" />

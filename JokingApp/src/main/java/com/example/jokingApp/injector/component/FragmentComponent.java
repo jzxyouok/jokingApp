@@ -1,11 +1,11 @@
 package com.example.jokingApp.injector.component;
 
 import com.example.jokingApp.ui.fragment.BaseFragment;
+import com.example.jokingApp.ui.fragment.FantasticFragment;
 import com.example.jokingApp.ui.fragment.ImageFragment;
 import com.example.jokingApp.ui.fragment.JokeFragment;
 import com.example.jokingApp.ui.fragment.MySettingFragmetn;
 import com.example.jokingApp.ui.fragment.PartitionFragment;
-import com.example.jokingApp.ui.fragment.SettingFragment;
 import com.example.jokingApp.injector.PerFragment;
 import com.example.jokingApp.injector.moduel.FragmentModule;
 import com.example.jokingApp.ui.fragment.VideoFragment;
@@ -22,7 +22,6 @@ public interface FragmentComponent {
 
     void inject(JokeFragment jokeFragment);
 
-    void inject(SettingFragment settingFragment);
 
     void inject(PartitionFragment partitionFragment);
 
@@ -31,5 +30,7 @@ public interface FragmentComponent {
     void inject(MySettingFragmetn mySettingFragment);
 
     void inject(VideoFragment mVideoFragment);
+
+    void inject(FantasticFragment mFantasticFragment);
 }
 

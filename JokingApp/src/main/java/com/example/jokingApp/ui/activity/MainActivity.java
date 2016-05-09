@@ -3,10 +3,6 @@ package com.example.jokingApp.ui.activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
-import android.os.Message;
-import android.support.annotation.MenuRes;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -16,7 +12,6 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.Menu;
@@ -29,36 +24,40 @@ import android.widget.Toast;
 import com.example.jokingApp.R;
 import com.example.jokingApp.ui.fragment.BaseFragment;
 import com.example.jokingApp.ui.fragment.FragmentFactory;
-import com.example.jokingApp.utils.PrefUtils;
 import com.example.jokingApp.utils.RxBus;
+import com.example.jokingApp.utils.UiUtils;
 import com.example.jokingApp.utils.event.DayModelEvent;
 import com.example.jokingApp.utils.event.NightModelEvent;
-import com.example.jokingApp.utils.helper.ToastHelper;
-import com.example.jokingApp.utils.UiUtils;
 import com.example.jokingApp.utils.helper.NetWorkHelper;
+import com.example.jokingApp.utils.helper.ToastHelper;
 
 import javax.inject.Inject;
 
+import butterknife.InjectView;
 import rx.Subscription;
 import rx.functions.Action1;
 
 public class MainActivity extends BaseSwipeBackActivity implements View.OnClickListener {
 
-    private DrawerLayout mDrawerLayout;
-    private NavigationView mNavigationView;
-    private ViewPager mViewpager;
-    private String[] mStringArray;
+    @InjectView(R.id.toolbar)
+    Toolbar mToolbar;
+    @InjectView(R.id.tabs)
     TabLayout mTabLayout;
-    private Toolbar mToolbar;
-
+    @InjectView(R.id.vp)
+    ViewPager mViewpager;
+    @InjectView(R.id.id_nv_menu)
+    NavigationView mNavigationView;
+    @InjectView(R.id.drawerlayout)
+    DrawerLayout mDrawerLayout;
     @Inject
     NetWorkHelper mNetWorkHelper;
     @Inject
     ToastHelper mToastHelper;
     @Inject
     RxBus mRxBus;
-    private boolean mIsNightModel;
-    private boolean  isNightModel=true;
+    private String[] mStringArray;
+
+    private boolean isNightModel = true;
 
 
     @Override
@@ -81,9 +80,6 @@ public class MainActivity extends BaseSwipeBackActivity implements View.OnClickL
     public void initView() {
         setContentView(R.layout.activity_main);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerlayout);
-
-        mIsNightModel = PrefUtils.getBoolean(this, "isNightModel", false);
-
 
         //初始化toobar
         initToobar();
@@ -123,7 +119,6 @@ public class MainActivity extends BaseSwipeBackActivity implements View.OnClickL
     }
 
 
-
     /**
      * 判断当前的网络状态
      */
@@ -152,13 +147,16 @@ public class MainActivity extends BaseSwipeBackActivity implements View.OnClickL
                 createFragment.show();//  当切换界面的时候 重新请求服务器
                 switch (position) {
                     case 0:
-                        mToolbar.setTitle("笑话");
+                        mToolbar.setTitle(mStringArray[0]);
                         break;
                     case 1:
-                        mToolbar.setTitle("图片");
+                        mToolbar.setTitle(mStringArray[1]);
                         break;
                     case 2:
-                        mToolbar.setTitle("视频");
+                        mToolbar.setTitle(mStringArray[2]);
+                        break;
+                    case 3:
+                        mToolbar.setTitle(mStringArray[3]);
                         break;
                     default:
                         break;
@@ -182,6 +180,7 @@ public class MainActivity extends BaseSwipeBackActivity implements View.OnClickL
         mTabLayout.addTab(mTabLayout.newTab().setText(mStringArray[0]));
         mTabLayout.addTab(mTabLayout.newTab().setText(mStringArray[1]));
         mTabLayout.addTab(mTabLayout.newTab().setText(mStringArray[2]));
+        mTabLayout.addTab(mTabLayout.newTab().setText(mStringArray[3]));
     }
 
     @Override
@@ -239,13 +238,6 @@ public class MainActivity extends BaseSwipeBackActivity implements View.OnClickL
                 mDrawerLayout.closeDrawers();
                 switch (itemId) {
                     case R.id.nav_home:
-                        //这里之所以延迟执行,为了先将navigation隐藏,否则的话 会出现不太明显的卡顿现象,受百度云音乐的启发
-//                        UiUtils.postDelay(new Runnable() {
-//                            @Override
-//                            public void run() {
-//                                startActivity(new Intent(MainActivity.this, SecondActivity.class));
-//                            }
-//                        }, 200);
                         break;
                     case R.id.theme:
                         changeTheme(item);
@@ -284,11 +276,11 @@ public class MainActivity extends BaseSwipeBackActivity implements View.OnClickL
         if (!isNightModel) {
             item.setTitle("夜间模式");
             mRxBus.send(new DayModelEvent());
-     } else {
+        } else {
             item.setTitle("日间模式");
             mRxBus.send(new NightModelEvent());
-     }
-        isNightModel=!isNightModel;
+        }
+        isNightModel = !isNightModel;
     }
 
     @Override
@@ -315,10 +307,7 @@ public class MainActivity extends BaseSwipeBackActivity implements View.OnClickL
         return super.onOptionsItemSelected(item);
     }
 
-
     private long exitTime = 0;
-
-
     //返回键处理
     @Override
     public void onBackPressed() {

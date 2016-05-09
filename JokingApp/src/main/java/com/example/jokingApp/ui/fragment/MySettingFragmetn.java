@@ -80,9 +80,7 @@ public class MySettingFragmetn extends PreferenceFragment implements Preference.
         pSwipeBackEdgeMode.setOnPreferenceChangeListener(this);
         setListSetting(Integer.parseInt(prefs.getString("pSwipeBackEdgeMode", "0")), R.array.swipeBackEdgeMode, pSwipeBackEdgeMode);
 
-        //
-        pNightMode  =  findPreference("pNightMode");
-        pNightMode.setOnPreferenceChangeListener(this);
+
 
     }
 
@@ -95,18 +93,11 @@ public class MySettingFragmetn extends PreferenceFragment implements Preference.
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-
         if ("pTextSize".equals(preference.getKey())) {
             setListSetting(Integer.parseInt(newValue.toString()), R.array.txtSizeNum, pTextSize);
         } else if ("pSwipeBackEdgeMode".equals(preference.getKey())) {
             setListSetting(Integer.parseInt(newValue.toString()), R.array.swipeBackEdgeMode, pSwipeBackEdgeMode);
             ((SettingActivity) getActivity()).reload();
-        } else if ("pNightMode".equals(preference.getKey())){
-            if ("true".equals(newValue.toString())) {
-                mBus.send(new NightModelEvent());
-            } else if ("false".equals(newValue.toString())){
-                mBus.send(new DayModelEvent());
-            }
         }
         return true;
     }

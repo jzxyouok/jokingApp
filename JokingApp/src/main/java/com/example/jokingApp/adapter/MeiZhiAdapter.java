@@ -12,14 +12,13 @@ import android.widget.TextView;
 
 import com.example.jokingApp.R;
 import com.example.jokingApp.bean.MeizhiInfo;
+import com.example.jokingApp.global.GlobalConstant;
 import com.example.jokingApp.ui.activity.VideoActivity;
 import com.example.jokingApp.utils.UiUtils;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 import java.util.Random;
-
-import javax.inject.Inject;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -29,19 +28,12 @@ import butterknife.InjectView;
  */
 public class MeiZhiAdapter extends RecyclerView.Adapter <RecyclerView.ViewHolder>{
 
-    List<MeizhiInfo.ResultsBean> data;
-    @Inject
+    List<MeizhiInfo.ImageBean> data;
     Activity mActivity;
 
-    @Inject
-    public MeiZhiAdapter() {
-      //  this.data = data;
-      //  this.mActivity = mActivity;
-    }
-    public void bind(List<MeizhiInfo.ResultsBean> data) {
+    public MeiZhiAdapter( List<MeizhiInfo.ImageBean> data, Activity mActivity) {
         this.data = data;
-        notifyDataSetChanged();
-
+        this.mActivity=mActivity;
     }
 
     @Override
@@ -54,18 +46,19 @@ public class MeiZhiAdapter extends RecyclerView.Adapter <RecyclerView.ViewHolder
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
 
         ViewHolder mHolder = (ViewHolder) holder;
-        String url = data.get(position).getUrl();
-        Picasso with = Picasso.with(mActivity);
-        with.setIndicatorsEnabled(true);
+        String url = GlobalConstant.SERVER_URL+data.get(position).getImageurl();
+
+        Picasso with = Picasso.with(UiUtils.getContext());
         final Random random = new Random();
         final int i = random.nextInt(4)+1;
-
         with .load(url)
                 .resize(200,400+i*30)
                 .centerCrop()
+                .tag(GlobalConstant.tag)
+                .placeholder(R.mipmap.beauty2)
                 .config(Bitmap.Config.RGB_565)
                 .into(mHolder.mImage);
-        mHolder.mText.setText(data.get(position).getSource());
+        mHolder.mText.setText("视频图片");
 
     }
 
@@ -94,9 +87,4 @@ public class MeiZhiAdapter extends RecyclerView.Adapter <RecyclerView.ViewHolder
         }
     }
 
-    static class FootViewHolder extends RecyclerView.ViewHolder {
-        public FootViewHolder(View view) {
-            super(view);
-        }
-    }
 }

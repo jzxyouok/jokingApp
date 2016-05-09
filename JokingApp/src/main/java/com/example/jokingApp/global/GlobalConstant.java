@@ -9,7 +9,7 @@ import java.util.Random;
 public class GlobalConstant {
     //服务器地址
     public static final String SERVER_URL = "http://121.42.200.58/";
-
+    public  static final Object tag =new Object();
     public static String Cookie = "";
 
     public static final String URL1 = "http://mvvideo1.meitudata.com/571044204d8495965.mp4";

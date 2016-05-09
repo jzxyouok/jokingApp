@@ -51,20 +51,12 @@ public class DetailActivity extends BaseSwipeBackActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
      protected void initView() {
         setContentView(R.layout.activity_detail);
         ButterKnife.inject(this);
-        setSupportActionBar(mToolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onBackPressed();
-            }
-        });
+         initToolBar(mToolbar);
 
         //拿到传入的数据
         mData = (JokeInfo.JokeBean) getIntent().getParcelableExtra("data");

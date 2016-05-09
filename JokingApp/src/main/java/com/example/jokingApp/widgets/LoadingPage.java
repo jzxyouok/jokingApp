@@ -11,6 +11,12 @@ import com.example.jokingApp.R;
 import com.example.jokingApp.utils.ThreadManager;
 import com.example.jokingApp.utils.UiUtils;
 
+import rx.Observable;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
+import rx.schedulers.Schedulers;
+
 /***
  * 创建了自定义帧布局 把baseFragment 一部分代码 抽取到这个类中
  *加载界面
@@ -124,9 +130,7 @@ public abstract class LoadingPage extends FrameLayout {
 
     public enum LoadResult {
         error(2), empty(3), success(4);
-
         int value;
-
         LoadResult(int value) {
             this.value = value;
         }
@@ -134,7 +138,6 @@ public abstract class LoadingPage extends FrameLayout {
         public int getValue() {
             return value;
         }
-
     }
 
     // 根据服务器的数据 切换状态
@@ -144,23 +147,24 @@ public abstract class LoadingPage extends FrameLayout {
         }
         // 请求服务器 获取服务器上数据 进行判断
         // 请求服务器 返回一个结果
-        ThreadManager.getInstance().createLongPool().execute(new Runnable() {
-
+        Observable.create(new Observable.OnSubscribe<LoadResult>() {
             @Override
-            public void run() {
+            public void call(Subscriber<? super LoadResult> subscriber) {
                 final LoadResult result = load();
-                UiUtils.runOnUiThread(new Runnable() {
-
+                subscriber.onNext(result);
+                subscriber.onCompleted();
+            }
+        }).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Action1<LoadResult>() {
                     @Override
-                    public void run() {
+                    public void call(LoadResult result) {
                         if (result != null) {
                             state = result.getValue();
                             showPage(); // 状态改变了,重新判断当前应该显示哪个界面
                         }
                     }
                 });
-            }
-        });
         showPage();
     }
 

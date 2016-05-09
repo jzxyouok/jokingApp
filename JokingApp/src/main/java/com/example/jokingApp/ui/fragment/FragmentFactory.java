@@ -14,9 +14,12 @@ public class FragmentFactory {
             if (position == 0) {
                 fragment = new JokeFragment();
             } else if (position == 1) {
-                fragment = new ImageFragment ();
+              //  fragment = new ImageFragment ();
+                fragment = new FantasticFragment();
             } else if (position == 2) {
                 fragment = new VideoFragment();
+            }else if (position == 3) {
+                fragment = new JoyFragment();
             }
             if (fragment != null) {
                 mFragments.put(position, fragment);// 把创建好的Fragment存放到集合中缓存起来

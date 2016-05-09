@@ -65,6 +65,7 @@ public class CollectActivity extends BaseSwipeBackActivity {
         mJokeAdapter=new CollectAdapter(list ,this);
         //设置adapter
         mList.setAdapter(mJokeAdapter);
+
     }
 
     @Override
