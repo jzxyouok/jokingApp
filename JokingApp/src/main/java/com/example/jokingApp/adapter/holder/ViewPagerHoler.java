@@ -14,6 +14,7 @@ import com.example.jokingApp.utils.UiUtils;
 import com.example.jokingApp.widgets.ViewPager;
 import com.squareup.picasso.Picasso;
 
+
 import java.util.List;
 
 /**

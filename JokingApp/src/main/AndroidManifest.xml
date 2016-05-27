@@ -55,6 +55,12 @@
             android:name=".ui.activity.FantasticActivity"
             />
         <activity
+            android:name=".ui.activity.WeiXinActivity"
+            />
+        <activity
+            android:name=".ui.activity.TerrorActivity"
+            />
+        <activity
             android:name=".ui.activity.VideoActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:theme="@style/AppThemeNotTranslucent" />

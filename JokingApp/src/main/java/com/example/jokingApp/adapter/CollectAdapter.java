@@ -52,7 +52,7 @@ public class CollectAdapter extends AnimRecyclerViewAdapter<RecyclerView.ViewHol
             mHolder.mContentView.setTextColor(UiUtils.getResource().getColor(R.color.toobar_back_night));
             mHolder.mCardView.setBackgroundColor( Color.parseColor("#ffffffff"));
             //这个动画效果有bug
-            //showItemAnim(((ViewHolder) holder).mCardView, position);
+           showItemAnim(((ViewHolder) holder).mCardView, position);
         }
     }
 

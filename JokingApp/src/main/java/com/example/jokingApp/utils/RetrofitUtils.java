@@ -50,7 +50,6 @@ public class RetrofitUtils {
      * @return
      */
     public static <T> T createApiToGson(Class<T> clazz) {
-        //DCL  单例
         if (single == null) {
             synchronized (RetrofitUtils.class) {
                 if (single == null) {

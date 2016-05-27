@@ -55,7 +55,6 @@ public class CollectActivity extends BaseSwipeBackActivity {
         mText.setVisibility(list.size()==0
                  ? View.VISIBLE : View.GONE);
 
-
         //设置recylerView
         final LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         mList.setLayoutManager(layoutManager);

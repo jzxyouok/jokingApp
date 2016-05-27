@@ -1,5 +1,7 @@
 package com.example.jokingApp.ui.activity;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.webkit.WebSettings;
@@ -38,6 +40,14 @@ public class FantasticActivity extends BaseSwipeBackActivity {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 view.loadUrl(url);   //在当前的webview中跳转到新的url
+
+                if( url.startsWith("http:") || url.startsWith("https:") ) {
+                    return false;
+                }
+
+                // Otherwise allow the OS to handle things like tel, mailto, etc.
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                startActivity( intent );
                 return true;
             }
         });

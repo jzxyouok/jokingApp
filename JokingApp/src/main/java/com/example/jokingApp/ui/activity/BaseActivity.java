@@ -53,7 +53,6 @@ public abstract class BaseActivity extends AppCompatActivity {
         initInjector(); //初始化注入
         initView();
         initData();
-
     }
 
     @Override
@@ -100,5 +99,4 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
         this.mCompositeSubscription.add(s);
     }
-
 }

@@ -1,14 +1,18 @@
 package com.example.jokingApp.injector.component;
 
+import com.example.jokingApp.bean.JoyInfo;
 import com.example.jokingApp.ui.fragment.BaseFragment;
 import com.example.jokingApp.ui.fragment.FantasticFragment;
 import com.example.jokingApp.ui.fragment.ImageFragment;
 import com.example.jokingApp.ui.fragment.JokeFragment;
+import com.example.jokingApp.ui.fragment.JoyFragment;
 import com.example.jokingApp.ui.fragment.MySettingFragmetn;
 import com.example.jokingApp.ui.fragment.PartitionFragment;
 import com.example.jokingApp.injector.PerFragment;
 import com.example.jokingApp.injector.moduel.FragmentModule;
+import com.example.jokingApp.ui.fragment.TerrorFragment;
 import com.example.jokingApp.ui.fragment.VideoFragment;
+import com.example.jokingApp.ui.fragment.WeiXinFragment;
 
 import dagger.Component;
 
@@ -32,5 +36,12 @@ public interface FragmentComponent {
     void inject(VideoFragment mVideoFragment);
 
     void inject(FantasticFragment mFantasticFragment);
+
+    void inject(JoyFragment mJoyFragment);
+
+    void inject(WeiXinFragment mWeiXinFragment);
+
+    void inject(TerrorFragment mTerrorFragment);
+
 }
 

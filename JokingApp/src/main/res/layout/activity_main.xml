@@ -46,9 +46,18 @@
                 android:layout_height="match_parent"
                 android:background="#F2F2F2"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+               <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right|bottom"
+                app:backgroundTint="@color/colorPrimary"
+                android:layout_margin="@dimen/fab_margin"
+                android:src="@mipmap/ic_top"/>
 
         </android.support.design.widget.CoordinatorLayout>
     </FrameLayout>
+
 
 
     <android.support.design.widget.NavigationView

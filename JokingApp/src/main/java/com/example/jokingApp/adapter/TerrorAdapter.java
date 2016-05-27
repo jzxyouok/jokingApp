@@ -2,9 +2,8 @@ package com.example.jokingApp.adapter;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Bitmap;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,14 +12,15 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.jokingApp.R;
-import com.example.jokingApp.bean.FantasticInfo;
-import com.example.jokingApp.bean.JokeInfo;
-import com.example.jokingApp.ui.activity.FantasticActivity;
-import com.example.jokingApp.ui.activity.MainActivity;
+import com.example.jokingApp.bean.TerroeInfo;
+import com.example.jokingApp.ui.activity.TerrorActivity;
 import com.example.jokingApp.utils.UiUtils;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.squareup.picasso.Picasso;
 
+import java.net.URI;
 import java.util.List;
+import java.util.Random;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -28,37 +28,39 @@ import butterknife.InjectView;
 /**
  * Created by idea-pc on 2016/5/8.
  */
-public class FantasticAdapter extends RecyclerView.Adapter {
-    Activity mActivity ;
-    private  List<FantasticInfo.NewslistBean>  data;
+public class TerrorAdapter extends RecyclerView.Adapter {
+    Activity mActivity;
+    List<TerroeInfo.ShowapiResBodyBean.PagebeanBean.ContentlistBean>  data;
+    int[] a = new int[]{R.mipmap.ic_1,R.mipmap.ic_2,R.mipmap.ic_3,R.mipmap.ic_4,R.mipmap.ic_5};
+    Random random = new Random();
 
-
-    public FantasticAdapter( List<FantasticInfo.NewslistBean> data,Activity mActivity) {
+    public TerrorAdapter( List<TerroeInfo.ShowapiResBodyBean.PagebeanBean.ContentlistBean>  data, Activity mActivity) {
         this.data = data;
-        this.mActivity= mActivity;
+        this.mActivity = mActivity;
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(UiUtils.getContext()).inflate(R.layout.fragment_item_fantastic, parent, false);
+        View view = LayoutInflater.from(UiUtils.getContext()).inflate(R.layout.fragment_item_terror, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         ViewHolder mHolder = (ViewHolder) holder;
-        String title = data.get(position).getTitle();//标题
-        String des = data.get(position).getCtime(); //时间
-        String picUrl = data.get(position).getPicUrl();//图片网址
-        String url =  data.get(position).getUrl();  //奇闻异事的地址
-        if (!TextUtils.isEmpty(picUrl)) {
-            Picasso.with(UiUtils.getContext())
-                    .load(picUrl).resize(70, 70).centerCrop().config(Bitmap.Config.RGB_565)
-                    .into(mHolder.mImage);
-        }
+        String title = data.get(position).getTitle(); //标题
+        String desc = data.get(position).getDesc();
+        //首页图片网址
+
+         int i = random.nextInt(5);
+        String mPicUrl = data.get(position).getImg();
 
         mHolder.mTitle.setText(title);
-        mHolder.mDesc.setText(des);
+        Picasso.with(UiUtils.getContext())
+                .load(a[i])
+                .into(mHolder.mImage);
+
+        mHolder.mDesc.setText(desc);
 
     }
 
@@ -84,10 +86,13 @@ public class FantasticAdapter extends RecyclerView.Adapter {
                 @Override
                 public void onClick(View v) {
                     int position = ViewHolder.this.getAdapterPosition()-1;
-                     String url = data.get(position).getUrl();
-
-                    Intent intent = new Intent(mActivity,FantasticActivity.class);
-                    intent.putExtra("url",url);
+                    String id = data.get(position).getId();
+                    String picurl = data.get(position).getImg();
+                    String title = data.get(position).getTitle();
+                    Intent intent = new Intent(mActivity, TerrorActivity.class);
+                    intent.putExtra("id", id);
+                    intent.putExtra("picurl", picurl);
+                    intent.putExtra("title", title);
                     mActivity.startActivity(intent);
                 }
             });

@@ -35,7 +35,6 @@ public class JoyAdapter extends RecyclerView.Adapter {
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(UiUtils.getContext()).inflate(R.layout.fragment_item_joy, parent, false);
         return new ViewHolder(view);
-
     }
 
     @Override

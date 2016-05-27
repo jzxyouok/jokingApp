@@ -3,6 +3,8 @@ package com.example.jokingApp.ui.activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -27,12 +29,19 @@ import com.example.jokingApp.ui.fragment.FragmentFactory;
 import com.example.jokingApp.utils.RxBus;
 import com.example.jokingApp.utils.UiUtils;
 import com.example.jokingApp.utils.event.DayModelEvent;
+import com.example.jokingApp.utils.event.FantasticEvent;
+import com.example.jokingApp.utils.event.JokeEvent;
+import com.example.jokingApp.utils.event.JoyEvent;
 import com.example.jokingApp.utils.event.NightModelEvent;
+import com.example.jokingApp.utils.event.TerrorEvent;
+import com.example.jokingApp.utils.event.VideoEvent;
+import com.example.jokingApp.utils.event.WeiXinEvent;
 import com.example.jokingApp.utils.helper.NetWorkHelper;
 import com.example.jokingApp.utils.helper.ToastHelper;
 
 import javax.inject.Inject;
 
+import butterknife.ButterKnife;
 import butterknife.InjectView;
 import rx.Subscription;
 import rx.functions.Action1;
@@ -55,6 +64,18 @@ public class MainActivity extends BaseSwipeBackActivity implements View.OnClickL
     ToastHelper mToastHelper;
     @Inject
     RxBus mRxBus;
+
+    @InjectView(R.id.appbar)
+    AppBarLayout mAppbar;
+
+
+    @InjectView(R.id.fab)
+    FloatingActionButton mFab;
+
+    public AppBarLayout getAppbar() {
+        return mAppbar;
+    }
+
     private String[] mStringArray;
 
     private boolean isNightModel = true;
@@ -79,7 +100,7 @@ public class MainActivity extends BaseSwipeBackActivity implements View.OnClickL
     @Override
     public void initView() {
         setContentView(R.layout.activity_main);
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerlayout);
+        ButterKnife.inject(this);
 
         //初始化toobar
         initToobar();
@@ -93,6 +114,49 @@ public class MainActivity extends BaseSwipeBackActivity implements View.OnClickL
         //初始化事件分发  这里主要用来实现模式切换
         initRxBus();
 
+        initAppBar();
+
+    }
+
+    private void initAppBar() {
+        mAppbar.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
+            @Override
+            public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
+                if(verticalOffset!=0){
+                    mFab.hide();
+                }else{
+                    mFab.show();
+                }
+            }
+        });
+        mFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                 String title = getSupportActionBar().getTitle().toString();
+                switch (title) {
+                    case "笑话":
+                        mRxBus.send(new JokeEvent());
+                        break;
+                    case "新闻":
+                        mRxBus.send(new FantasticEvent());
+                        break;
+                    case "视频":
+                        mRxBus.send(new VideoEvent());
+                        break;
+                    case "趣图":
+                        mRxBus.send(new JoyEvent());
+                        break;
+                    case "热点":
+                        mRxBus.send(new WeiXinEvent());
+                        break;
+                    case "鬼故事":
+                        mRxBus.send(new TerrorEvent());
+                        break;
+                    default:
+                        break;
+                }
+            }
+        });
     }
 
     /**
@@ -134,7 +198,6 @@ public class MainActivity extends BaseSwipeBackActivity implements View.OnClickL
     }
 
     private void initViewPager() {
-        mViewpager = (ViewPager) findViewById(R.id.vp);
         final MainAdapter mainAdapter = new MainAdapter(getSupportFragmentManager());
         mViewpager.setAdapter(mainAdapter);
         mTabLayout.setupWithViewPager(mViewpager);
@@ -158,6 +221,12 @@ public class MainActivity extends BaseSwipeBackActivity implements View.OnClickL
                     case 3:
                         mToolbar.setTitle(mStringArray[3]);
                         break;
+                    case 4:
+                        mToolbar.setTitle(mStringArray[4]);
+                        break;
+                    case 5:
+                        mToolbar.setTitle(mStringArray[5]);
+                        break;
                     default:
                         break;
                 }
@@ -166,7 +235,6 @@ public class MainActivity extends BaseSwipeBackActivity implements View.OnClickL
     }
 
     private void initToobar() {
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setHomeAsUpIndicator(R.mipmap.img_menu);
@@ -175,12 +243,13 @@ public class MainActivity extends BaseSwipeBackActivity implements View.OnClickL
     }
 
     private void iniTablayout() {
-        mTabLayout = (TabLayout) findViewById(R.id.tabs);
         mTabLayout.setTabMode(TabLayout.MODE_FIXED);
         mTabLayout.addTab(mTabLayout.newTab().setText(mStringArray[0]));
         mTabLayout.addTab(mTabLayout.newTab().setText(mStringArray[1]));
         mTabLayout.addTab(mTabLayout.newTab().setText(mStringArray[2]));
         mTabLayout.addTab(mTabLayout.newTab().setText(mStringArray[3]));
+        mTabLayout.addTab(mTabLayout.newTab().setText(mStringArray[4]));
+        mTabLayout.addTab(mTabLayout.newTab().setText(mStringArray[5]));
     }
 
     @Override
@@ -222,7 +291,6 @@ public class MainActivity extends BaseSwipeBackActivity implements View.OnClickL
      * 初始化 navigationView
      */
     private void initNavigationView() {
-        mNavigationView = (NavigationView) findViewById(R.id.id_nv_menu);
         //头布局
         View headerView = mNavigationView.getHeaderView(0);
         TextView mTextView = (TextView) headerView.findViewById(R.id.login);
@@ -308,6 +376,7 @@ public class MainActivity extends BaseSwipeBackActivity implements View.OnClickL
     }
 
     private long exitTime = 0;
+
     //返回键处理
     @Override
     public void onBackPressed() {

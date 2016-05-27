@@ -8,6 +8,7 @@ import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.Html;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.View;
@@ -15,9 +16,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.example.jokingApp.R;
 import com.example.jokingApp.global.GlobalConstant;
+import com.example.jokingApp.utils.PrefUtils;
 import com.example.jokingApp.utils.UiUtils;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
@@ -44,22 +47,17 @@ public class VideoActivity extends BaseSwipeBackActivity implements UniversalVid
     FrameLayout mVideoLayout;
     @InjectView(R.id.bottom_layout)
     LinearLayout mBottomLayout;
-    @InjectView(R.id.start)
-    Button mStart;
 
     private static final String TAG = "MainActivity";
     private static final String SEEK_POSITION_KEY = "SEEK_POSITION_KEY";
     private static final String VIDEO_URL = "http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4";
-    private int mSeekPosition;
     private int cachedHeight;
     private boolean isFullscreen;
     private boolean ispause;
-    private ArrayList<String> mVideoData;
 
     @Override
     protected void initView() {
         super.initView();
-
 
         setContentView(R.layout.activity_video);
         ButterKnife.inject(this);
@@ -89,6 +87,8 @@ public class VideoActivity extends BaseSwipeBackActivity implements UniversalVid
             }
         };
 
+
+
      //   bitmapUtils.display(mVideoView,url);
         Picasso.with(UiUtils.getContext())
                 .load(url)
@@ -108,19 +108,6 @@ public class VideoActivity extends BaseSwipeBackActivity implements UniversalVid
     }
 
 
-    @OnClick(R.id.start)
-    public void onClick() {
-        if (mSeekPosition > 0) {
-            mVideoView.seekTo(mSeekPosition);
-        }
-        if (!ispause) {
-            mVideoView.start();
-        }else {
-            mVideoView.pause();
-        }
-        // mMediaController.setTitle("Big Buck Bunny");
-
-    }
     private void setVideoAreaSize() {
         mVideoLayout.post(new Runnable() {
             @Override
@@ -145,14 +132,12 @@ public class VideoActivity extends BaseSwipeBackActivity implements UniversalVid
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         Log.d(TAG, "onSaveInstanceState Position=" + mVideoView.getCurrentPosition());
-        outState.putInt(SEEK_POSITION_KEY, mSeekPosition);
+
     }
 
     @Override
     protected void onRestoreInstanceState(Bundle outState) {
         super.onRestoreInstanceState(outState);
-        mSeekPosition = outState.getInt(SEEK_POSITION_KEY);
-        Log.d(TAG, "onRestoreInstanceState Position=" + mSeekPosition);
     }
 
 
@@ -191,7 +176,6 @@ public class VideoActivity extends BaseSwipeBackActivity implements UniversalVid
     @Override
     public void onPause(MediaPlayer mediaPlayer) {
         ispause=false;
-        mStart.setText("点击播放");
         Log.d(TAG, "onPause UniversalVideoView callback");
     }
 
@@ -199,7 +183,6 @@ public class VideoActivity extends BaseSwipeBackActivity implements UniversalVid
     public void onStart(MediaPlayer mediaPlayer) {
         mVideoView.setBackgroundColor(Color.TRANSPARENT);
         ispause=true;
-        mStart.setText("点击暂停");
         Log.d(TAG, "onStart UniversalVideoView callback");
     }
 
@@ -223,5 +206,11 @@ public class VideoActivity extends BaseSwipeBackActivity implements UniversalVid
             super.onBackPressed();
             overridePendingTransition(R.anim.slide_left_in, R.anim.slide_right_out);
         }
+    }
+
+    @Override
+    public void finish() {
+
+        super.finish();
     }
 }

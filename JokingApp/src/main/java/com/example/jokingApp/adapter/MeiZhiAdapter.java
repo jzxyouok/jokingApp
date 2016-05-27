@@ -49,13 +49,10 @@ public class MeiZhiAdapter extends RecyclerView.Adapter <RecyclerView.ViewHolder
         String url = GlobalConstant.SERVER_URL+data.get(position).getImageurl();
 
         Picasso with = Picasso.with(UiUtils.getContext());
-        final Random random = new Random();
-        final int i = random.nextInt(4)+1;
+
         with .load(url)
-                .resize(200,400+i*30)
-                .centerCrop()
                 .tag(GlobalConstant.tag)
-                .placeholder(R.mipmap.beauty2)
+                .placeholder(R.mipmap.ic_loading)
                 .config(Bitmap.Config.RGB_565)
                 .into(mHolder.mImage);
         mHolder.mText.setText("视频图片");

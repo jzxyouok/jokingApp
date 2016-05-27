@@ -1,11 +1,14 @@
 package com.example.jokingApp.ui.fragment;
 
 import android.os.Bundle;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.jokingApp.R;
@@ -17,6 +20,7 @@ import com.example.jokingApp.utils.RetrofitUtils;
 import com.example.jokingApp.utils.RxBus;
 import com.example.jokingApp.utils.UiUtils;
 import com.example.jokingApp.utils.event.DayModelEvent;
+import com.example.jokingApp.utils.event.JokeEvent;
 import com.example.jokingApp.utils.event.NightModelEvent;
 import com.example.jokingApp.widgets.DividerItemDecoration;
 import com.example.jokingApp.widgets.LoadingPage;
@@ -26,8 +30,11 @@ import java.util.Random;
 
 import javax.inject.Inject;
 
+import butterknife.ButterKnife;
+import butterknife.InjectView;
 import rx.Observable;
 import rx.Subscriber;
+import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.schedulers.Schedulers;
@@ -36,23 +43,25 @@ import rx.schedulers.Schedulers;
  * Created by idea-pc on 2016/3/17.
  */
 public class JokeFragment extends BaseFragment {
-    private List<JokeInfo.JokeBean> mJokeBeen;
-    private SwipeRefreshLayout swipeRefreshLayout;
-    private RecyclerView recyclerView;
+    @InjectView(R.id.list)
+    RecyclerView recyclerView;
+    @InjectView(R.id.refresh_layout)
+    SwipeRefreshLayout swipeRefreshLayout;
 
+    private List<JokeInfo.JokeBean> mJokeBeen;
     boolean isLoading;
-    private FloatingActionButton mFloatingActionButton;
     private JokeAdapter mJokeAdapter;
 
     private boolean isLight;
     @Inject
     RxBus mRxBus;
+    private LinearLayoutManager mLayoutManager;
+
 
 
     /**
      * activityCreated 的时候就请求数据
      * 其他的fragment   ViewPager 设置滑动监听 调用show()方法
-     *
      * @param savedInstanceState
      */
     @Override
@@ -64,18 +73,16 @@ public class JokeFragment extends BaseFragment {
     @Override
     public View createSuccessView() {
         View view = View.inflate(mActivity, R.layout.fragment_game, null);
-        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.refresh_layout);
-        recyclerView = (RecyclerView) view.findViewById(R.id.list);
-        mFloatingActionButton = (FloatingActionButton) view.findViewById(R.id.fab);
+        ButterKnife.inject(this, view);
 
         //初始化 recylerView
-        final LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
-        recyclerView.setLayoutManager(layoutManager);
-        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), layoutManager.getOrientation()));
+        mLayoutManager = new LinearLayoutManager(getContext());
+        recyclerView.setLayoutManager(mLayoutManager);
+        mLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), mLayoutManager.getOrientation()));
         recyclerView.setHasFixedSize(true);
 
-        mJokeAdapter = new JokeAdapter( mActivity, true);
+        mJokeAdapter = new JokeAdapter(mActivity, true);
         mJokeAdapter.setData(mJokeBeen);
         mJokeAdapter.setIsLoadingMore(true);
         recyclerView.setAdapter(mJokeAdapter);
@@ -88,32 +95,30 @@ public class JokeFragment extends BaseFragment {
             }
         });
         //加载更多
-        initLoadMoreListener(layoutManager);
+        initLoadMoreListener(mLayoutManager);
         //设置folatingaction
-        mFloatingActionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                layoutManager.smoothScrollToPosition(recyclerView, null, 0);
-            }
-        });
+
         initRxBus();
         return view;
 
     }
 
+
     private void initRxBus() {
-        mRxBus.toObserverable()
-                .subscribe(new Action1<Object>() {
-                    @Override
-                    public void call(Object o) {
-                        if (o instanceof NightModelEvent) {
-                            mJokeAdapter.updateTheme();
-                        } else if (o instanceof DayModelEvent) {
-                            mJokeAdapter.updateTheme();
-                        }
-                        isLight=!isLight;
-                    }
-                });
+        mRxBus.toObserverable().subscribe(new Action1<Object>() {
+           @Override
+           public void call(Object o) {
+               if (o instanceof NightModelEvent) {
+                   mJokeAdapter.updateTheme();
+                   isLight = !isLight;
+               } else if (o instanceof DayModelEvent) {
+                   mJokeAdapter.updateTheme();
+                   isLight = !isLight;
+               } else if (o instanceof JokeEvent) {
+                   mLayoutManager.smoothScrollToPosition(recyclerView, null, 0);
+               }
+           }
+       });
     }
 
 
@@ -199,6 +204,7 @@ public class JokeFragment extends BaseFragment {
     /**
      * 请求服务器的数据
      * 之后执行的createSuccessView()
+     *
      * @return
      */
     @Override

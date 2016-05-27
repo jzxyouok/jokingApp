@@ -6,183 +6,135 @@ import java.util.List;
  * Created by idea-pc on 2016/5/8.
  */
 public class FantasticInfo {
-    /**
-     * showapi_res_code : 0
-     * showapi_res_error :
-     * showapi_res_body : {"code":200,"msg":"success","newslist":[{"ctime":"2016-05-03 00:00","description":"猎奇奇闻",
-     * "picUrl":"http://img521.lieqi.com/upload/picture/65/19216.jpg","title":"罗马尼亚古城堡 吸血鬼品牌","url":"http://www.lieqi
-     * .com/read/7/19216/"},{"ctime":"2016-04-29 00:00","description":"猎奇奇闻","picUrl":"http://img521.lieqi
-     * .com/upload/picture/64/19169.jpg","title":"香港万佛寺：沿途五百罗汉表情恐怖","url":"http://www.lieqi.com/read/7/19169/"},
-     * {"ctime":"2016-04-29 00:00","description":"猎奇奇闻","picUrl":"http://img521.lieqi.com/upload/picture/64/19171
-     * .jpg","title":"美国西部风景：凄凉阴森的废弃鬼镇","url":"http://www.lieqi.com/read/7/19171/"},{"ctime":"2016-04-28 00:00",
-     * "description":"猎奇奇闻","picUrl":"http://img521.lieqi.com/upload/picture/64/19115.jpg",
-     * "title":"神秘幽灵船：各地被困搁浅海上的船","url":"http://www.lieqi.com/read/7/19115/"},{"ctime":"2016-04-27 00:00",
-     * "description":"猎奇奇闻","picUrl":"http://img521.lieqi.com/upload/picture/64/19058.jpg",
-     * "title":"揭秘：恐龙在68万年前的行踪故事","url":"http://www.lieqi.com/read/7/19058/"},{"ctime":"2016-04-26 00:00",
-     * "description":"猎奇奇闻","picUrl":"http://img521.lieqi.com/upload/picture/64/18998.jpg","title":"慎入！驴友误入妲己墓穴
-     * 拍到灵异深洞女尸","url":"http://www.lieqi.com/read/7/18998/"},{"ctime":"2016-04-26 00:00","description":"猎奇奇闻",
-     * "picUrl":"http://img521.lieqi.com/upload/picture/64/19000.jpg","title":"惊悚鬼屋：情妇火烧城堡化为厉鬼","url":"http://www
-     * .lieqi.com/read/7/19000/"},{"ctime":"2016-04-23 00:00","description":"猎奇奇闻","picUrl":"http://img521.lieqi
-     * .com/upload/picture/64/18921.jpg","title":"日本海啸过后突现惊人一幕：慎入！","url":"http://www.lieqi.com/read/7/18921/"},
-     * {"ctime":"2016-04-25 00:00","description":"猎奇奇闻","picUrl":"http://img521.lieqi.com/upload/picture/64/18962
-     * .jpg","title":"男子娶女尸完婚：吓坏所有人","url":"http://www.lieqi.com/read/7/18962/"},{"ctime":"2016-04-21 00:00",
-     * "description":"猎奇奇闻","picUrl":"http://img521.lieqi.com/upload/picture/63/18871.jpg","title":"男童深夜对着空气聊天
-     * 爸妈听到诡异声吓坏了","url":"http://www.lieqi.com/read/7/18871/"},{"ctime":"2016-04-20 00:00","description":"猎奇奇闻",
-     * "picUrl":"http://img521.lieqi.com/upload/picture/63/18834.jpg","title":"探秘：人死后去阴间要经历的七大关","url":"http://www
-     * .lieqi.com/read/7/18834/"},{"ctime":"2016-04-04 00:00","description":"猎奇奇闻","picUrl":"http://img521.lieqi
-     * .com/upload/picture/62/18410.jpg","title":"夫妻自拍照藏恐怖秘密：把网友们吓坏了","url":"http://www.lieqi.com/read/7/18410/"},
-     * {"ctime":"2016-04-08 00:00","description":"猎奇奇闻","picUrl":"http://img521.lieqi.com/upload/picture/62/18547
-     * .jpg","title":"林正英逝世是跟拍鬼片有关系吗？林正英死亡真相","url":"http://www.lieqi.com/read/7/18547/"},{"ctime":"2016-03-30
-     * 00:00","description":"猎奇奇闻","picUrl":"http://img521.lieqi.com/upload/picture/62/18360.jpg",
-     * "title":"揭鬼看到人而人看不到鬼之谜","url":"http://www.lieqi.com/read/7/18360/"},{"ctime":"2016-03-29 00:00",
-     * "description":"猎奇奇闻","picUrl":"http://img521.lieqi.com/upload/picture/62/18332.jpg",
-     * "title":"男子买房发现神秘物品，第二天立马搬家","url":"http://www.lieqi.com/read/7/18332/"},{"ctime":"2016-03-24 00:00",
-     * "description":"猎奇奇闻","picUrl":"http://img521.lieqi.com/upload/picture/61/18222.jpg","title":"坟墓上有这个后代会越过越穷",
-     * "url":"http://www.lieqi.com/read/7/18222/"},{"ctime":"2016-03-24 00:00","description":"猎奇奇闻",
-     * "picUrl":"http://img521.lieqi.com/upload/picture/61/18225.jpg","title":"小心鬼上身！女生夜间十大禁忌","url":"http://www
-     * .lieqi.com/read/7/18225/"},{"ctime":"2016-03-17 00:00","description":"猎奇奇闻","picUrl":"http://img521.lieqi
-     * .com/upload/picture/61/18081.jpg","title":"震惊！16岁孕妇下葬后离奇复活","url":"http://www.lieqi.com/read/7/18081/"},
-     * {"ctime":"2016-03-11 00:00","description":"猎奇奇闻","picUrl":"http://img521.lieqi.com/upload/picture/60/17984
-     * .jpg","title":"惊悚骇人！一场吓死25人的诡异出殡","url":"http://www.lieqi.com/read/6/17984/"},{"ctime":"2016-03-09 00:00",
-     * "description":"猎奇奇闻","picUrl":"http://img521.lieqi.com/upload/picture/60/17916.jpg","title":"老妇太平间里复活
-     * 挣脱装尸袋吓坏守尸人","url":"http://www.lieqi.com/read/6/17916/"}]}
-     */
 
-    private int showapi_res_code;
-    private String showapi_res_error;
     /**
      * code : 200
      * msg : success
-     * newslist : [{"ctime":"2016-05-03 00:00","description":"猎奇奇闻","picUrl":"http://img521.lieqi
-     * .com/upload/picture/65/19216.jpg","title":"罗马尼亚古城堡 吸血鬼品牌","url":"http://www.lieqi.com/read/7/19216/"},
-     * {"ctime":"2016-04-29 00:00","description":"猎奇奇闻","picUrl":"http://img521.lieqi.com/upload/picture/64/19169
-     * .jpg","title":"香港万佛寺：沿途五百罗汉表情恐怖","url":"http://www.lieqi.com/read/7/19169/"},{"ctime":"2016-04-29 00:00",
-     * "description":"猎奇奇闻","picUrl":"http://img521.lieqi.com/upload/picture/64/19171.jpg",
-     * "title":"美国西部风景：凄凉阴森的废弃鬼镇","url":"http://www.lieqi.com/read/7/19171/"},{"ctime":"2016-04-28 00:00",
-     * "description":"猎奇奇闻","picUrl":"http://img521.lieqi.com/upload/picture/64/19115.jpg",
-     * "title":"神秘幽灵船：各地被困搁浅海上的船","url":"http://www.lieqi.com/read/7/19115/"},{"ctime":"2016-04-27 00:00",
-     * "description":"猎奇奇闻","picUrl":"http://img521.lieqi.com/upload/picture/64/19058.jpg",
-     * "title":"揭秘：恐龙在68万年前的行踪故事","url":"http://www.lieqi.com/read/7/19058/"},{"ctime":"2016-04-26 00:00",
-     * "description":"猎奇奇闻","picUrl":"http://img521.lieqi.com/upload/picture/64/18998.jpg","title":"慎入！驴友误入妲己墓穴
-     * 拍到灵异深洞女尸","url":"http://www.lieqi.com/read/7/18998/"},{"ctime":"2016-04-26 00:00","description":"猎奇奇闻",
-     * "picUrl":"http://img521.lieqi.com/upload/picture/64/19000.jpg","title":"惊悚鬼屋：情妇火烧城堡化为厉鬼","url":"http://www
-     * .lieqi.com/read/7/19000/"},{"ctime":"2016-04-23 00:00","description":"猎奇奇闻","picUrl":"http://img521.lieqi
-     * .com/upload/picture/64/18921.jpg","title":"日本海啸过后突现惊人一幕：慎入！","url":"http://www.lieqi.com/read/7/18921/"},
-     * {"ctime":"2016-04-25 00:00","description":"猎奇奇闻","picUrl":"http://img521.lieqi.com/upload/picture/64/18962
-     * .jpg","title":"男子娶女尸完婚：吓坏所有人","url":"http://www.lieqi.com/read/7/18962/"},{"ctime":"2016-04-21 00:00",
-     * "description":"猎奇奇闻","picUrl":"http://img521.lieqi.com/upload/picture/63/18871.jpg","title":"男童深夜对着空气聊天
-     * 爸妈听到诡异声吓坏了","url":"http://www.lieqi.com/read/7/18871/"},{"ctime":"2016-04-20 00:00","description":"猎奇奇闻",
-     * "picUrl":"http://img521.lieqi.com/upload/picture/63/18834.jpg","title":"探秘：人死后去阴间要经历的七大关","url":"http://www
-     * .lieqi.com/read/7/18834/"},{"ctime":"2016-04-04 00:00","description":"猎奇奇闻","picUrl":"http://img521.lieqi
-     * .com/upload/picture/62/18410.jpg","title":"夫妻自拍照藏恐怖秘密：把网友们吓坏了","url":"http://www.lieqi.com/read/7/18410/"},
-     * {"ctime":"2016-04-08 00:00","description":"猎奇奇闻","picUrl":"http://img521.lieqi.com/upload/picture/62/18547
-     * .jpg","title":"林正英逝世是跟拍鬼片有关系吗？林正英死亡真相","url":"http://www.lieqi.com/read/7/18547/"},{"ctime":"2016-03-30
-     * 00:00","description":"猎奇奇闻","picUrl":"http://img521.lieqi.com/upload/picture/62/18360.jpg",
-     * "title":"揭鬼看到人而人看不到鬼之谜","url":"http://www.lieqi.com/read/7/18360/"},{"ctime":"2016-03-29 00:00",
-     * "description":"猎奇奇闻","picUrl":"http://img521.lieqi.com/upload/picture/62/18332.jpg",
-     * "title":"男子买房发现神秘物品，第二天立马搬家","url":"http://www.lieqi.com/read/7/18332/"},{"ctime":"2016-03-24 00:00",
-     * "description":"猎奇奇闻","picUrl":"http://img521.lieqi.com/upload/picture/61/18222.jpg","title":"坟墓上有这个后代会越过越穷",
-     * "url":"http://www.lieqi.com/read/7/18222/"},{"ctime":"2016-03-24 00:00","description":"猎奇奇闻",
-     * "picUrl":"http://img521.lieqi.com/upload/picture/61/18225.jpg","title":"小心鬼上身！女生夜间十大禁忌","url":"http://www
-     * .lieqi.com/read/7/18225/"},{"ctime":"2016-03-17 00:00","description":"猎奇奇闻","picUrl":"http://img521.lieqi
-     * .com/upload/picture/61/18081.jpg","title":"震惊！16岁孕妇下葬后离奇复活","url":"http://www.lieqi.com/read/7/18081/"},
-     * {"ctime":"2016-03-11 00:00","description":"猎奇奇闻","picUrl":"http://img521.lieqi.com/upload/picture/60/17984
-     * .jpg","title":"惊悚骇人！一场吓死25人的诡异出殡","url":"http://www.lieqi.com/read/6/17984/"},{"ctime":"2016-03-09 00:00",
-     * "description":"猎奇奇闻","picUrl":"http://img521.lieqi.com/upload/picture/60/17916.jpg","title":"老妇太平间里复活
-     * 挣脱装尸袋吓坏守尸人","url":"http://www.lieqi.com/read/6/17916/"}]
+     * newslist : [{"ctime":"2016-05-11 12:27","title":"湖南一男护工殴打女精神病患者 多人被问责(图)","description":"网易社会",
+     * "picUrl":"http://s.cimg.163.com/photo/0001/2016-05-10/t_BMNG084T00AP0001.jpg.119x83.jpg","url":"http://news
+     * .163.com/16/0511/12/BMPLGSRP00014AEE.html#f=slist"},{"ctime":"2016-05-11 13:05",
+     * "title":"陕西一\u201c副站长\u201d多年吃空饷，坐牢每月还领5200元工资","description":"网易社会","picUrl":"http://s.cimg.163
+     * .com/catchpic/7/78/7894B8269EF1DA4F4996BCA2D3E0419C.jpg.119x83.jpg","url":"http://news.163
+     * .com/16/0511/13/BMPNKSQ100014AED.html#f=slist"},{"ctime":"2016-05-11 13:06","title":"男子持刀杀3人被击毙:醉酒后误以为自家电被掐",
+     * "description":"网易社会","picUrl":"http://s.cimg.163.com/catchpic/D/DB/DBA52389FFEE6D3A7BBF307FCE286006.jpg.119x83
+     * .jpg","url":"http://news.163.com/16/0511/13/BMPNMU9Q00011229.html#f=slist"},{"ctime":"2016-05-11 13:26",
+     * "title":"北京二年级小学生写信给水务局:我家门前河好臭","description":"网易社会","picUrl":"http://s.cimg.163
+     * .com/catchpic/7/7A/7A6FBDA795D93BE4655EFE7D1ADBE174.jpg.119x83.jpg","url":"http://news.163
+     * .com/16/0511/13/BMPORNS80001124J.html#f=slist"},{"ctime":"2016-05-11 11:21","title":"研究驳斥打屁股管教孩子：越打越容易精神病",
+     * "description":"网易社会","picUrl":"http://s.cimg.163.com/catchpic/C/C5/C53D9451632E44DFD38DDDD1FEDBAFC2.jpg.119x83
+     * .jpg","url":"http://news.163.com/16/0511/11/BMPHMNJS00014AEE.html#f=slist"},{"ctime":"2016-05-11 11:34",
+     * "title":"婆婆与儿媳共侍丈夫 为争侍寝权叫来警察","description":"网易社会","picUrl":"http://s.cimg.163
+     * .com/catchpic/7/7E/7E2ECD1D6E725AD2731D5F1735F14BBB.jpg.119x83.jpg","url":"http://news.163
+     * .com/16/0511/11/BMPIFONS00011229.html#f=slist"},{"ctime":"2016-05-11 12:07","title":"大学生掏鸟案被告父亲自首称行贿办案人员",
+     * "description":"网易社会","picUrl":"http://s.cimg.163.com/catchpic/9/97/97790AA2EE6045F0EBE26CC1BBD15BED.jpg.119x83
+     * .jpg","url":"http://news.163.com/16/0511/12/BMPKBSG700011229.html#f=slist"},{"ctime":"2016-05-11 10:35",
+     * "title":"中国夫妇赴美遭美海关中文调侃：\u201c老牛吃嫩草\u201d(图)","description":"网易社会","picUrl":"http://s.cimg.163
+     * .com/catchpic/C/C5/C53D9451632E44DFD38DDDD1FEDBAFC2.jpg.119x83.jpg","url":"http://news.163
+     * .com/16/0511/10/BMPF3Q1E00014AEE.html#f=slist"},{"ctime":"2016-05-11 10:40","title":"河南洛阳高中女生教室内被劫持 嫌疑人已被刑拘",
+     * "description":"网易社会","picUrl":"http://s.cimg.163.com/catchpic/7/7E/7E2ECD1D6E725AD2731D5F1735F14BBB.jpg.119x83
+     * .jpg","url":"http://news.163.com/16/0511/10/BMPFD0OU00011229.html#f=slist"},{"ctime":"2016-05-11 10:53",
+     * "title":"日本新型色狼定义:嗅气味属性骚扰 遭男性不满","description":"网易社会","picUrl":"http://s.cimg.163
+     * .com/catchpic/9/97/97790AA2EE6045F0EBE26CC1BBD15BED.jpg.119x83.jpg","url":"http://news.163
+     * .com/16/0511/10/BMPG41BN00014JB6.html#f=slist"},{"ctime":"2016-05-11 09:30","title":"北大培文杯头奖作品确为抄袭 获奖者奖项被取消",
+     * "description":"网易社会","picUrl":"http://s.cimg.163.com/cnews/2016/5/11/20160511084822c9e5c.jpg.119x83.jpg",
+     * "url":"http://news.163.com/16/0511/09/BMPBB4E000014SEH.html#f=slist"},{"ctime":"2016-05-11 09:44",
+     * "title":"雷洋家属已联系第三方鉴定机构 将二次沟通检方","description":"网易社会","picUrl":"http://s.cimg.163
+     * .com/cnews/2016/5/11/20160511085537c2788_550.jpg.119x83.jpg","url":"http://news.163
+     * .com/16/0511/09/BMPC53720001124J.html#f=slist"},{"ctime":"2016-05-11 09:49","title":"男子为减压砸车16辆被捕 称喜欢赔钱(图)",
+     * "description":"网易社会","picUrl":"http://s.cimg.163.com/catchpic/0/0D/0D680CE777B89799E34A92B4AB6824CD.png.119x83
+     * .jpg","url":"http://news.163.com/16/0511/09/BMPCFBNP00014AEE.html#f=slist"},{"ctime":"2016-05-11 10:04",
+     * "title":"司机失误公交车门夹乘客 女乘客:你敢夹当官的","description":"网易社会","picUrl":"http://s.cimg.163
+     * .com/catchpic/C/C5/C53D9451632E44DFD38DDDD1FEDBAFC2.jpg.119x83.jpg","url":"http://news.163
+     * .com/16/0511/10/BMPD9GTM00011229.html#f=slist"},{"ctime":"2016-05-11 08:37","title":"广西警方确认一条鲸鲨被制成鱼肥售卖 2
+     * .5元1斤","description":"网易社会","picUrl":"http://s.cimg.163.com/catchpic/B/B0/B075909220ECB3EDF1F98C064626AAB2.jpg
+     * .119x83.jpg","url":"http://news.163.com/16/0511/08/BMP8ANFH00011229.html#f=slist"},{"ctime":"2016-05-11
+     * 08:40","title":"因打牌出牌太慢 男子遭牌友持刀当街砍成重伤","description":"网易社会","picUrl":"http://s.cimg.163
+     * .com/cnews/2016/5/11/2016051108251440a40.jpg.119x83.jpg","url":"http://news.163
+     * .com/16/0511/08/BMP8GMH400011229.html#f=slist"},{"ctime":"2016-05-11 08:43","title":"福州广场舞大妈为挂包 大树遭钉刑(图)",
+     * "description":"网易社会","picUrl":"http://s.cimg.163.com/cnews/2016/5/11/2016051108362350b85.jpg.119x83.jpg",
+     * "url":"http://news.163.com/16/0511/08/BMP8M8GU00014AEE.html#f=slist"},{"ctime":"2016-05-11 08:59",
+     * "title":"南京一医院给患者输氧4044小时 院方:无严重后果","description":"网易社会","picUrl":"http://s.cimg.163
+     * .com/cnews/2016/5/11/20160511084822c9e5c.jpg.119x83.jpg","url":"http://news.163
+     * .com/16/0511/08/BMP9IJE400011229.html#f=slist"},{"ctime":"2016-05-11 09:11","title":"新婚之夜女方因生理期拒同房 夫妻上法庭闹离婚",
+     * "description":"网易社会","picUrl":"http://s.cimg.163.com/cnews/2016/5/11/20160511085537c2788_550.jpg.119x83.jpg",
+     * "url":"http://news.163.com/16/0511/09/BMPA9EAS00011229.html#f=slist"},{"ctime":"2016-05-11 07:31",
+     * "title":"不爱红妆爱道装 四川90后女大学生放弃高薪职业出家当","description":"网易社会","picUrl":"http://s.cimg.163
+     * .com/catchpic/D/D2/D2E24506EE5207BFAF6A7251A3C58877.jpg.119x83.jpg","url":"http://news.163
+     * .com/16/0511/07/BMP4IEG400014AED.html#f=slist"}]
      */
 
-    private ShowapiResBodyBean showapi_res_body;
+    private int code;
+    private String msg;
+    /**
+     * ctime : 2016-05-11 12:27
+     * title : 湖南一男护工殴打女精神病患者 多人被问责(图)
+     * description : 网易社会
+     * picUrl : http://s.cimg.163.com/photo/0001/2016-05-10/t_BMNG084T00AP0001.jpg.119x83.jpg
+     * url : http://news.163.com/16/0511/12/BMPLGSRP00014AEE.html#f=slist
+     */
 
-    public int getShowapi_res_code() {
-        return showapi_res_code;
+    private List<NewslistBean> newslist;
+
+    public int getCode() {
+        return code;
     }
 
-    public void setShowapi_res_code(int showapi_res_code) {
-        this.showapi_res_code = showapi_res_code;
+    public void setCode(int code) {
+        this.code = code;
     }
 
-    public String getShowapi_res_error() {
-        return showapi_res_error;
+    public String getMsg() {
+        return msg;
     }
 
-    public void setShowapi_res_error(String showapi_res_error) {
-        this.showapi_res_error = showapi_res_error;
+    public void setMsg(String msg) {
+        this.msg = msg;
     }
 
-    public ShowapiResBodyBean getShowapi_res_body() {
-        return showapi_res_body;
+    public List<NewslistBean> getNewslist() {
+        return newslist;
     }
 
-    public void setShowapi_res_body(ShowapiResBodyBean showapi_res_body) {
-        this.showapi_res_body = showapi_res_body;
+    public void setNewslist(List<NewslistBean> newslist) {
+        this.newslist = newslist;
     }
 
-    public static class ShowapiResBodyBean {
-        /**
-         * ctime : 2016-05-03 00:00
-         * description : 猎奇奇闻
-         * picUrl : http://img521.lieqi.com/upload/picture/65/19216.jpg
-         * title : 罗马尼亚古城堡 吸血鬼品牌
-         * url : http://www.lieqi.com/read/7/19216/
-         */
+    public static class NewslistBean {
+        private String ctime;
+        private String title;
+        private String picUrl;
+        private String url;
 
-        private List<NewslistBean> newslist;
-
-        public List<NewslistBean> getNewslist() {
-            return newslist;
+        public String getCtime() {
+            return ctime;
         }
 
-        public void setNewslist(List<NewslistBean> newslist) {
-            this.newslist = newslist;
+        public void setCtime(String ctime) {
+            this.ctime = ctime;
         }
 
-        public static class NewslistBean {
-            private String ctime;
-            private String description;
-            private String picUrl;
-            private String title;
-            private String url;
+        public String getTitle() {
+            return title;
+        }
 
-            public String getCtime() {
-                return ctime;
-            }
+        public void setTitle(String title) {
+            this.title = title;
+        }
 
-            public void setCtime(String ctime) {
-                this.ctime = ctime;
-            }
+        public String getPicUrl() {
+            return picUrl;
+        }
 
-            public String getDescription() {
-                return description;
-            }
+        public void setPicUrl(String picUrl) {
+            this.picUrl = picUrl;
+        }
 
-            public void setDescription(String description) {
-                this.description = description;
-            }
+        public String getUrl() {
+            return url;
+        }
 
-            public String getPicUrl() {
-                return picUrl;
-            }
-
-            public void setPicUrl(String picUrl) {
-                this.picUrl = picUrl;
-            }
-
-            public String getTitle() {
-                return title;
-            }
-
-            public void setTitle(String title) {
-                this.title = title;
-            }
-
-            public String getUrl() {
-                return url;
-            }
-
-            public void setUrl(String url) {
-                this.url = url;
-            }
+        public void setUrl(String url) {
+            this.url = url;
         }
     }
 }

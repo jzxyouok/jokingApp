@@ -5,6 +5,9 @@ import com.example.jokingApp.bean.ImageInfo;
 import com.example.jokingApp.bean.JokeInfo;
 import com.example.jokingApp.bean.JoyInfo;
 import com.example.jokingApp.bean.MeizhiInfo;
+import com.example.jokingApp.bean.TerroeInfo;
+import com.example.jokingApp.bean.TerrorDeatail;
+import com.example.jokingApp.bean.WeiXinInfo;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -32,16 +35,34 @@ public interface ApiService {
     //获取视频封面
     @GET("福利/10/{Pager}")
     Observable<MeizhiInfo> getMeiZhiByRxjava(@Path("Pager")String string);
-    //获取逗比图片
+    //获取趣图图片
     @GET("341-2/")
     Call<JoyInfo> getJoyInfo(@Query("showapi_appid") String appid,@Query("showapi_sign") String sign,
                                    @Query("page")String page,@Query("maxResult")String maxResult
                                    );
-    //获取奇闻异事
-    @GET("231-1/")
-    Call<FantasticInfo> getFantastic(@Query("showapi_appid") String appid, @Query("showapi_sign") String sign,
-                                     @Query("page")String page, @Query("num")String num
+    //http://api.huceo.com/social/?key=14e59ebf7e28a04aac0d1a1a885bacce&page=1&num=20
+    //获取新闻
+    @GET("social/")
+    Call<FantasticInfo> getFantastic(@Query("key") String key, @Query("page") String page,
+                                     @Query("num")String num
     );
 
+    //获取奇闻
+    @GET("wxnew/")
+    Call<WeiXinInfo> getWeiXin(@Query("key") String key, @Query("num") String num ,
+                                  @Query("page")String page
+    );
+    //获取恐怖故事列表
+    @GET("955-1/")
+    Call<TerroeInfo> getTerror(@Query("showapi_appid") String appId, @Query("showapi_sign") String sign ,
+                               @Query("page")String page,@Query("type") String type
+    );
+
+    //获取恐怖故事详情
+    @GET("213-4/")
+    Observable<TerrorDeatail> getTerrorDetail(@Query("showapi_appid") String appId, @Query("showapi_sign") String sign ,
+                                              @Query("id")String id
+    );
 
 }
+

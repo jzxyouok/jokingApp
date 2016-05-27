@@ -18,9 +18,15 @@ import com.example.jokingApp.widgets.LoadingPage;
 
 import java.util.List;
 
+import rx.Subscription;
+import rx.subscriptions.CompositeSubscription;
+
 public abstract class BaseFragment extends Fragment {
     protected FragmentComponent mFragmentComponent;
+
     public MainActivity mActivity;
+
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -95,7 +101,6 @@ public abstract class BaseFragment extends Fragment {
     }
     //初始化  注入器
     public abstract void initInjector();
-
 
     public void getBundle(Bundle bundle){}
 

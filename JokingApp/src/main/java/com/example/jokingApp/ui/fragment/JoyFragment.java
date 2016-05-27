@@ -13,6 +13,8 @@ import com.example.jokingApp.adapter.JoyAdapter;
 import com.example.jokingApp.api.ApiService;
 import com.example.jokingApp.bean.JoyInfo;
 import com.example.jokingApp.utils.RetrofitUtils;
+import com.example.jokingApp.utils.RxBus;
+import com.example.jokingApp.utils.event.JoyEvent;
 import com.example.jokingApp.utils.helper.ToastHelper;
 import com.example.jokingApp.widgets.LoadingPage;
 import com.jcodecraeer.xrecyclerview.ProgressStyle;
@@ -32,10 +34,12 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
+import rx.Subscription;
+import rx.functions.Action1;
 
 
 /**
- * 笑话大全
+ * 趣图
  * Created by idea-pc on 2016/5/8.
  */
 public class JoyFragment extends BaseFragment implements XRecyclerView.LoadingListener {
@@ -43,31 +47,48 @@ public class JoyFragment extends BaseFragment implements XRecyclerView.LoadingLi
     String SHOWAPI_APPID = "18760";
     String SHOWAPI_SIGN = "fb9e2d61cd5e44f7966d0c6842d56c61";
     String MAXRESULT = "20";
+    String url="http://route.showapi.com/582-5?showapi_appid=18760&n=&showapi_sign=fb9e2d61cd5e44f7966d0c6842d56c61" ;
 
     @InjectView(R.id.recyclerView)
     XRecyclerView mRecyclerView;
     @Inject
     ToastHelper mToastHelper;
-
+    @Inject
+    RxBus mRxBus;
     private List<JoyInfo.ShowapiResBodyBean.ContentlistBean> data;
     private Call<JoyInfo> mCall;
     private JoyAdapter mJoyAdapter;
     private ApiService mApiService;
     int i;
+    private LinearLayoutManager mLayoutManager;
 
     @Override
     protected View createSuccessView() {
         View view = View.inflate(mActivity, R.layout.fragment_joy, null);
         ButterKnife.inject(this, view);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
-        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        mRecyclerView.setLayoutManager(layoutManager);
+        initRxBus();
+        mLayoutManager = new LinearLayoutManager(mActivity);
+        mLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mJoyAdapter = new JoyAdapter(data, mActivity);
+        mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mJoyAdapter);
         mRecyclerView.setLoadingListener(this) ;
+
         mRecyclerView.setPullRefreshEnabled(false);
         return view;
     }
+
+    private void initRxBus() {
+       mRxBus.toObserverable().subscribe(new Action1<Object>() {
+           @Override
+           public void call(Object o) {
+               if (o instanceof JoyEvent) {
+                   mLayoutManager.smoothScrollToPosition(mRecyclerView, null, 0);
+               }
+           }
+       });
+    }
+
 
     @Override
     protected LoadingPage.LoadResult load() {
